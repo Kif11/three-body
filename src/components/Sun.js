@@ -2,18 +2,22 @@ import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('sun', {
-  schema: function () {
+  schema: {
     sunRadius: {
-      type: 'int'
-    }
+      type: 'int',
+      default: 10
+    },
     pathRadius: {
-      type: 'int'
-    }
+      type: 'int',
+      pathRadius: 800
+    },
     speed: {
-      type: 'int'
-    }
+      type: 'int',
+      default: 1000
+    },
     offset: {
-      type: 'int'
+      type: 'int',
+      default: 0
     }
   },
   init: function () {

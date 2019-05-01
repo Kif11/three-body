@@ -13,15 +13,6 @@ AFRAME.registerComponent('set-gltf-material', {
     }
   },
   init: function () {
-    // this.material = new THREE.ShaderMaterial({
-    //   uniforms: {
-    //     time: { value: 0.0 },
-    //     flowTexture: { value: 0.0 },
-    //   },
-    //   vertexShader: GroundVert,
-    //   fragmentShader: GroundFrag,
-    // });
-
     this.material = new MeshBasicMaterialOverride();
 
     this.el.addEventListener('model-loaded', () => {
@@ -29,17 +20,14 @@ AFRAME.registerComponent('set-gltf-material', {
       const mesh = scene.children[0];
 
       if (mesh) {
-        // this.material.uniforms.flowTexture.value = mesh.material.map;
-
         mesh.material = this.material;
-        console.log('mesh.material', mesh.material);
-
         mesh.material.color = new THREE.Color(this.data.color);
       }
     });
   },
 
   tick: function (time) {
+    // HACK: Using opacity to pass time
     this.material.opacity = time;
   }
 });
