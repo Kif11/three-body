@@ -17,12 +17,13 @@ AFRAME.registerComponent('sun', {
     }
   },
   init: function () {
-    var sphereGeo = new THREE.SphereBufferGeometry(this.data.sunRadius);
+    const system = document.querySelector('a-scene').systems['sunSystem'];
+
+    var sphereGeo = new THREE.SphereBufferGeometry(this.data.sunRadius * system.data.skyRadius);
     var sphereMat = new THREE.MeshBasicMaterial({color: new THREE.Color()});
     var sun = new THREE.Mesh(sphereGeo, sphereMat);
     this.el.object3D.add(sun)
 
-    const system = document.querySelector('a-scene').systems['sunSystem'];
     system.registerSun(this.el, this.data);
   },
 });

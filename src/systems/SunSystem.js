@@ -7,7 +7,11 @@ AFRAME.registerSystem('sunSystem', {
       type: 'float'
     },
     skyRadius: {
-      type: 'int'
+      type: 'float'
+    },
+    timeOffset: {
+      type: 'float',
+      default: 0
     },
   },
 
@@ -21,8 +25,8 @@ AFRAME.registerSystem('sunSystem', {
 
   registerSun: function (el, initData) {
     //TODO; WHY
-    initData.sunRadius = parseFloat(initData.sunRadius);
-    initData.pathRadius = parseFloat(initData.pathRadius);
+    initData.sunRadius = this.data.skyRadius*parseFloat(initData.sunRadius);
+    initData.pathRadius = this.data.skyRadius*parseFloat(initData.pathRadius);
     initData.speed = parseFloat(initData.speed);
     initData.offset = parseFloat(initData.offset);
     this.entities.push({el, initData});
@@ -42,7 +46,8 @@ AFRAME.registerSystem('sunSystem', {
   },
 
   tick: function (time, timeDelta) {
-    var center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(time/-2000*this.data.speed), this.data.skyRadius*Math.cos(time/-2000*this.data.speed));
+    var animationTime = time + this.data.timeOffset;
+    var center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(animationTime/-2000*this.data.speed), this.data.skyRadius*Math.cos(animationTime/-2000*this.data.speed));
     this.center.position.copy(center);
     this.center.updateMatrixWorld();
 
@@ -53,8 +58,8 @@ AFRAME.registerSystem('sunSystem', {
     this.entities.forEach((sun, index) => {
       const curSun = sun.el.object3D.children[0];
       var pos = new THREE.Vector3().add(
-        newX.clone().multiplyScalar(sun.initData.pathRadius*Math.cos(time*sun.initData.speed*this.data.speed + sun.initData.offset))).add(
-        newY.clone().multiplyScalar(sun.initData.pathRadius*Math.sin(time*sun.initData.speed*this.data.speed + sun.initData.offset)))
+        newX.clone().multiplyScalar(sun.initData.pathRadius*Math.cos(animationTime*sun.initData.speed*this.data.speed + sun.initData.offset))).add(
+        newY.clone().multiplyScalar(sun.initData.pathRadius*Math.sin(animationTime*sun.initData.speed*this.data.speed + sun.initData.offset)))
       pos.add(center);
       this.ray.origin.copy(pos);
       this.ray.direction.copy(pos.normalize().multiplyScalar(-1));

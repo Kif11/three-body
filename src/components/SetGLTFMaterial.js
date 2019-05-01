@@ -32,7 +32,6 @@ AFRAME.registerComponent('set-gltf-material', {
         // this.material.uniforms.flowTexture.value = mesh.material.map;
 
         mesh.material = this.material;
-        console.log('mesh.material', mesh.material);
 
         mesh.material.color = new THREE.Color(this.data.color);
       }

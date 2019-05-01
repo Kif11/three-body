@@ -27,7 +27,7 @@ void main() {
   vec4 backgroundColor = vec4(mix(env_c1, env_c2, noise), 1.0);
   float noise2 = cnoise(scrollingPos*freq*1.0);
 
-  vec4 heatColor = vec4(mix(heat_c1, heat_c2, noise2), 1.0);
+  vec4 heatColor = vec4(mix(heat_c2, heat_c2, noise2), 1.0);
 
   float l = length(vPos - sunPos1);
   float l2 = length(vPos - sunPos2);

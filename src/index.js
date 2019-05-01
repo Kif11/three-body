@@ -11,7 +11,7 @@ import CameraRig from './CameraRig';
 
 
 const App = () => (
-  <a-scene background="color: black" sunSystem="speed: 0.1; skyRadius: 500">
+  <a-scene background="color: black" sunSystem="speed: 0.1; skyRadius: 1000; timeOffset:65000">
     {CameraRig()}
 
     <a-assets>
@@ -26,23 +26,25 @@ const App = () => (
      sky
     />
     <a-entity
-      sun="sunRadius:100; pathRadius:400; speed:-0.0002; offset:0.2"
+      sun="sunRadius:0.2; pathRadius:0.8; speed:-0.0002; offset:0.2"
     />
     <a-entity
-      sun="sunRadius:30; pathRadius:400; speed:-0.004; offset:1"
+      sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1"
     />
     <a-entity
-      sun="sunRadius:50; pathRadius:400; speed:-0.006; offset:2"
+      sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2"
     />
     <a-gltf-model
       src="#mountains"
       scale="0.5 0.5 0.5"
       set-gltf-material="color: #e2aa73;"
     />
+    {/*
     <a-gltf-model
       src="#cubes"
       set-gltf-material="color: #a98457;"
     />
+    */}
   </a-scene>
 );
 
