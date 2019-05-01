@@ -4,20 +4,20 @@ const THREE = AFRAME.THREE;
 AFRAME.registerComponent('sun', {
   schema: {
     sunRadius: {
-      type: 'int',
-      default: 10
+      type: 'float',
+      default: 0.2
     },
     pathRadius: {
-      type: 'int',
-      pathRadius: 800
+      type: 'float',
+      default: 0.8
     },
     speed: {
-      type: 'int',
-      default: 1000
+      type: 'float',
+      default: -0.0002
     },
     offset: {
-      type: 'int',
-      default: 0
+      type: 'float',
+      default: 0.2
     }
   },
   init: function () {
