@@ -10,7 +10,7 @@ AFRAME.registerSystem('sunSystem', {
       type: 'int'
     },
   },
-  
+
   init: function () {
     this.entities = []
     this.center = new THREE.Object3D();
@@ -21,9 +21,7 @@ AFRAME.registerSystem('sunSystem', {
 
   registerSun: function (el, initData) {
     this.entities.push({el, initData});
-    if(this.entities.length > 2){
-      this.updateSkyUniforms();
-    }
+    this.updateSkyUniforms();
   },
 
   updateSkyUniforms: function () {

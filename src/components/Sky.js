@@ -35,6 +35,9 @@ AFRAME.registerComponent('sky', {
         sunRadius2: { value: 0 },
         sunRadius3: { value: 0 },
         skyRadius: { value: 0 },
+        time: { value: 0 },
+        env_c1: {value: new THREE.Color("#54cccc")},
+        env_c2: {value: new THREE.Color("#2795bd")}
       },
       vertexShader: SkyVert,
       fragmentShader: SkyFrag,
@@ -48,5 +51,6 @@ AFRAME.registerComponent('sky', {
     system.registerSky(this.el);
   },
   tick: function (time, timeDelta) {
+    this.sky.material.uniforms.time.value = time/10;
   }
 });
