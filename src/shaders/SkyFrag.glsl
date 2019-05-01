@@ -10,6 +10,8 @@ uniform float sunRadius3;
 uniform float skyRadius;
 uniform vec3 env_c1;
 uniform vec3 env_c2;
+uniform vec3 heat_c1;
+uniform vec3 heat_c2;
 
 uniform sampler2D flowTexture;
 varying vec2 vUv;
@@ -17,7 +19,7 @@ varying vec3 vPos;
 
 void main() {
 
-  float freq = 0.0022;
+  float freq = 1.1/skyRadius;
 
   vec3 scrollingPos = vec3(vPos.x, vPos.y, vPos.z + time);
   float noise = cnoise(scrollingPos * freq) + 0.2;
@@ -25,12 +27,7 @@ void main() {
   vec4 backgroundColor = vec4(mix(env_c1, env_c2, noise), 1.0);
   float noise2 = cnoise(scrollingPos*freq*1.0);
 
-  vec4 heatColor_1 = vec4(0.988, 0.976, 0.733, 1.0);
-  vec4 heatColor_2 = vec4(1, 0.705, 0.180, 1.0);
-
-  vec4 heatColor = mix(heatColor_1, heatColor_2, noise2);
-
-
+  vec4 heatColor = vec4(mix(heat_c1, heat_c2, noise2), 1.0);
 
   float l = length(vPos - sunPos1);
   float l2 = length(vPos - sunPos2);

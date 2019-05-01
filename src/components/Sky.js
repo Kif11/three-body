@@ -23,7 +23,9 @@ AFRAME.registerComponent('sky', {
         skyRadius: { value: 0 },
         time: { value: 0 },
         env_c1: {value: new THREE.Color("#54cccc")},
-        env_c2: {value: new THREE.Color("#2795bd")}
+        env_c2: {value: new THREE.Color("#2795bd")},
+        heat_c1: {value: new THREE.Color("#fcf9bb")},
+        heat_c2: {value: new THREE.Color("#ffb42e")},
       },
       vertexShader: SkyVert,
       fragmentShader: SkyFrag,
