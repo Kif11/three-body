@@ -11,7 +11,7 @@ import CameraRig from './CameraRig';
 
 
 const App = () => (
-  <a-scene background="color: black" sunSystem="speed: 100; skyRadius: 500">
+  <a-scene background="color: black" sunSystem="speed: 10; skyRadius: 500">
     {CameraRig()}
 
     <a-assets>
