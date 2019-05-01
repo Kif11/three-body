@@ -5,12 +5,26 @@ import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('sky', {
-  schema: function () {
+  schema: {
+    widthSegments: {
+      default: 30,
+      type: 'int'
+    },
+    heightSegments: {
+      default: 30,
+      type: 'int'
+    }
   },
+
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
+    const { widthSegments, heightSegments } = this.data;
 
-    var sphereGeo = new THREE.SphereBufferGeometry(system.data.skyRadius);
+    var sphereGeo = new THREE.SphereBufferGeometry(
+      system.data.skyRadius,
+      widthSegments,
+      heightSegments,
+    );
 
     var sphereMat = new THREE.ShaderMaterial({
       uniforms: {
