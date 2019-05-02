@@ -7,12 +7,14 @@ import MeshBasicMaterialOverride from '../shaders/MeshBasicMaterialOverride';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('set-gltf-material', {
-  schema: function () {
+  schema: {
     color: {
-      type: 'color'
+      type: 'color',
+      default: null
     }
   },
   init: function () {
+    const { color } = this.data;
     this.material = new MeshBasicMaterialOverride();
 
     this.el.addEventListener('model-loaded', () => {
@@ -20,8 +22,17 @@ AFRAME.registerComponent('set-gltf-material', {
       const mesh = scene.children[0];
 
       if (mesh) {
+        const { map: diffTexture } = mesh.material;
+
+        if (diffTexture) {
+          this.material.map = diffTexture;
+        }
+
         mesh.material = this.material;
-        mesh.material.color = new THREE.Color(this.data.color);
+        
+        if (color) {
+          mesh.material.color = new THREE.Color(color);
+        }
       }
     });
   },
