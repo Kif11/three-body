@@ -12,6 +12,7 @@ uniform vec3 env_c1;
 uniform vec3 env_c2;
 uniform vec3 heat_c1;
 uniform vec3 heat_c2;
+uniform vec3 night_c1;
 
 uniform sampler2D flowTexture;
 varying vec2 vUv;
@@ -35,10 +36,12 @@ void main() {
 
   vec3 centroi = vec3(sunPos1 + sunPos2 + sunPos3)/3.0;
 
+  float distHorizon = centroi.y/skyRadius;
+
+  backgroundColor = vec4(mix(night_c1.xyz, backgroundColor.xyz, distHorizon+1.0), 1.0);
+
   float magnitude = (length(sunPos1 - centroi) + length(sunPos3 - centroi) + length(sunPos2 - centroi))/6.0/skyRadius;
-
   float magnitudeS = (l + l2 + l3)/6.0/skyRadius;
-
   backgroundColor = mix(backgroundColor, heatColor, pow(1.0 - clamp(magnitudeS, .0, 1.0),2.0) * (1.5+pow(1.0 - clamp(magnitude, .0, 1.0),2.0)) );
 
 

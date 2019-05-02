@@ -87,7 +87,7 @@ AFRAME.registerSystem('sunSystem', {
       this.sky.material.uniforms[uniName].value.copy(curSun.position);
       const lightName = 'sunLight' + (index+1).toString();
       this[lightName].position.copy(curSun.position);
-      // this[lightName].position.normalize();
+      this[lightName].intensity = Math.max(curSun.position.y/this.data.skyRadius, 0);
     })
   }
 });

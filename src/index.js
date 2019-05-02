@@ -14,7 +14,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: 0.01; skyRadius: 1000; timeOffset:500000"
+    sunSystem="speed: .1; skyRadius: 1000; timeOffset:10000"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -40,9 +40,8 @@ const App = () => (
 
     <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere>
 
-    <a-gltf-model src="#mountains" scale="0.5 0.5 0.5" set-gltf-material="color: #e2aa73;" />
     <a-gltf-model src="#ruins" position="5 0.44 -4" set-gltf-material />
-
+    <a-gltf-model src="#mountains" scale="0.5 0.5 0.5" set-gltf-material="color: #e2aa73;" />
     {/* <a-gltf-model src="#cubes" set-gltf-material="color: #a98457;" /> */}
   </a-scene>
 );
