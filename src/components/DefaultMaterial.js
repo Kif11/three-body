@@ -1,5 +1,5 @@
 import AFRAME from 'aframe';
-import MeshBasicMaterialOverride from '../shaders/MeshBasicMaterialOverride';
+import MeshPhongMaterialOverride from '../shaders/MeshPhongMaterialOverride';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('default-material', {
@@ -13,11 +13,10 @@ AFRAME.registerComponent('default-material', {
     }
   },
   init: function () {
+    this.el.sceneEl.renderer.shadowMapEnabled = true;
     const mesh = this.el.object3D.children[0];
-    mesh.material = new MeshBasicMaterialOverride();
-    mesh.material.depthWrite = this.data.depthWrite;
+    mesh.material = new THREE.MeshPhongMaterialOverride();
     mesh.material.color = new THREE.Color(this.data.color);
-    mesh.material.side = THREE.DoubleSide;
   },
 
   tick: function (time, timeDelta) {

@@ -2,7 +2,7 @@ import AFRAME from 'aframe';
 import GroundFrag from '../shaders/GroundFrag.glsl';
 import GroundVert from '../shaders/GroundVert.glsl';
 
-import MeshBasicMaterialOverride from '../shaders/MeshBasicMaterialOverride';
+import MeshPhongMaterialOverride from '../shaders/MeshPhongMaterialOverride';
 
 const THREE = AFRAME.THREE;
 
@@ -13,15 +13,18 @@ AFRAME.registerComponent('set-gltf-material', {
     }
   },
   init: function () {
-    this.material = new MeshBasicMaterialOverride();
+    this.material = new MeshPhongMaterialOverride();
 
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
       const mesh = scene.children[0];
 
       if (mesh) {
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        mesh.geometry.computeVertexNormals()
         mesh.material = this.material;
-        mesh.material.color = new THREE.Color(this.data.color);
+        mesh.material.color = new THREE.Color("#5a4239");
       }
     });
   },

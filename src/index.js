@@ -19,8 +19,8 @@ const App = () => (
       <a-asset-item id="cubes" src="assets/cubes/cubes.gltf" />
     </a-assets>
 
-    <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
-    <a-entity light="type: directional; color: #FFF; intensity: 1" position="-1 1 0" />
+    <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 1" />
+
     <a-entity
      id="sky"
      sky
@@ -39,12 +39,15 @@ const App = () => (
       scale="0.5 0.5 0.5"
       set-gltf-material="color: #e2aa73;"
     />
-    {/*
+
+    <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere>
+
+
     <a-gltf-model
       src="#cubes"
       set-gltf-material="color: #a98457;"
     />
-    */}
+
   </a-scene>
 );
 

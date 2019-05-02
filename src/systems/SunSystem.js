@@ -21,6 +21,19 @@ AFRAME.registerSystem('sunSystem', {
     this.center.up = new THREE.Vector3(1,0,1)
     this.sphere = new THREE.Sphere(new THREE.Vector3(0,0,0), this.data.skyRadius);
     this.ray = new THREE.Ray();
+
+    //sun system is in charge of the three directional lights
+    this.sunLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
+    this.sunLight1.castShadow = true;
+    this.sunLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+    this.sunLight2.castShadow = true;
+    this.sunLight3 = new THREE.DirectionalLight(0xffffff, 0.5);
+    this.sunLight3.castShadow = true;
+
+    this.sceneEl.object3D.add(this.sunLight1)
+    this.sceneEl.object3D.add(this.sunLight2)
+    this.sceneEl.object3D.add(this.sunLight3)
+
   },
 
   registerSun: function (el, initData) {
@@ -66,6 +79,9 @@ AFRAME.registerSystem('sunSystem', {
       this.ray.intersectSphere(this.sphere, curSun.position);
       const uniName = 'sunPos' + (index+1).toString();
       this.sky.material.uniforms[uniName].value.copy(curSun.position);
+      const lightName = 'sunLight' + (index+1).toString();
+      this[lightName].position.copy(curSun.position);
+      this[lightName].position.normalize();
     })
   }
 });
