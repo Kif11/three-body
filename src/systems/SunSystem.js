@@ -25,10 +25,16 @@ AFRAME.registerSystem('sunSystem', {
     //sun system is in charge of the three directional lights
     this.sunLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
     this.sunLight1.castShadow = true;
+    this.sunLight1.shadow.camera.far = 2*this.data.skyRadius;
+
     this.sunLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
     this.sunLight2.castShadow = true;
+    this.sunLight2.shadow.camera.far = 2*this.data.skyRadius;
+
     this.sunLight3 = new THREE.DirectionalLight(0xffffff, 0.5);
     this.sunLight3.castShadow = true;
+    this.sunLight3.shadow.camera.far = 2*this.data.skyRadius;
+
 
     this.sceneEl.object3D.add(this.sunLight1)
     this.sceneEl.object3D.add(this.sunLight2)
@@ -81,7 +87,7 @@ AFRAME.registerSystem('sunSystem', {
       this.sky.material.uniforms[uniName].value.copy(curSun.position);
       const lightName = 'sunLight' + (index+1).toString();
       this[lightName].position.copy(curSun.position);
-      this[lightName].position.normalize();
+      // this[lightName].position.normalize();
     })
   }
 });

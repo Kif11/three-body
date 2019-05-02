@@ -7,14 +7,15 @@ import MeshPhongMaterialOverride from '../shaders/MeshPhongMaterialOverride';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('set-gltf-material', {
-  schema: function () {
+  schema: {
     color: {
-      type: 'color'
+      type: 'color',
+      default: null
     }
   },
   init: function () {
     this.material = new MeshPhongMaterialOverride();
-
+    const { color } = this.data;
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
       const mesh = scene.children[0];
@@ -23,8 +24,18 @@ AFRAME.registerComponent('set-gltf-material', {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
         mesh.geometry.computeVertexNormals()
+        
+        const { map: diffTexture } = mesh.material;
+
+        if (diffTexture) {
+          this.material.map = diffTexture;
+        }
+
         mesh.material = this.material;
-        mesh.material.color = new THREE.Color("#5a4239");
+
+        if (color) {
+          mesh.material.color = new THREE.Color(color);
+        }
       }
     });
   },
