@@ -13,8 +13,13 @@ import CameraRig from './CameraRig';
 const App = () => (
   <a-scene
     background="color: black"
-    sunSystem="speed: 0.1; skyRadius: 1000; timeOffset:65000"
-    renderer="physicallyCorrectLights: true; colorManagement: true;"
+    sunSystem="speed: 0.008; skyRadius: 1000; timeOffset:755000"
+    renderer="
+      antialias: true;
+      physicallyCorrectLights: true;
+      colorManagement: true;
+      foveationLevel: 3;
+    "
   >
     {CameraRig()}
 
@@ -28,12 +33,12 @@ const App = () => (
     <a-entity light="type: directional; color: #FFF; intensity: 1" position="-1 1 0" />
     <a-entity id="sky" sky />
     
-    <a-entity sun="sunRadius:0.2; pathRadius:0.8; speed:-0.0002; offset:0.2" />
-    <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1" />
-    <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
+    <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:0.001; offset:0.2" />
+    <a-entity sun="sunRadius:0.03; pathRadius:0.8; speed:0.002; offset:1" />
+    <a-entity sun="sunRadius:0.07; pathRadius:0.8; speed:0.003; offset:2" />
   
     <a-gltf-model src="#mountains" scale="0.5 0.5 0.5" set-gltf-material="color: #e2aa73;" />
-    <a-gltf-model src="#ruins" position="0 0.44 0" set-gltf-material />
+    <a-gltf-model src="#ruins" position="5 0.44 -4" set-gltf-material />
 
     {/* <a-gltf-model src="#cubes" set-gltf-material="color: #a98457;" /> */}
   </a-scene>
