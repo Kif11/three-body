@@ -13,7 +13,6 @@ AFRAME.registerComponent('default-material', {
     }
   },
   init: function () {
-    this.el.sceneEl.renderer.shadowMapEnabled = true;
     const mesh = this.el.object3D.children[0];
     mesh.material = new THREE.MeshPhongMaterialOverride();
     mesh.material.color = new THREE.Color(this.data.color);

@@ -4,7 +4,7 @@ import './components/Mover';
 
 const CameraRig = () => (
   <a-entity id="cameraRig" position="0 0 4">
-    <a-camera />
+    <a-camera id="camera"/>
     <a-entity
       oculus-go-controls
       mover

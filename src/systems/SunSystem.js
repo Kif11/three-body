@@ -24,21 +24,28 @@ AFRAME.registerSystem('sunSystem', {
 
     //sun system is in charge of the three directional lights
     this.sunLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
-    this.sunLight1.castShadow = true;
-    this.sunLight1.shadow.camera.far = 2*this.data.skyRadius;
+    // this.sunLight1.castShadow = true;
+    // this.sunLight1.shadow.camera.far = 2*this.data.skyRadius;
 
     this.sunLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
     this.sunLight2.castShadow = true;
     this.sunLight2.shadow.camera.far = 2*this.data.skyRadius;
 
     this.sunLight3 = new THREE.DirectionalLight(0xffffff, 0.5);
-    this.sunLight3.castShadow = true;
-    this.sunLight3.shadow.camera.far = 2*this.data.skyRadius;
+    // this.sunLight3.castShadow = true;
+    // this.sunLight3.shadow.camera.far = 2*this.data.skyRadius;
 
 
     this.sceneEl.object3D.add(this.sunLight1)
     this.sceneEl.object3D.add(this.sunLight2)
     this.sceneEl.object3D.add(this.sunLight3)
+
+    this.startAnimation = false;
+    this.animationTime = this.data.timeOffset;
+
+    this.sceneEl.addEventListener('speech1-ended', () => {
+      this.startAnimation = true;
+    });
 
   },
 
@@ -65,8 +72,12 @@ AFRAME.registerSystem('sunSystem', {
   },
 
   tick: function (time, timeDelta) {
-    var animationTime = time + this.data.timeOffset;
-    var center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(animationTime/-2000*this.data.speed), this.data.skyRadius*Math.cos(animationTime/-2000*this.data.speed));
+    var center;
+    if(this.startAnimation){
+      this.animationTime += timeDelta;
+    }
+    center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(this.animationTime/-2000*this.data.speed), this.data.skyRadius*Math.cos(this.animationTime/-2000*this.data.speed));
+
     this.center.position.copy(center);
     this.center.updateMatrixWorld();
 
@@ -77,8 +88,8 @@ AFRAME.registerSystem('sunSystem', {
     this.entities.forEach((sun, index) => {
       const curSun = sun.el.object3D.children[0];
       var pos = new THREE.Vector3().add(
-        newX.clone().multiplyScalar(sun.initData.pathRadius*Math.cos(animationTime*sun.initData.speed*this.data.speed + sun.initData.offset))).add(
-        newY.clone().multiplyScalar(sun.initData.pathRadius*Math.sin(animationTime*sun.initData.speed*this.data.speed + sun.initData.offset)))
+        newX.clone().multiplyScalar(sun.initData.pathRadius*Math.cos(this.animationTime*sun.initData.speed*this.data.speed + sun.initData.offset))).add(
+        newY.clone().multiplyScalar(sun.initData.pathRadius*Math.sin(this.animationTime*sun.initData.speed*this.data.speed + sun.initData.offset)))
       pos.add(center);
       this.ray.origin.copy(pos);
       this.ray.direction.copy(pos.normalize().multiplyScalar(-1));

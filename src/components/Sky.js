@@ -38,7 +38,7 @@ AFRAME.registerComponent('sky', {
         time: { value: 0 },
         env_c1: {value: new THREE.Color("#54cccc")},
         env_c2: {value: new THREE.Color("#2795bd")},
-        heat_c1: {value: new THREE.Color("#fcf9bb")},
+        heat_c1: {value: new THREE.Color("#ff7a35")},
         heat_c2: {value: new THREE.Color("#ffb42e")},
         night_c1: {value: new THREE.Color("#191640")},
       },
