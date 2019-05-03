@@ -1,5 +1,4 @@
 import AFRAME from 'aframe';
-import aframeEffects from 'aframe-effects';
 import JSX from './JSX';
 import './components/Spinner';
 import './components/SetGLTFMaterial';
@@ -27,8 +26,8 @@ const App = () => (
   >
     {CameraRig()}
     <a-assets>
-      <audio id="speech1" src="assets/greetingShort.mp3" preload="auto"></audio>
-      <audio id="speech2" src="assets/speech1.mp3" preload="auto"></audio>
+      <audio id="speech1" src="assets/speech/greetingShort.mp3" preload="auto"></audio>
+      <audio id="speech2" src="assets/speech/speech1.mp3" preload="auto"></audio>
       <a-asset-item id="mountains" src="assets/mountains/mountains.gltf" />
       <a-asset-item id="cubes" src="assets/cubes/cubes.gltf" />
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
@@ -37,19 +36,18 @@ const App = () => (
     <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
     <a-entity id="sky" sky />
 
-    <a-entity character sound="src: #bottle; volume: 1;"/>
-
     <a-entity
+      character
       speech-controller
       sound__1="
         src: #speech1;
-        volume:3;
+        volume:1;
         loop: false;
         positional: true;
       "
       sound__2="
         src: #speech2;
-        volume:3;
+        volume:1;
         loop: false;
         positional: true;
       "

@@ -9,11 +9,15 @@ AFRAME.registerComponent('character', {
     var boxGeo = new THREE.BoxBufferGeometry(0.25,1,0.15);
     var boxMat = new THREE.MeshPhongMaterial({color: new THREE.Color('#454340')});
     var character = new THREE.Mesh(boxGeo, boxMat);
-    character.position.set(0,this.characterHeight,-40)
+    // character.position.set(0,this.characterHeight,-40)
+
     this.el.object3D.add(character)
     this.character = character;
     this.characterHeight = 0.7;
     this.targetPos = new THREE.Vector3(0,1,-40);
+    this.characterPos = new THREE.Vector3(0,this.characterHeight,-40);
+    this.el.setAttribute('position', this.characterPos);
+
     this.walkingSpeed = 0.1;
 
     this.reachedCharacter = false;
@@ -39,9 +43,9 @@ AFRAME.registerComponent('character', {
     worldPos.sub(forward.normalize().multiplyScalar(1.5));
     this.targetPos.set(worldPos.x,this.characterHeight,worldPos.z);
 
-    this.character.position.y = 1;
+    this.characterPos.y = this.characterHeight;
 
-    var dir = new THREE.Vector3().subVectors(this.targetPos, this.character.position);
+    var dir = new THREE.Vector3().subVectors(this.targetPos, this.characterPos);
     var dist = dir.length();
     if(dist < 1) {
       // send event and also stop moving
@@ -50,7 +54,7 @@ AFRAME.registerComponent('character', {
       return;
     }
     dir.multiplyScalar(this.walkingSpeed/dist);
-    this.character.position.add(dir)
+    this.characterPos.add(dir)
   },
 
   tick: function (time, timeDelta) {
@@ -62,7 +66,9 @@ AFRAME.registerComponent('character', {
     //idle
 
     var idx = 10*Math.sin(time/3000);
-    this.character.position.y = this.characterHeight + 1 + 0.2*Math.sin(idx)/idx;
+    this.characterPos.y = this.characterHeight + 1 + 0.2*Math.sin(idx)/idx;
+
+    this.el.setAttribute('position', this.characterPos);
 
   }
 });
