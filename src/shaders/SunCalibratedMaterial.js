@@ -6,16 +6,18 @@ import phongFrag from './PhongFrag.glsl';
 import phongVert from './PhongVert.glsl';
 import perlin from './PerlinNoise.glsl';
 
-export default class MeshPhongMaterialOverride extends THREE.MeshPhongMaterial {
-  constructor(){
+// sun calibrated materials need to have access to the sun system in order to properly update
+// the sunCentroid parameter. must include sunCentroid and time uniform to work properly.
+export default class SunCalibratedMaterial extends THREE.MeshPhongMaterial {
+  constructor(system){
     super();
-
-    this.onBeforeCompile = function (shader) {
-
+    this.onBeforeCompile = (shader) => {
+      shader.uniforms.time = { value: 0 };
+      shader.uniforms.sunCentroid = { value: new THREE.Vector3() };
       shader.vertexShader = phongVert;
       shader.fragmentShader = phongFrag;
-
-
+      this.shader = shader;
+      system.registerMaterial(this.shader);
       // shader.vertexShader = perlin + shader.vertexShader;
       // shader.vertexShader = "uniform float opacity;\n" + shader.vertexShader;
 

@@ -1,6 +1,8 @@
 import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
 
+import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
+
 AFRAME.registerComponent('sun', {
   schema: {
     sunRadius: {

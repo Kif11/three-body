@@ -3,8 +3,10 @@
 uniform vec3 diffuse;
 uniform vec3 emissive;
 uniform vec3 specular;
+uniform vec3 sunCentroid;
 uniform float shininess;
 uniform float opacity;
+uniform float time;
 
 #include <common>
 #include <packing>
@@ -119,5 +121,7 @@ void main() {
 	#include <fog_fragment>
 	#include <premultiplied_alpha_fragment>
 	#include <dithering_fragment>
+
+	@import ./ColorCorrection;
 
 }

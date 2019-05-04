@@ -1,5 +1,5 @@
 import AFRAME from 'aframe';
-import MeshPhongMaterialOverride from '../shaders/MeshPhongMaterialOverride';
+import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('default-material', {
@@ -14,7 +14,7 @@ AFRAME.registerComponent('default-material', {
   },
   init: function () {
     const mesh = this.el.object3D.children[0];
-    mesh.material = new THREE.MeshPhongMaterialOverride();
+    mesh.material = new THREE.SunCalibratedMaterial();
     mesh.material.color = new THREE.Color(this.data.color);
   },
 

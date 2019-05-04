@@ -16,7 +16,8 @@ AFRAME.registerSystem('sunSystem', {
   },
 
   init: function () {
-    this.entities = []
+    this.entities = [];
+    this.materials = [];
     this.center = new THREE.Object3D();
     this.center.up = new THREE.Vector3(1,0,1)
     this.sphere = new THREE.Sphere(new THREE.Vector3(0,0,0), this.data.skyRadius);
@@ -71,6 +72,10 @@ AFRAME.registerSystem('sunSystem', {
     this.sky = el.object3D.children[0];
   },
 
+  registerMaterial: function(mat) {
+    this.materials.push(mat);
+  },
+
   tick: function (time, timeDelta) {
     var center;
     if(this.startAnimation){
@@ -85,6 +90,7 @@ AFRAME.registerSystem('sunSystem', {
     var newX = new THREE.Vector3(1,0,0).applyQuaternion(this.center.quaternion);
     var newY = new THREE.Vector3(0,1,0).applyQuaternion(this.center.quaternion);
 
+    var sunCentroid = new THREE.Vector3(0,0,0);
     this.entities.forEach((sun, index) => {
       const curSun = sun.el.object3D.children[0];
       var pos = new THREE.Vector3().add(
@@ -99,6 +105,13 @@ AFRAME.registerSystem('sunSystem', {
       const lightName = 'sunLight' + (index+1).toString();
       this[lightName].position.copy(curSun.position);
       this[lightName].intensity = Math.max(curSun.position.y/this.data.skyRadius, 0);
+      sunCentroid.add(curSun.position)
+    })
+
+    sunCentroid.multiplyScalar(1/3);
+    this.materials.forEach((mat) => {
+      mat.uniforms.sunCentroid.value = sunCentroid;
+      mat.uniforms.time.value = time/1000;
     })
   }
 });

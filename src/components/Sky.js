@@ -31,6 +31,7 @@ AFRAME.registerComponent('sky', {
         sunPos1: { value: new THREE.Vector3(0,1,0) },
         sunPos2: { value: new THREE.Vector3(0,1,0) },
         sunPos3: { value: new THREE.Vector3(0,1,0) },
+        sunCentroid: {value: new THREE.Vector3(0,0,0)},
         sunRadius1: { value: 0 },
         sunRadius2: { value: 0 },
         sunRadius3: { value: 0 },
@@ -52,8 +53,9 @@ AFRAME.registerComponent('sky', {
     this.el.object3D.add(sky)
     this.sky = sky;
     system.registerSky(this.el);
+    system.registerMaterial(this.sky.material);
   },
   tick: function (time, timeDelta) {
-    this.sky.material.uniforms.time.value = time/10;
+    this.sky.material.uniforms.time.value = time/1000;
   }
 });
