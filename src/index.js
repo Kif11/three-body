@@ -5,7 +5,7 @@ import './components/SetGLTFMaterial';
 import './components/DefaultMaterial';
 import './components/Sun';
 import './components/Sky';
-import './components/Character';
+import './components/CharacterMover';
 import './components/SpeechController';
 import './systems/SunSystem';
 
@@ -15,7 +15,7 @@ import CameraRig from './CameraRig';
 const App = () => (
   <a-scene
     background="color: black"
-    sunSystem="speed: .1; skyRadius: 1000; timeOffset:20000"
+    sunSystem="speed: .1; skyRadius: 1000; timeOffset:60000"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -32,13 +32,15 @@ const App = () => (
       <a-asset-item id="cubes" src="assets/cubes/cubes.gltf" />
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
       <a-asset-item id="cliff" src="assets/cliff/cliff.gltf" />
+      <a-asset-item id="mask" src="assets/mask/mask.gltf" />
     </a-assets>
 
     <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
     <a-entity id="sky" sky />
 
-    <a-entity
-      character
+    <a-gltf-model
+      src="#mask"
+      character-mover
       speech-controller
       sound__1="
         src: #speech1;

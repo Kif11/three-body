@@ -3,19 +3,12 @@ const THREE = AFRAME.THREE;
 
 import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
 
-AFRAME.registerComponent('character', {
+AFRAME.registerComponent('character-mover', {
   schema: {
   },
 
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
-
-    var boxGeo = new THREE.BoxBufferGeometry(0.25,1,0.15);
-    var boxMat = new SunCalibratedMaterial(system);
-    var character = new THREE.Mesh(boxGeo, boxMat);
-    this.el.object3D.add(character)
-
-    this.character = character;
 
     this.characterHeight = 0.7;
     this.targetPos = new THREE.Vector3(0, 1, -40);
@@ -25,9 +18,10 @@ AFRAME.registerComponent('character', {
     this.walkingSpeed = 0.1;
     this.reachedCharacter = false;
 
-    this.el.sceneEl.addEventListener('speech1', (event) => {
-      this.character.material.color = new THREE.Color('#ff00ff');
-    });
+    // this.el.sceneEl.addEventListener('speech1', (event) => {
+    //   this.character = this.el.object3D;
+    //   this.character.material.color = new THREE.Color('#ff00ff');
+    // });
 
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
       window.setTimeout(() => {
