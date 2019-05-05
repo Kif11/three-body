@@ -6,7 +6,7 @@ import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
 
 const THREE = AFRAME.THREE;
 
-AFRAME.registerComponent('set-gltf-material', {
+AFRAME.registerComponent('set-character-material', {
   schema: {
     color: {
       type: 'color',

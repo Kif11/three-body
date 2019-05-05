@@ -2,6 +2,7 @@ import AFRAME from 'aframe';
 import JSX from './JSX';
 import './components/Spinner';
 import './components/SetGLTFMaterial';
+import './components/SetCharacterMaterial';
 import './components/DefaultMaterial';
 import './components/Sun';
 import './components/Sky';
@@ -40,6 +41,7 @@ const App = () => (
 
     <a-gltf-model
       src="#mask"
+      set-character-material="color: #ffffff;"
       character-mover
       speech-controller
       sound__1="
