@@ -37,6 +37,10 @@ module.exports = {
       {
         from: 'public/assets',
         to: 'assets',
+      },
+      {
+        from: 'public/js',
+        to: 'js',
       }
     ]),
   ],

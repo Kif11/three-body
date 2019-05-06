@@ -1,4 +1,5 @@
 import AFRAME from 'aframe';
+
 import JSX from './JSX';
 import './components/Spinner';
 import './components/SetGLTFMaterial';
@@ -8,6 +9,8 @@ import './components/Sun';
 import './components/Sky';
 import './components/CharacterMover';
 import './components/SpeechController';
+import './components/VertexCacheTextures';
+
 import './systems/SunSystem';
 
 import CameraRig from './CameraRig';
@@ -15,6 +18,7 @@ import CameraRig from './CameraRig';
 
 const App = () => (
   <a-scene
+    stats
     background="color: black"
     sunSystem="speed: .1; skyRadius: 1000; timeOffset:60000"
     renderer="
@@ -34,7 +38,13 @@ const App = () => (
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
       <a-asset-item id="cliff" src="assets/cliff/cliff.gltf" />
       <a-asset-item id="mask" src="assets/mask/mask.gltf" />
+      <a-asset-item id="fire" src="assets/fire_hi/fire_mesh.fbx" />
+      <a-asset-item id="firePosExr" src="assets/fire_hi/fire_pos.exr" response-type="arraybuffer"/>
+      <a-asset-item id="fireColorExr" src="assets/fire_hi/fire_col.exr" response-type="arraybuffer" />
+      <a-asset-item id="fireParams" src="assets/fire_hi/fire_minmax.json" response-type="json"/>
     </a-assets>
+
+    {/* <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams" scale="0.01 0.01 0.01"></a-entity> */}
 
     <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
     <a-entity id="sky" sky />
@@ -62,7 +72,7 @@ const App = () => (
     <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1" />
     <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
 
-    <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere>
+    {/* <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere> */}
 
     <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material />
     <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73;" />

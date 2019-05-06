@@ -22,7 +22,6 @@ AFRAME.registerComponent('set-gltf-material', {
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
       const mesh = scene.children[0];
-      console.log(scene)
 
       if (mesh) {
         mesh.castShadow = true;

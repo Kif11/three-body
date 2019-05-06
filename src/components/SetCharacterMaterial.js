@@ -3,6 +3,8 @@ import GroundFrag from '../shaders/GroundFrag.glsl';
 import GroundVert from '../shaders/GroundVert.glsl';
 
 import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
+import EyeFrag from '../shaders/EyeFrag.glsl';
+import EyeVert from '../shaders/EyeVert.glsl';
 
 const THREE = AFRAME.THREE;
 
@@ -17,33 +19,37 @@ AFRAME.registerComponent('set-character-material', {
 
     const system = document.querySelector('a-scene').systems['sunSystem'];
 
+    this.eyeMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+      },
+      vertexShader: EyeVert,
+      fragmentShader: EyeFrag,
+    });
+
     this.material = new SunCalibratedMaterial(system);
     const { color } = this.data;
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
-      const mesh = scene.children[0];
-      console.log(scene)
+      const eyeMesh = scene.getObjectByName('eyes');
+      const bodyMesh = scene.getObjectByName('body');
 
-      if (mesh) {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        mesh.geometry.computeVertexNormals()
-
-        const { map: diffTexture } = mesh.material;
+      if (eyeMesh) {
+        eyeMesh.material = this.eyeMaterial;
+      }
+      if (bodyMesh) {
+        const { map: diffTexture } = bodyMesh.material;
 
         if (diffTexture) {
           this.material.map = diffTexture;
         }
-
-        mesh.material = this.material;
-
-        if (color) {
-          mesh.material.color = new THREE.Color(color);
-        }
+        bodyMesh.geometry.computeVertexNormals();
+        bodyMesh.material = this.material;
       }
     });
   },
 
   tick: function (time) {
+    this.eyeMaterial.uniforms.time.value = time/1000;
   }
 });
