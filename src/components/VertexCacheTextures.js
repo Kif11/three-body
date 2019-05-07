@@ -18,6 +18,9 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.fbxModel = null;
     this.params = null;
     this.load = this.load.bind(this);
+    this.el.addEventListener('start-vertex-animation', (evt) => {
+      this.animating = true;
+    });
   },
 
   update: function () {
@@ -104,6 +107,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.handleFbxModel();
     this.handleEXRTextures();
     this.time = 0;
+    this.el.emit('vertex-cache-loaded');
   },
 
   remove: function () {
@@ -112,6 +116,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
 
   tick: function (time, timeDelta) {
     if(!this.model) return;
+    if(!this.animating) return;
     var currentFrame = Math.ceil(this.time/this.data.fps);
     if(currentFrame >= this.params.numframes) {
       this.time = 0

@@ -10,6 +10,7 @@ import './components/Sky';
 import './components/CharacterMover';
 import './components/SpeechController';
 import './components/VertexCacheTextures';
+import './components/FireManager';
 
 import './systems/SunSystem';
 
@@ -44,7 +45,7 @@ const App = () => (
       <a-asset-item id="fireParams" src="assets/fire_hi/fire_minmax.json" response-type="json"/>
     </a-assets>
 
-    {/* <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams" scale="0.01 0.01 0.01"></a-entity> */}
+     {/* <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams" fire-manager scale="0 0 0"></a-entity> */}
 
     <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
     <a-entity id="sky" sky />
