@@ -21,41 +21,20 @@ AFRAME.registerComponent('sky', {
     const { widthSegments, heightSegments } = this.data;
 
     var sphereGeo = new THREE.SphereBufferGeometry(
-      system.data.skyRadius,
+      1000,
       widthSegments,
       heightSegments,
     );
 
-    var sphereMat = new THREE.ShaderMaterial({
-      uniforms: {
-        sunPos1: { value: new THREE.Vector3(0,1,0) },
-        sunPos2: { value: new THREE.Vector3(0,1,0) },
-        sunPos3: { value: new THREE.Vector3(0,1,0) },
-        sunCentroid: {value: new THREE.Vector3(0,0,0)},
-        sunRadius1: { value: 0 },
-        sunRadius2: { value: 0 },
-        sunRadius3: { value: 0 },
-        skyRadius: { value: 0 },
-        time: { value: 0 },
-        env_c1: {value: new THREE.Color("#54cccc")},
-        env_c2: {value: new THREE.Color("#2795bd")},
-        heat_c1: {value: new THREE.Color("#ff7a35")},
-        heat_c2: {value: new THREE.Color("#ffb42e")},
-        night_c1: {value: new THREE.Color("#191640")},
-      },
-      vertexShader: SkyVert,
-      fragmentShader: SkyFrag,
-      depthWrite: false,
-      side: THREE.DoubleSide,
+    var sphereMat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color("#70c1c3"),
+      side: THREE.DoubleSide
     });
 
     var sky = new THREE.Mesh(sphereGeo, sphereMat);
     this.el.object3D.add(sky)
     this.sky = sky;
-    system.registerSky(this.el);
-    system.registerMaterial(this.sky.material);
   },
   tick: function (time, timeDelta) {
-    this.sky.material.uniforms.time.value = time/1000;
   }
 });

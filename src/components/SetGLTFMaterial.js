@@ -17,7 +17,7 @@ AFRAME.registerComponent('set-gltf-material', {
 
     const system = document.querySelector('a-scene').systems['sunSystem'];
 
-    this.material = new SunCalibratedMaterial(system);
+    this.material = new THREE.MeshPhongMaterial();
     const { color } = this.data;
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
