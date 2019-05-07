@@ -43,9 +43,15 @@ const App = () => (
       <a-asset-item id="firePosExr" src="assets/fire_hi/fire_pos.exr" response-type="arraybuffer"/>
       <a-asset-item id="fireColorExr" src="assets/fire_hi/fire_col.exr" response-type="arraybuffer" />
       <a-asset-item id="fireParams" src="assets/fire_hi/fire_minmax.json" response-type="json"/>
+      <a-asset-item id="cloth" src="assets/cloth/cloth_mesh.fbx" />
+      <a-asset-item id="clothPosExr" src="assets/cloth/cloth_pos.exr" response-type="arraybuffer"/>
+      <a-asset-item id="clothNormalExr" src="assets/cloth/cloth_norm.exr" response-type="arraybuffer" />
+      <a-asset-item id="clothParams" src="assets/cloth/cloth_minmax.json" response-type="json"/>
+      <img id="clothDiffuse" src="assets/cloth/cloth_diffuse.png"/>
     </a-assets>
 
-     {/* <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams" fire-manager scale="0 0 0"></a-entity> */}
+     <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams;" fire-manager scale="0 0 0"></a-entity>
+     <a-entity vertex-cache-textures="fbxModel:#cloth; posTex:#clothPosExr; normalTex:#clothNormalExr; diffuseTex:#clothDiffuse; params:#clothParams; mode:'soft';" position="-4.2 0.2 0.2" scale="0.02 0.02 0.02"></a-entity>
 
     <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
     <a-entity id="sky" sky />
