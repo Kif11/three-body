@@ -29,7 +29,7 @@ void main() {
   vec4 backgroundColor = vec4(mix(env_c1, env_c2, noise), 1.0);
   float noise2 = cnoise(scrollingPos*freq*1.0);
 
-  vec4 heatColor = vec4(mix(heat_c2, heat_c2, noise2), 1.0);
+  vec4 heatColor = vec4(mix(heat_c1, heat_c2, noise2), 1.0);
 
   float l = length(vPos - sunPos1);
   float l2 = length(vPos - sunPos2);
@@ -37,11 +37,11 @@ void main() {
 
   float distHorizon = sunCentroid.y/skyRadius;
 
-  backgroundColor = vec4(mix(night_c1.xyz, backgroundColor.xyz, distHorizon+1.0), 1.0);
+  backgroundColor = vec4(mix(night_c1.xyz, backgroundColor.xyz, clamp(distHorizon+1.0,0.0,1.0)), 1.0);
 
   float magnitude = (length(sunPos1 - sunCentroid) + length(sunPos3 - sunCentroid) + length(sunPos2 - sunCentroid))/6.0/skyRadius;
   float magnitudeS = (l + l2 + l3)/6.0/skyRadius;
-  backgroundColor = mix(backgroundColor, heatColor, pow(1.0 - clamp(magnitudeS, .0, 1.0),2.0) * (1.5+pow(1.0 - clamp(magnitude, .0, 1.0),2.0)) );
+  backgroundColor = mix(backgroundColor, heatColor, clamp(pow(1.0 - clamp(magnitudeS, .0, 1.0),2.0) * (1.5+pow(1.0 - clamp(magnitude, .0, 1.0),2.0)),0.0,1.0) );
 
 
   l = clamp((l-sunRadius1)/(4.0*sunRadius1), 0.0, 1.0);
