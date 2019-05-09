@@ -9,6 +9,7 @@ import './components/Sun';
 import './components/Sky';
 import './components/CharacterMover';
 import './components/SpeechController';
+import './components/AmbientController';
 import './components/VertexCacheTextures';
 import './components/FireManager';
 
@@ -21,7 +22,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: .1; skyRadius: 1000; timeOffset:60000"
+    sunSystem="speed: .4; skyRadius: 500; timeOffset:15000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -29,11 +30,15 @@ const App = () => (
       foveationLevel: 3;
       shadowMapEnabled: true;
     "
+    fog="type: exponential; color: #ffe4aa; density: 0.004;"
   >
     {CameraRig()}
     <a-assets>
       <audio id="speech1" src="assets/speech/greetingShort.mp3" preload="auto"></audio>
       <audio id="speech2" src="assets/speech/speech1.mp3" preload="auto"></audio>
+      <audio id="track1" src="assets/ambient/track1.mp3" preload="auto"></audio>
+      <audio id="track2" src="assets/ambient/track2.mp3" preload="auto"></audio>
+      <audio id="track3" src="assets/ambient/track3.mp3" preload="auto"></audio>
       <a-asset-item id="mountains" src="assets/mountains/mountains.gltf" />
       <a-asset-item id="cubes" src="assets/cubes/cubes.gltf" />
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
@@ -50,12 +55,30 @@ const App = () => (
       <img id="clothDiffuse" src="assets/cloth/cloth_diffuse.png"/>
     </a-assets>
 
-     <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams;" fire-manager scale="0 0 0"></a-entity>
-     <a-entity vertex-cache-textures="fbxModel:#cloth; posTex:#clothPosExr; normalTex:#clothNormalExr; diffuseTex:#clothDiffuse; params:#clothParams; mode:'soft';" position="-4.2 0.2 0.2" scale="0.02 0.02 0.02"></a-entity>
-
-    <a-entity light="type: hemisphere; color: #ffffff; groundColor: #ffffff; intensity: 0.5" />
+    <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
     <a-entity id="sky" sky />
-
+    <a-entity
+      id="ambientSounds"
+      ambient-controller
+      sound__1="
+        src: #track1;
+        volume:0;
+        loop: true;
+        positional: false;
+      "
+      sound__2="
+        src: #track2;
+        volume:0;
+        loop: true;
+        positional: false;
+      "
+      sound__3="
+        src: #track3;
+        volume:0;
+        loop: true;
+        positional: false;
+      "
+    />
     <a-gltf-model
       src="#mask"
       set-character-material="color: #ffffff;"
@@ -63,13 +86,13 @@ const App = () => (
       speech-controller
       sound__1="
         src: #speech1;
-        volume:1;
+        volume:0;
         loop: false;
         positional: true;
       "
       sound__2="
         src: #speech2;
-        volume:1;
+        volume:0;
         loop: false;
         positional: true;
       "
@@ -95,5 +118,8 @@ const App = () => (
     {/* <a-gltf-model src="#cubes" set-gltf-material="color: #a98457;" /> */}
   </a-scene>
 );
+
+     // <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams;" fire-manager scale="0 0 0"></a-entity>
+     // <a-entity vertex-cache-textures="fbxModel:#cloth; posTex:#clothPosExr; normalTex:#clothNormalExr; diffuseTex:#clothDiffuse; params:#clothParams; mode:'soft';" position="-4.2 0.2 0.2" scale="0.02 0.02 0.02"></a-entity>
 
 document.querySelector('body').appendChild(App());

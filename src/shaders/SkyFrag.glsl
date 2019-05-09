@@ -1,5 +1,4 @@
 @import ./PerlinNoise;
-
 uniform float time;
 uniform vec3 sunPos1;
 uniform vec3 sunPos2;
@@ -19,6 +18,9 @@ uniform sampler2D flowTexture;
 varying vec2 vUv;
 varying vec3 vPos;
 
+#include <common>
+#include <fog_pars_fragment>
+
 void main() {
 
   float freq = 1.1/skyRadius;
@@ -37,7 +39,7 @@ void main() {
 
   float distHorizon = sunCentroid.y/skyRadius;
 
-  backgroundColor = vec4(mix(night_c1.xyz, backgroundColor.xyz, clamp(distHorizon+1.0,0.0,1.0)), 1.0);
+  backgroundColor = vec4(mix(night_c1.xyz, backgroundColor.xyz, clamp(distHorizon, 0.0, 1.0)), 1.0);
 
   float magnitude = (length(sunPos1 - sunCentroid) + length(sunPos3 - sunCentroid) + length(sunPos2 - sunCentroid))/6.0/skyRadius;
   float magnitudeS = (l + l2 + l3)/6.0/skyRadius;
@@ -52,5 +54,6 @@ void main() {
 
   gl_FragColor = mix(backgroundColor, c1, clamp(pow(1.0 - l, 5.0) + pow(1.0 - l3, 5.0)+ pow(1.0 - l2, 5.0), 0.0, 1.0));
   @import ./ColorCorrection;
+  @import ./FogReplaceFrag;
 
 }

@@ -41,12 +41,15 @@ AFRAME.registerComponent('sky', {
         env_c2: {value: new THREE.Color("#f7dbb6")},
         heat_c1: {value: new THREE.Color("#f7967e")},
         heat_c2: {value: new THREE.Color("#f78f64")},
-        night_c1: {value: new THREE.Color("#210f17")},
+        night_c1: {value: new THREE.Color("#0d1a2f")},
+        fogColor: {value: 0},
+        fogDensity: {value: 0},
       },
       vertexShader: SkyVert,
       fragmentShader: SkyFrag,
       depthWrite: false,
       side: THREE.DoubleSide,
+      fog: true,
     });
 
     var sky = new THREE.Mesh(sphereGeo, sphereMat);

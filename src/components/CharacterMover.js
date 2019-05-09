@@ -15,7 +15,7 @@ AFRAME.registerComponent('character-mover', {
     this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
     this.el.setAttribute('position', this.characterPos);
 
-    this.walkingSpeed = 0.5;
+    this.walkingSpeed = 0.1;
     this.reachedCharacter = false;
 
     // this.el.sceneEl.addEventListener('speech1', (event) => {

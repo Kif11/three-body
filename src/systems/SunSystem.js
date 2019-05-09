@@ -13,6 +13,10 @@ AFRAME.registerSystem('sunSystem', {
       type: 'float',
       default: 0
     },
+    fogColor: {
+      type: 'color',
+      default: '#ffffff'
+    },
   },
 
   init: function () {
@@ -36,6 +40,8 @@ AFRAME.registerSystem('sunSystem', {
     // this.sunLight3.castShadow = true;
     // this.sunLight3.shadow.camera.far = 2*this.data.skyRadius;
 
+    this.fogColor = new THREE.Color(this.data.fogColor);
+    this.fogNightColor = new THREE.Color("#ffffff");
 
     this.sceneEl.object3D.add(this.sunLight1)
     this.sceneEl.object3D.add(this.sunLight2)
@@ -109,6 +115,12 @@ AFRAME.registerSystem('sunSystem', {
     })
 
     sunCentroid.multiplyScalar(1/3);
+    var t = sunCentroid.y/this.data.skyRadius;
+
+    t = Math.min(Math.max(t, 0), 1)
+    this.sceneEl.object3D.fog.density = Math.min(t+0.1,1)*0.005;
+    this.sceneEl.object3D.fog.color = this.fogNightColor.lerp(this.fogColor, t)
+
     this.materials.forEach((mat) => {
       mat.uniforms.sunCentroid.value = sunCentroid;
       mat.uniforms.time.value = time/1000;

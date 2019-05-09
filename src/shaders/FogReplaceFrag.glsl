@@ -4,5 +4,5 @@
 	#else
 		float fogFactor = smoothstep( fogNear, fogFar, fogDepth );
 	#endif
-	gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );
+	gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor/2.0 );
 #endif

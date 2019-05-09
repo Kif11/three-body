@@ -24,9 +24,8 @@ AFRAME.registerComponent('sun', {
   },
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
-
-    var sphereGeo = new THREE.SphereBufferGeometry(this.data.sunRadius * system.data.skyRadius);
-    var sphereMat = new THREE.MeshBasicMaterial({color: new THREE.Color()});
+    var sphereGeo = new THREE.SphereBufferGeometry(this.data.sunRadius * system.data.skyRadius, 100, 100);
+    var sphereMat = new THREE.MeshBasicMaterial({color: new THREE.Color(), fog: false});
     var sun = new THREE.Mesh(sphereGeo, sphereMat);
     this.el.object3D.add(sun)
 
