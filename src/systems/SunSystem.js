@@ -29,12 +29,20 @@ AFRAME.registerSystem('sunSystem', {
 
     //sun system is in charge of the three directional lights
     this.sunLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
-    // this.sunLight1.castShadow = true;
-    // this.sunLight1.shadow.camera.far = 2*this.data.skyRadius;
+    this.sunLight1.castShadow = true;
+    this.sunLight1.shadow.camera.far = 2*this.data.skyRadius;
+    this.sunLight1.shadow.camera.left = -10;
+    this.sunLight1.shadow.camera.bottom = -10;
+    this.sunLight1.shadow.camera.right = 10;
+    this.sunLight1.shadow.camera.top = 10;
+    this.sunLight1.shadow.mapSize.width = 1024;
+	  this.sunLight1.shadow.mapSize.height = 1024;
 
+    console.log(this.sunLight1.shadow.camera)
+    this.sceneEl.object3D.add(new THREE.CameraHelper(this.sunLight1.shadow.camera))
     this.sunLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-    this.sunLight2.castShadow = true;
-    this.sunLight2.shadow.camera.far = 2*this.data.skyRadius;
+    // this.sunLight2.castShadow = true;
+    // this.sunLight2.shadow.camera.far = 2*this.data.skyRadius;
 
     this.sunLight3 = new THREE.DirectionalLight(0xffffff, 0.5);
     // this.sunLight3.castShadow = true;

@@ -10,7 +10,7 @@ AFRAME.registerComponent('character-mover', {
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
 
-    this.characterHeight = 0.7;
+    this.characterHeight = -1;
     this.targetPos = new THREE.Vector3(0, 1, -40);
     this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
     this.el.setAttribute('position', this.characterPos);

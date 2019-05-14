@@ -22,7 +22,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: .4; skyRadius: 500; timeOffset:15000; color: #ffe4aa;"
+    sunSystem="speed: .04; skyRadius: 500; timeOffset:200000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -52,6 +52,11 @@ const App = () => (
       <a-asset-item id="clothPosExr" src="assets/cloth/cloth_pos.exr" response-type="arraybuffer"/>
       <a-asset-item id="clothNormalExr" src="assets/cloth/cloth_norm.exr" response-type="arraybuffer" />
       <a-asset-item id="clothParams" src="assets/cloth/cloth_minmax.json" response-type="json"/>
+      <a-asset-item id="char" src="assets/char/char_mesh.fbx" />
+      <img id="charDiffuse" src="assets/char/char_diffuse.png"/>
+      <a-asset-item id="charPosExr" src="assets/char/char_pos.exr" response-type="arraybuffer"/>
+      <a-asset-item id="charNormalExr" src="assets/char/char_norm.exr" response-type="arraybuffer" />
+      <a-asset-item id="charParams" src="assets/char/char_minmax.json" response-type="json"/>
       <img id="clothDiffuse" src="assets/cloth/cloth_diffuse.png"/>
     </a-assets>
 
@@ -81,6 +86,7 @@ const App = () => (
     />
     <a-gltf-model
       src="#mask"
+      vertex-cache-textures="fps:100; fbxModel:#char; posTex:#charPosExr; normalTex:#charNormalExr; diffuseTex:#charDiffuse; params:#charParams; mode:'soft';"
       set-character-material="color: #ffffff;"
       character-mover
       speech-controller
@@ -104,8 +110,9 @@ const App = () => (
 
     {/* <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere> */}
 
-    <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material />
-    <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73;" />
+
+    <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;" />
+    <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
 
     <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
     <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -0.93098 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>

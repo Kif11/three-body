@@ -11,7 +11,15 @@ AFRAME.registerComponent('set-gltf-material', {
     color: {
       type: 'color',
       default: null
-    }
+    },
+    castShadow: {
+      type: 'boolean',
+      default: false
+    },
+    receiveShadow: {
+      type: 'boolean',
+      default: false
+    },
   },
   init: function () {
 
@@ -24,8 +32,8 @@ AFRAME.registerComponent('set-gltf-material', {
       const mesh = scene.children[0];
 
       if (mesh) {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
+        mesh.castShadow = this.data.castShadow;
+        mesh.receiveShadow = this.data.receiveShadow;
         mesh.geometry.computeVertexNormals()
 
         const { map: diffTexture } = mesh.material;

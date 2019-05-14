@@ -75,28 +75,41 @@ AFRAME.registerComponent('vertex-cache-textures', {
     const triangleCloud = this.fbxModel.children[0];
 
     if(this.data.diffuseTex !== 'none'){
-      this.diffuseTex = new THREE.TextureLoader().load(this.data.diffuseTex.src);
+      this.diffuseTex = new THREE.TextureLoader().load(this.data.diffuseTex.src, (tex) => {
+        this.model.material.uniforms.diffuseTex.value = tex;
+      });
     }
+
+    var uniforms = ({
+      bbox_max: {value: this.params.bbox_max},
+      bbox_min: {value: this.params.bbox_min},
+      numFrames: {value: this.params.numframes},
+      posTex: {value: 0},
+      colorTex: {value: 0},
+      normalTex: {value: 0},
+      diffuseTex: {value: this.diffuseTex},
+      timeInFrames: {value: 0}
+    });
+    var phongShader = THREE.ShaderLib.phong;
+    var mUniforms = THREE.UniformsUtils.merge([phongShader.uniforms, uniforms]);
 
     // ANIMATION PARAMETERS
     var material = new THREE.ShaderMaterial({
-      uniforms: {
-        bbox_max: {value: this.params.bbox_max},
-        bbox_min: {value: this.params.bbox_min},
-        numFrames: {value: this.params.numframes},
-        posTex: {value: 0},
-        colorTex: {value: 0},
-        normalTex: {value: 0},
-        diffuseTex: {value: this.diffuseTex},
-        timeInFrames: {value: 0}
-      },
+      uniforms: mUniforms,
       vertexShader: (this.data.mode === 'fluid') ? VertexCacheFluidVert: VertexCacheSoftVert,
       fragmentShader: (this.data.mode === 'fluid') ? VertexCacheFluidFrag: VertexCacheSoftFrag,
       side: THREE.DoubleSide,
+      lights: true,
+      extensions: {
+      	derivatives: true, // set to use derivatives
+      }
     });
     this.model = new THREE.Mesh(triangleCloud.geometry, material);
+    this.model.scale.set(0.01, 0.01, 0.01); //houdini tool scales mesh up by 100
     this.model.frustumCulled = false;
-    this.el.setObject3D('mesh', this.model);
+    this.model.castShadow = true;
+
+    this.el.setObject3D('vertex-cache', this.model);
   },
 
   handleEXRTextures: function () {
@@ -148,7 +161,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
   },
 
   remove: function () {
-    if (this.model) this.el.removeObject3D('mesh');
+    if (this.model) this.el.removeObject3D('vertex-cache');
   },
 
   tick: function (time, timeDelta) {
