@@ -38,8 +38,8 @@ AFRAME.registerSystem('sunSystem', {
     this.sunLight1.shadow.mapSize.width = 1024;
 	  this.sunLight1.shadow.mapSize.height = 1024;
 
-    console.log(this.sunLight1.shadow.camera)
     this.sceneEl.object3D.add(new THREE.CameraHelper(this.sunLight1.shadow.camera))
+
     this.sunLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
     // this.sunLight2.castShadow = true;
     // this.sunLight2.shadow.camera.far = 2*this.data.skyRadius;
@@ -88,6 +88,11 @@ AFRAME.registerSystem('sunSystem', {
 
   registerMaterial: function(mat) {
     this.materials.push(mat);
+  },
+
+  registerMainCharacter: function(char) {
+    this.sunLight1.target = char;
+    console.log(char)
   },
 
   tick: function (time, timeDelta) {

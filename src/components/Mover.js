@@ -11,6 +11,9 @@ AFRAME.registerComponent('mover', {
     const camera = document.querySelector('a-camera');
     this.camera = camera.object3D;
 
+    const system = document.querySelector('a-scene').systems['sunSystem'];
+    system.registerMainCharacter(this.camera);
+
     this.el.addEventListener('axismove', (evt) => {
       this.lastAxis.x = evt.detail.axis[0];
       this.lastAxis.y = evt.detail.axis[1];

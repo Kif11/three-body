@@ -33,7 +33,6 @@ AFRAME.registerComponent('set-character-material', {
       const scene = this.el.getObject3D('mesh');
       const eyeMesh = scene.getObjectByName('eyes');
       const bodyMesh = scene.getObjectByName('body');
-
       if (eyeMesh) {
         eyeMesh.material = this.eyeMaterial;
       }
