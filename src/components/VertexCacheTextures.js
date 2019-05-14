@@ -2,6 +2,7 @@ import VertexCacheSoftFrag from '../shaders/VertexCacheSoftFrag.glsl';
 import VertexCacheSoftVert from '../shaders/VertexCacheSoftVert.glsl';
 import VertexCacheFluidFrag from '../shaders/VertexCacheFluidFrag.glsl';
 import VertexCacheFluidVert from '../shaders/VertexCacheFluidVert.glsl';
+import CharacterSoftFrag from '../shaders/CharacterSoftFrag.glsl';
 
 THREE.FBXLoader = require('../libs/FBXLoader');
 
@@ -15,6 +16,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     params:  { type: 'asset' },
     fps:  { type: 'int', default: 30 },
     mode:  { type: 'string', default: 'fluid' },
+    fragmentShader: {type: 'string'}
   },
 
   init: function () {
@@ -88,16 +90,23 @@ AFRAME.registerComponent('vertex-cache-textures', {
       colorTex: {value: 0},
       normalTex: {value: 0},
       diffuseTex: {value: this.diffuseTex},
-      timeInFrames: {value: 0}
+      timeInFrames: {value: 0},
+      time: {value: 0}
     });
     var phongShader = THREE.ShaderLib.phong;
     var mUniforms = THREE.UniformsUtils.merge([phongShader.uniforms, uniforms]);
 
+    var fragmentShader;
+    if (this.data.fragmentShader) {
+      fragmentShader = CharacterSoftFrag;
+    } else {
+      fragmentShader = (this.data.mode === 'fluid') ? VertexCacheFluidFrag: VertexCacheSoftFrag;
+    }
     // ANIMATION PARAMETERS
     var material = new THREE.ShaderMaterial({
       uniforms: mUniforms,
       vertexShader: (this.data.mode === 'fluid') ? VertexCacheFluidVert: VertexCacheSoftVert,
-      fragmentShader: (this.data.mode === 'fluid') ? VertexCacheFluidFrag: VertexCacheSoftFrag,
+      fragmentShader: fragmentShader,
       side: THREE.DoubleSide,
       lights: true,
       extensions: {
@@ -172,6 +181,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
       this.time = 0
     }
     this.model.material.uniforms.timeInFrames.value = currentFrame;
+    this.model.material.uniforms.time.value = time/1000;
     this.time += timeDelta;
   }
 });

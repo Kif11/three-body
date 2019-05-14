@@ -93,6 +93,23 @@ void main() {
 	#include <clipping_planes_fragment>
 
   vec4 diffuseColor = texture2D(diffuseTex, vUv);
+  vec3 yellow = vec3(241.0/255.0, 161.0/255.0, 0.0);
+  vec3 red = vec3(161.0/255.0, 37.0/255.0, 45.0/255.0);
+
+  float d = length(yellow - diffuseColor.xyz);
+  float r = length(red - diffuseColor.xyz);
+
+	float pulse = 10.0*sin(time/2.0);
+  float glow = 0.0;
+  if(d < 0.3){
+    glow = 0.5 + 0.8*abs(sin(pulse)/pulse);
+  } else if (r < 0.3){
+    glow = 0.1 ;
+  }
+  diffuseColor.x = pow(diffuseColor.x,2.2);
+  diffuseColor.y = pow(diffuseColor.y,2.2);
+  diffuseColor.z = pow(diffuseColor.z,2.2);
+
 
 	ReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );
 	vec3 totalEmissiveRadiance = emissive;
@@ -120,7 +137,7 @@ void main() {
 
 	#include <envmap_fragment>
 
-	gl_FragColor = vec4( diffuseColor.xyz + outgoingLight, diffuseColor.a );
+	gl_FragColor = vec4( glow*diffuseColor.xyz + outgoingLight, diffuseColor.a );
 
 	#include <tonemapping_fragment>
 	#include <encodings_fragment>

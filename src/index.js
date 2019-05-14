@@ -86,7 +86,7 @@ const App = () => (
     />
     <a-gltf-model
       src="#mask"
-      vertex-cache-textures="fps:100; fbxModel:#char; posTex:#charPosExr; normalTex:#charNormalExr; diffuseTex:#charDiffuse; params:#charParams; mode:'soft';"
+      vertex-cache-textures="fps:100; fbxModel:#char; posTex:#charPosExr; normalTex:#charNormalExr; diffuseTex:#charDiffuse; params:#charParams; mode:'soft'; fragmentShader:'CharacterSoftFrag'"
       set-character-material="color: #ffffff;"
       character-mover
       speech-controller

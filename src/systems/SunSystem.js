@@ -92,7 +92,6 @@ AFRAME.registerSystem('sunSystem', {
 
   registerMainCharacter: function(char) {
     this.sunLight1.target = char;
-    console.log(char)
   },
 
   tick: function (time, timeDelta) {

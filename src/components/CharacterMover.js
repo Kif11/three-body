@@ -58,7 +58,7 @@ AFRAME.registerComponent('character-mover', {
     }
 
     var idx = 10*Math.sin(time/3000);
-    this.characterPos.y = this.characterHeight + 1 + 0.2*Math.sin(idx)/idx;
+    this.characterPos.y = this.characterHeight + 1 + 0.1*Math.sin(idx)/idx;
     this.el.setAttribute('position', this.characterPos);
   }
 });
