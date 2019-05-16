@@ -52,8 +52,19 @@ void main() {
 
   vec4 c1 = vec4(0.999, 0.999, 1.0, 1.0);
 
-  gl_FragColor = mix(backgroundColor, c1, clamp(pow(1.0 - l, 5.0) + pow(1.0 - l3, 5.0)+ pow(1.0 - l2, 5.0), 0.0, 1.0));
+
+  //stars
+  vec3 offset = vec3(100.0,100.0,100.0 );
+  float cs = pow(cnoise(.01*vec3(vPos)+offset),5.0) + cnoise(.3*vec3(vPos));
+  float ss =clamp(pow(cs,10.0),0.0,1.0);
+  // float ss = clamp(abs(sin(mod(floor(1000.0*vUv.x), 1000.0) + time)), 0.0, 1.0); //blinking?
+  vec4 starColor = abs(clamp(distHorizon, -1.0, .0))*(vPos.y/skyRadius)*0.5*vec4(ss, ss, ss, 1.0);
+
+  gl_FragColor = backgroundColor;
   @import ./ColorCorrection;
   @import ./FogReplaceFrag;
+
+  gl_FragColor = mix(gl_FragColor, c1, clamp(pow(1.0 - l, 5.0) + pow(1.0 - l3, 5.0)+ pow(1.0 - l2, 5.0), 0.0, 1.0));
+  gl_FragColor += starColor;
 
 }

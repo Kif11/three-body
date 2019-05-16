@@ -91,6 +91,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
       normalTex: {value: 0},
       diffuseTex: {value: this.diffuseTex},
       timeInFrames: {value: 0},
+      sunCentroid: {value: 0},
       time: {value: 0}
     });
     var phongShader = THREE.ShaderLib.phong;
@@ -118,6 +119,8 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.model.frustumCulled = false;
     this.model.castShadow = true;
 
+    const system = document.querySelector('a-scene').systems['sunSystem'];
+    system.registerMaterial(material);
     this.el.setObject3D('vertex-cache', this.model);
   },
 
