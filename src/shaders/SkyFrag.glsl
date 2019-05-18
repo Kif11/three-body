@@ -23,7 +23,7 @@ varying vec3 vPos;
 
 void main() {
 
-  float freq = 1.1/skyRadius;
+  float freq = 1.1/(0.01 + skyRadius);
 
   vec3 scrollingPos = vec3(vPos.x, vPos.y, vPos.z + 100.0*time);
   float noise = cnoise(scrollingPos * freq) + 0.2;
@@ -37,12 +37,12 @@ void main() {
   float l2 = length(vPos - sunPos2);
   float l3 = length(vPos - sunPos3);
 
-  float distHorizon = sunCentroid.y/skyRadius;
+  float distHorizon = sunCentroid.y/(0.01 + skyRadius);
 
   backgroundColor = vec4(mix(night_c1.xyz, backgroundColor.xyz, clamp(distHorizon, 0.0, 1.0)), 1.0);
 
-  float magnitude = (length(sunPos1 - sunCentroid) + length(sunPos3 - sunCentroid) + length(sunPos2 - sunCentroid))/6.0/skyRadius;
-  float magnitudeS = (l + l2 + l3)/6.0/skyRadius;
+  float magnitude = (length(sunPos1 - sunCentroid) + length(sunPos3 - sunCentroid) + length(sunPos2 - sunCentroid))/6.0/(0.01 + skyRadius);
+  float magnitudeS = (l + l2 + l3)/6.0/(0.01 + skyRadius);
   backgroundColor = mix(backgroundColor, heatColor, clamp(pow(1.0 - clamp(magnitudeS, .0, 1.0),2.0) * (1.5+pow(1.0 - clamp(magnitude, .0, 1.0),2.0)),0.0,1.0) );
 
 
@@ -52,13 +52,11 @@ void main() {
 
   vec4 c1 = vec4(0.999, 0.999, 1.0, 1.0);
 
-
   //stars
   vec3 offset = vec3(100.0,100.0,100.0 );
   float cs = pow(cnoise(.01*vec3(vPos)+offset),5.0) + cnoise(.3*vec3(vPos));
   float ss =clamp(pow(cs,10.0),0.0,1.0);
-  // float ss = clamp(abs(sin(mod(floor(1000.0*vUv.x), 1000.0) + time)), 0.0, 1.0); //blinking?
-  vec4 starColor = abs(clamp(distHorizon, -1.0, .0))*(vPos.y/skyRadius)*0.5*vec4(ss, ss, ss, 1.0);
+  vec4 starColor = abs(clamp(distHorizon, -1.0, .0))*(vPos.y/(0.01 + skyRadius))*1.5*vec4(ss, ss, ss, 1.0);
 
   gl_FragColor = backgroundColor;
   @import ./ColorCorrection;
