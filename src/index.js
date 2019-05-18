@@ -24,7 +24,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: .04; skyRadius: 500; timeOffset:200000; color: #ffe4aa;"
+    sunSystem="speed: .04; skyRadius: 500; timeOffset:100000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -46,20 +46,11 @@ const App = () => (
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
       <a-asset-item id="cliff" src="assets/cliff/cliff.gltf" />
       <a-asset-item id="mask" src="assets/mask/mask.gltf" />
-      <a-asset-item id="fire" src="assets/fire_hi/fire_mesh.fbx" />
-      <a-asset-item id="firePosExr" src="assets/fire_hi/fire_pos.exr" response-type="arraybuffer"/>
-      <a-asset-item id="fireColorExr" src="assets/fire_hi/fire_col.exr" response-type="arraybuffer" />
-      <a-asset-item id="fireParams" src="assets/fire_hi/fire_minmax.json" response-type="json"/>
-      <a-asset-item id="cloth" src="assets/cloth/cloth_mesh.fbx" />
-      <a-asset-item id="clothPosExr" src="assets/cloth/cloth_pos.exr" response-type="arraybuffer"/>
-      <a-asset-item id="clothNormalExr" src="assets/cloth/cloth_norm.exr" response-type="arraybuffer" />
-      <a-asset-item id="clothParams" src="assets/cloth/cloth_minmax.json" response-type="json"/>
       <a-asset-item id="char" src="assets/char/char_mesh.fbx" />
       <img id="charDiffuse" src="assets/char/char_diffuse.png"/>
       <a-asset-item id="charPosExr" src="assets/char/char_pos.exr" response-type="arraybuffer"/>
       <a-asset-item id="charNormalExr" src="assets/char/char_norm.exr" response-type="arraybuffer" />
       <a-asset-item id="charParams" src="assets/char/char_minmax.json" response-type="json"/>
-      <img id="clothDiffuse" src="assets/cloth/cloth_diffuse.png"/>
     </a-assets>
 
     <a-entity web-ui-controller />
@@ -71,7 +62,7 @@ const App = () => (
         </div>
       </div>
     </a-entity>
-    
+
     <a-entity id="scene2">
       <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
       <a-entity id="sky" sky />
