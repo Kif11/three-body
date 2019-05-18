@@ -22,7 +22,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: .04; skyRadius: 500; timeOffset:100000; color: #ffe4aa;"
+    sunSystem="speed: .04; skyRadius: 500; timeOffset:200000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -34,15 +34,22 @@ const App = () => (
   >
     {CameraRig()}
     <a-assets>
+      {/* Audio */}
       <audio id="speech1" src="assets/speech/greetingShort.mp3" preload="auto"></audio>
       <audio id="speech2" src="assets/speech/speech1.mp3" preload="auto"></audio>
       <audio id="track1" src="assets/ambient/track1.mp3" preload="auto"></audio>
       <audio id="track2" src="assets/ambient/track2.mp3" preload="auto"></audio>
       <audio id="track3" src="assets/ambient/track3.mp3" preload="auto"></audio>
+
+      {/* Environment */}
       <a-asset-item id="mountains" src="assets/mountains/mountains.gltf" />
       <a-asset-item id="cubes" src="assets/cubes/cubes.gltf" />
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
       <a-asset-item id="cliff" src="assets/cliff/cliff.gltf" />
+      <a-asset-item id="dunes" src="assets/dunes/dunes.gltf" />
+      <a-asset-item id="moon_rock" src="assets/moon_rock/moon_rock.gltf" />
+
+      {/* Character */}
       <a-asset-item id="mask" src="assets/mask/mask.gltf" />
       <a-asset-item id="char" src="assets/char/char_mesh.fbx" />
       <img id="charDiffuse" src="assets/char/char_diffuse.png"/>
@@ -100,20 +107,29 @@ const App = () => (
     <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
 
     {/* <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere> */}
+    {/* <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73; receiveShadow: true;" /> */}
 
+    {/* Environment */}
 
     <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;" />
-    <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
+    <a-gltf-model src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
 
     <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
-    <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -0.93098 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
-    <a-gltf-model id="cliff3" rotation="179.9998479605043 62.488496010352975 -179.9998479605043" src="#cliff" position="11.33276 -1.21171 -203.52688" scale="0.63449 1.22352 1.05029" set-gltf-material="color: #e2aa73"></a-gltf-model>
-    <a-gltf-model id="cliff4" rotation="0 -70.97113616726482 0" src="#cliff" position="-243.270 -1.82796 -140.533" scale="2.28821 1.39396 3.35915" set-gltf-material="color: #e2aa73"></a-gltf-model>
-    <a-gltf-model id="cliff5" rotation="179.99927500270914 -85.17304103517253 179.99927500270914" src="#cliff" position="-86.8801 -1.82798 177.55686" scale="1.73741 1.19296 1.8559" set-gltf-material="color: #e2aa73"></a-gltf-model>
-    <a-gltf-model id="cliff6" rotation="0 -70.97113616726482" src="#cliff" position="84.8113 -1.82796 217.52888" scale="2.28821 1.39396 3.35915" set-gltf-material="color: #e2aa73"></a-gltf-model>
-    <a-gltf-model id="cliff7" rotation="0 19.987059725343638 0" src="#cliff" position="-437.62339 -1.82796 128.33767" scale="1.94443 1.19725 1.94443" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -2.5 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff3" rotation="179.9998479605043 62.488496010352975 -179.9998479605043" src="#cliff" position="11.33276 -2.5 -203.52688" scale="0.63449 1.22352 1.05029" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff4" rotation="0 -70 0" src="#cliff" position="-308 -2.5 -212" scale="2.3 1.4 3.4" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff5" rotation="180 -85 179" src="#cliff" position="-71 -2.5 208" scale="1.7 1.3 1.8" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff6" rotation="0 -70 0" src="#cliff" position="87 -1.8 263" scale="2 1.4 3.3" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff7" rotation="0 19.987059725343638 0" src="#cliff" position="-437.62339 -2.5 244" scale="1.94443 1.19725 1.94443" set-gltf-material="color: #e2aa73"></a-gltf-model>
+    <a-gltf-model id="cliff8" rotation="0 126.67924963003964" src="#cliff" gltf-model="assets/cliff/cliff.gltf" position="124.97708 -2.5 -342.52154" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
 
-    {/* <a-gltf-model src="#cubes" set-gltf-material="color: #a98457;" /> */}
+    <a-gltf-model
+      id="moon_rock"
+      src="#moon_rock"
+      position="-198 -2.5 -340"
+      scale="1.2 1.2 1.2"
+      set-gltf-material="color: #e2aa73"
+    />
   </a-scene>
 );
 
