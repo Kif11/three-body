@@ -16,12 +16,11 @@ AFRAME.registerComponent('character-mover', {
     this.el.setAttribute('position', this.characterPos);
 
     this.walkingSpeed = 0.1;
-    this.reachedCharacter = false;
+    this.reachedCharacter = true;
 
-    // this.el.sceneEl.addEventListener('speech1', (event) => {
-    //   this.character = this.el.object3D;
-    //   this.character.material.color = new THREE.Color('#ff00ff');
-    // });
+    this.el.sceneEl.addEventListener('begin-game', (event) => {
+      this.reachedCharacter = false;
+    });
 
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
       window.setTimeout(() => {
