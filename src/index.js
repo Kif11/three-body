@@ -18,7 +18,10 @@ import './components/WebUIController';
 import './systems/SunSystem';
 
 import CameraRig from './CameraRig';
-
+// <audio id="speech1" src="assets/speech/speech1.mp3" preload="auto"></audio>
+// <audio id="speech2" src="assets/speech/followMe.mp3" preload="auto"></audio>
+// <audio id="speech3" src="assets/speech/speech3.mp3" preload="auto"></audio>
+// <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
 //224000 0.02
 const App = () => (
   <a-scene
@@ -37,10 +40,10 @@ const App = () => (
     {CameraRig()}
     <a-assets>
       {/* Audio */}
-      <audio id="speech1" src="assets/speech/greetingShort.mp3" preload="auto"></audio>
-      <audio id="speech2" src="assets/speech/speech1.mp3" preload="auto"></audio>
-      <audio id="speech3" src="assets/speech/speech2.mp3" preload="auto"></audio>
-      <audio id="speech4" src="assets/speech/speech3.mp3" preload="auto"></audio>
+      <audio id="speech1" src="assets/speech/speech1.mp3" preload="auto"></audio>
+      <audio id="speech2" src="assets/speech/speech2.mp3" preload="auto"></audio>
+      <audio id="speech3" src="assets/speech/speech3.mp3" preload="auto"></audio>
+      <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
       <audio id="track1" src="assets/ambient/track1.mp3" preload="auto"></audio>
       <audio id="track2" src="assets/ambient/track2.mp3" preload="auto"></audio>
       <audio id="track3" src="assets/ambient/track3.mp3" preload="auto"></audio>
@@ -138,7 +141,7 @@ const App = () => (
 
       {/* Environment */}
 
-      <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;" />
+      <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;"/>
       <a-gltf-model src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
 
       <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>

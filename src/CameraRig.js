@@ -1,6 +1,7 @@
 import AFRAME from 'aframe';
 import JSX from './JSX';
 import './components/Mover';
+import './components/Collider';
 
 const CameraRig = () => (
   <a-entity id="cameraRig" position="0 0.2 4">
@@ -8,6 +9,7 @@ const CameraRig = () => (
     <a-entity
       oculus-go-controls
       mover
+      collider="camera:true;"
     />
   </a-entity>
 );

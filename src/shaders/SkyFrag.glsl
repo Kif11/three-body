@@ -64,6 +64,6 @@ void main() {
   @import ./FogReplaceFrag;
 
   gl_FragColor = mix(gl_FragColor, c1, clamp(pow(1.0 - l, 5.0) + pow(1.0 - l3, 5.0)+ pow(1.0 - l2, 5.0), 0.0, 1.0));
-  gl_FragColor += starColor;
+  // gl_FragColor += starColor;
 
 }

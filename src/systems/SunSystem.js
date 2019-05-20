@@ -102,6 +102,9 @@ AFRAME.registerSystem('sunSystem', {
         this.fadingOut = true;
       }, 20000);
     });
+    this.sceneEl.addEventListener('win', () => {
+      this.fadingOut = false;
+    });
   },
 
   registerSun: function (el, initData) {
@@ -178,6 +181,8 @@ AFRAME.registerSystem('sunSystem', {
       mat.uniforms.time.value = time/1000;
       if(this.fadingOut){
         mat.uniforms.fadeOutTime.value += 0.1;
+      } else {
+        mat.uniforms.fadeOutTime.value = Math.max(mat.uniforms.fadeOutTime.value-0.5, 0);
       }
     })
   }
