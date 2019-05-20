@@ -15,16 +15,30 @@ AFRAME.registerComponent('character-mover', {
     this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
     this.el.setAttribute('position', this.characterPos);
 
-    this.walkingSpeed = 0.03;
+    this.walkingSpeed = 0.3;
     this.reachedCharacter = true;
+    this.eventTick = [0,0,0,0];
 
     this.el.sceneEl.addEventListener('begin-game', (event) => {
       this.reachedCharacter = false;
     });
 
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
+      //come follow me?
+      this.targetPos.set(10,this.characterHeight,10);
+      this.reachedCharacter = false;
+      // window.setTimeout(() => {
+      //   this.el.sceneEl.emit('speech2');
+      // }, 5000);
+    });
+    this.el.sceneEl.addEventListener('speech2-ended', (event) => {
       window.setTimeout(() => {
-        this.el.sceneEl.emit('speech2');
+        this.el.sceneEl.emit('speech3');
+      }, 5000);
+    });
+    this.el.sceneEl.addEventListener('speech3-ended', (event) => {
+      window.setTimeout(() => {
+        this.el.sceneEl.emit('speech4');
       }, 5000);
     });
   },
@@ -36,15 +50,24 @@ AFRAME.registerComponent('character-mover', {
 
     var forward = new THREE.Vector3(0,0,1).transformDirection(cameraEl.object3D.matrixWorld)
     worldPos.sub(forward.normalize().multiplyScalar(1.5));
-    this.targetPos.set(worldPos.x,this.characterHeight,worldPos.z);
-
+    if(this.eventTick[0]==0){
+      this.targetPos.set(worldPos.x,this.characterHeight,worldPos.z);
+    }
     this.characterPos.y = this.characterHeight;
 
     var dir = new THREE.Vector3().subVectors(this.targetPos, this.characterPos);
     var dist = dir.length();
+    console.log(dist)
     if(dist < 1) {
+      if(this.eventTick[0]==0){
+        this.el.sceneEl.emit('speech1');
+        this.eventTick[0]=1;
+      } else if(this.eventTick[1]==0){
+        console.log('hi')
+        this.el.sceneEl.emit('speech2');
+        this.eventTick[1]=1;
+      }
       this.reachedCharacter = true;
-      this.el.sceneEl.emit('speech1');
       return;
     }
     dir.multiplyScalar(this.walkingSpeed/dist);

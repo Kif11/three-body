@@ -13,6 +13,7 @@ uniform vec3 env_c2;
 uniform vec3 heat_c1;
 uniform vec3 heat_c2;
 uniform vec3 night_c1;
+uniform float fadeOutTime;
 
 uniform sampler2D flowTexture;
 varying vec2 vUv;

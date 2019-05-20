@@ -12,6 +12,7 @@ uniform float opacity;
 uniform float time;
 varying vec2 vUv;
 uniform sampler2D diffuseTex;
+uniform float fadeOutTime;
 
 #include <common>
 #include <packing>

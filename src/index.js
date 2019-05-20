@@ -19,12 +19,12 @@ import './systems/SunSystem';
 
 import CameraRig from './CameraRig';
 
-
+//224000 0.02
 const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: .01; skyRadius: 500; timeOffset:160000; color: #ffe4aa;"
+    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -39,6 +39,8 @@ const App = () => (
       {/* Audio */}
       <audio id="speech1" src="assets/speech/greetingShort.mp3" preload="auto"></audio>
       <audio id="speech2" src="assets/speech/speech1.mp3" preload="auto"></audio>
+      <audio id="speech3" src="assets/speech/speech2.mp3" preload="auto"></audio>
+      <audio id="speech4" src="assets/speech/speech3.mp3" preload="auto"></audio>
       <audio id="track1" src="assets/ambient/track1.mp3" preload="auto"></audio>
       <audio id="track2" src="assets/ambient/track2.mp3" preload="auto"></audio>
       <audio id="track3" src="assets/ambient/track3.mp3" preload="auto"></audio>
@@ -103,21 +105,33 @@ const App = () => (
         speech-controller
         sound__1="
           src: #speech1;
-          volume:1;
+          volume:2;
           loop: false;
           positional: true;
         "
         sound__2="
           src: #speech2;
-          volume:1;
+          volume:2;
+          loop: false;
+          positional: true;
+        "
+        sound__3="
+          src: #speech3;
+          volume:2;
+          loop: false;
+          positional: true;
+        "
+        sound__4="
+          src: #speech4;
+          volume:2;
           loop: false;
           positional: true;
         "
       />
 
-      <a-entity sun="sunRadius:0.2; pathRadius:0.8; speed:-0.002; offset:0.2" />
-      <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1" />
-      <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
+      <a-entity sun="sunRadius:0.2; pathRadius:0.8; speed:-0.001; offset:0.2" />
+      <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.002; offset:1" />
+      <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.003; offset:2" />
 
       {/* <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere> */}
       {/* <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73; receiveShadow: true;" /> */}
