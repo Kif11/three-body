@@ -24,7 +24,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: .01; skyRadius: 500; timeOffset:160000; color: #ffe4aa;"
+    sunSystem="speed: .01; skyRadius: 500; timeOffset:800000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -47,6 +47,7 @@ const App = () => (
       <a-asset-item id="mountains" src="assets/mountains/mountains.gltf" />
       <a-asset-item id="cubes" src="assets/cubes/cubes.gltf" />
       <a-asset-item id="ruins" src="assets/ruins/ruins.gltf" />
+      <a-asset-item id="arc" src="assets/arc/arc.gltf" />
       <a-asset-item id="cliff" src="assets/cliff/cliff.gltf" />
       <a-asset-item id="dunes" src="assets/dunes/dunes.gltf" />
       <a-asset-item id="moon_rock" src="assets/moon_rock/moon_rock.gltf" />
@@ -65,14 +66,12 @@ const App = () => (
     <a-entity id="scene1">
       <div id="buttonsContainer">
         <div class="startBtn" id="startBtn">
-        enter 3body.net
+          enter 3body.net
         </div>
       </div>
     </a-entity>
 
     <a-entity id="scene2">
-      <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
-      <a-entity id="sky" sky />
       <a-entity
         id="ambientSounds"
         ambient-controller
@@ -87,7 +86,7 @@ const App = () => (
           volume:0;
           loop: true;
           positional: false;
-        "
+        "xw
         sound__3="
           src: #track3;
           volume:0;
@@ -95,9 +94,20 @@ const App = () => (
           positional: false;
         "
       />
+
       <a-gltf-model
+        id="character"
         src="#mask"
-        vertex-cache-textures="fps:100; fbxModel:#char; posTex:#charPosExr; normalTex:#charNormalExr; diffuseTex:#charDiffuse; params:#charParams; mode:'soft'; fragmentShader:'CharacterSoftFrag'"
+        vertex-cache-textures="
+          mode: 'soft';
+          fps: 100;
+          fbxModel: #char;
+          params: #charParams;
+          posTex: #charPosExr;
+          normalTex: #charNormalExr;
+          diffuseTex: #charDiffuse;
+          fragmentShader: 'CharacterSoftFrag';
+        "
         set-character-material="color: #ffffff;"
         character-mover
         speech-controller
@@ -115,17 +125,21 @@ const App = () => (
         "
       />
 
-      <a-entity sun="sunRadius:0.2; pathRadius:0.8; speed:-0.002; offset:0.2" />
-      <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1" />
-      <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
-
       {/* <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere> */}
       {/* <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73; receiveShadow: true;" /> */}
 
       {/* Environment */}
 
-      <a-gltf-model src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;" />
-      <a-gltf-model src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
+      <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
+      <a-entity id="sky" sky />
+
+      <a-entity sun="sunRadius:0.2; pathRadius:0.8; speed:-0.002; offset:0.2" />
+      <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1" />
+      <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
+
+      <a-gltf-model id="ruins" src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;" />
+      <a-gltf-model id="arc" src="#arc" gltf-model="assets/arc/arc.gltf" position="-3.59305 0.51061 6.26451" rotation="0 146.86455275249853" scale="0.9 0.9 0.9" set-gltf-material="castShadow: true"></a-gltf-model>
+      <a-gltf-model id="dunes" src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
 
       <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
       <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -2.5 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
