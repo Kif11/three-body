@@ -8,9 +8,7 @@ AFRAME.registerComponent('web-ui-controller', {
     startBtnEl.addEventListener('click', event => {
       document.getElementById('scene2').setAttribute('visible', 'true');
       const sceneEl = document.querySelector('a-scene');
-
       startBtnEl.style.display = 'none';
-
       // sceneEl.enterVR();
       this.el.emit('begin-game');
     })

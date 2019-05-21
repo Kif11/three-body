@@ -19,12 +19,13 @@ AFRAME.registerComponent('collider', {
 
   },
 
-  collide: function(collider) {
+  collide: function(forward) {
+    var dir = (forward)? -1 : 1;
     //global collider entities ............
     this.colliders = this.el.sceneEl.object3D.colliders;
     var worldPos = new THREE.Vector3();
     worldPos.setFromMatrixPosition(this.raycastingEl.object3D.matrixWorld);
-    var forward = new THREE.Vector3(0,0,-1).transformDirection(this.raycastingEl.object3D.matrixWorld);
+    var forward = new THREE.Vector3(0,0,dir).transformDirection(this.raycastingEl.object3D.matrixWorld);
 
     this.raycaster.set(worldPos, forward.normalize());
     var closestPoint = this.raycaster.intersectObjects( this.colliders, true )[0];

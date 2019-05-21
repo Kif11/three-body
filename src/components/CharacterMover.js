@@ -8,7 +8,8 @@ const t1 = new THREE.Vector3();
 const t2 = new THREE.Vector3();
 const t3 = new THREE.Vector3();
 const m1 = new THREE.Matrix4();
-
+const UP = new THREE.Vector3(0,1,0);
+//util
 function setQuaternionFromDirection(direction, up, target) {
   const x = t1;
   const y = t2;
@@ -51,8 +52,9 @@ AFRAME.registerComponent('character-mover', {
     this.targetPos = new THREE.Vector3(0, 1, -40);
     this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
     this.el.setAttribute('position', this.characterPos);
+    this.targetQuat = new THREE.Quaternion();
 
-    this.walkingSpeed = 0.03;
+    this.walkingSpeed = 0.1;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -62,16 +64,16 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech2');
-      }, 500);
+      }, 5000);
     });
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
-      this.targetPos.set(10,this.characterHeight,10);
+      this.targetPos.set(5.8 ,this.characterHeight, 13.8);
       this.reachedCharacter = false;
     });
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech4');
-      }, 500);
+      }, 5000);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       //now set to following camera. if ever reaches shade.. trigger happy ending
@@ -84,7 +86,7 @@ AFRAME.registerComponent('character-mover', {
     this.characterPos.y = this.characterHeight;
     var dir = new THREE.Vector3().subVectors(this.targetPos, this.characterPos);
     //always face facePos
-    setQuaternionFromDirection(dir.clone().normalize(), new THREE.Vector3(0,1,0),this.el.object3D.quaternion);
+    setQuaternionFromDirection(dir.clone().normalize(), UP, this.targetQuat);
 
     var dist = dir.length();
     if(dist < 1) {
@@ -94,6 +96,7 @@ AFRAME.registerComponent('character-mover', {
     }
     dir.multiplyScalar(this.walkingSpeed/dist);
     this.characterPos.add(dir)
+    this.el.object3D.quaternion.slerp(this.targetQuat, 0.1);
 
 
   },
