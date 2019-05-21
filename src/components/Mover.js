@@ -4,7 +4,8 @@ const THREE = AFRAME.THREE;
 AFRAME.registerComponent('mover', {
   init: function () {
     this.pressed = false;
-    this.lastAxis = new THREE.Vector2();
+    this.moveBackward = false;
+
     const rig = document.querySelector('#cameraRig');
     this.rig = rig.object3D;
 
@@ -20,14 +21,18 @@ AFRAME.registerComponent('mover', {
     const system = document.querySelector('a-scene').systems['sunSystem'];
     system.registerMainCharacter(this.camera);
 
-    this.el.addEventListener('axismove', (evt) => {
-      this.lastAxis.x = evt.detail.axis[0];
-      this.lastAxis.y = evt.detail.axis[1];
-    });
-    this.el.addEventListener('trackpaddown', (evt) => {
+    this.el.addEventListener('trackpaddown', () => {
       this.pressed = true;
     });
-    this.el.addEventListener('trackpadup', (evt) => {
+    this.el.addEventListener('trackpadup', () => {
+      this.pressed = false;
+    });
+    this.el.addEventListener('triggerdown', () => {
+      this.moveBackward = true;
+      this.pressed = true;
+    });
+    this.el.addEventListener('triggerup', () => {
+      this.moveBackward = false;
       this.pressed = false;
     });
     window.addEventListener('keydown', (evt) => {
@@ -44,7 +49,7 @@ AFRAME.registerComponent('mover', {
     if(this.pressed){
       const tweenForward = new THREE.Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion);
       tweenForward.y = 0;
-      if(this.lastAxis.y < 0){
+      if (this.moveBackward){
         //move backwards
         var collided = this.collider.collide(true);
         if(!collided) {
