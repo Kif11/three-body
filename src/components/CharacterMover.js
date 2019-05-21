@@ -51,8 +51,9 @@ AFRAME.registerComponent('character-mover', {
     this.targetPos = new THREE.Vector3(0, 1, -40);
     this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
     this.el.setAttribute('position', this.characterPos);
+    this.targetQuat = new THREE.Quaternion();
 
-    this.walkingSpeed = 0.03;
+    this.walkingSpeed = 0.1;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -84,7 +85,7 @@ AFRAME.registerComponent('character-mover', {
     this.characterPos.y = this.characterHeight;
     var dir = new THREE.Vector3().subVectors(this.targetPos, this.characterPos);
     //always face facePos
-    setQuaternionFromDirection(dir.clone().normalize(), new THREE.Vector3(0,1,0),this.el.object3D.quaternion);
+    setQuaternionFromDirection(dir.clone().normalize(), new THREE.Vector3(0,1,0),this.targetQuat);
 
     var dist = dir.length();
     if(dist < 1) {
@@ -94,6 +95,7 @@ AFRAME.registerComponent('character-mover', {
     }
     dir.multiplyScalar(this.walkingSpeed/dist);
     this.characterPos.add(dir)
+    this.el.object3D.quaternion.slerp(this.targetQuat, 0.1);
 
 
   },
