@@ -27,18 +27,8 @@ export default class CharacterStateMachine {
         break;
       case 1:
       break;
-
-
       case 3:
-        //REACH USER
-        var cameraEl = document.querySelector('#camera');
-        var worldPos = new THREE.Vector3();
-        worldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
-        var back = new THREE.Vector3(0,0,-1).transformDirection(cameraEl.object3D.matrixWorld)
-        worldPos.sub(back.normalize().multiplyScalar(1.5));
-        targetPos.set(worldPos.x,-1,worldPos.z);
-        break;
-
+      break;
     }
   }
   updateState(ref) {
@@ -56,16 +46,26 @@ export default class CharacterStateMachine {
         break;
 
       case 2:
-        ref.reachedCharacter = false; //continuously follow character
+        ref.targetPos.set(60.74943, ref.characterHeight, 52.90357);
+        ref.reachedCharacter = false;
         this.state += 1;
         break;
 
       case 3:
-        ref.reachedCharacter = false; //continuously follow character
-        //if we are in the shade.. then
-        var distanceToShade = ref.characterPos.distanceTo(new THREE.Vector3(-36, ref.characterHeight, 30));
-        if(distanceToShade < 4){
+        ref.targetPos.set(55.74943, ref.characterHeight, 53.1357);
+        ref.reachedCharacter = false;
+        this.state += 1;
+        break;
+      case 4:
+        //should be inside...
+        ref.reachedCharacter = false;
+        var cameraEl = document.querySelector('#camera');
+        var camWorldPos = new THREE.Vector3();
+        camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
+        var distanceToShade = camWorldPos.distanceTo(new THREE.Vector3(60.74943, this.characterHeight, 52.90357));
+        if(distanceToShade < 10){
           ref.el.sceneEl.emit('win');
+          ref.reachedCharacter = true;
         }
         break;
     }

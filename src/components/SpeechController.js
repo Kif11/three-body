@@ -15,7 +15,9 @@ AFRAME.registerComponent('speech-controller', {
      this.el.sceneEl.addEventListener('speech4', (event) => {
        this.el.components.sound__4.playSound();
      });
-
+     this.el.sceneEl.addEventListener('speechWin', (event) => {
+       this.el.components.sound__5.playSound();
+     });
      this.el.addEventListener('sound-ended', (event) =>   {
        if(event.detail.id == 1){
          this.el.sceneEl.emit('speech1-ended');

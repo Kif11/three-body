@@ -89,9 +89,7 @@ AFRAME.registerSystem('sunSystem', {
       this.startAnimation = true;
     });
     this.sceneEl.addEventListener('speech4-ended', () => {
-      window.setTimeout(() => {
-        this.fadingOut = true;
-      }, 20000);
+      this.fadingOut = true;
     });
     this.sceneEl.addEventListener('win', () => {
       this.fadingOut = false;
@@ -171,9 +169,13 @@ AFRAME.registerSystem('sunSystem', {
       mat.uniforms.sunCentroid.value = sunCentroid;
       mat.uniforms.time.value = time/1000;
       if(this.fadingOut){
-        mat.uniforms.fadeOutTime.value += 0.1;
+        mat.uniforms.fadeOutTime.value += 0.001;
+        if (mat.uniforms.fadeOutTime.value > 1){
+          //triger lose
+          this.sceneEl.emit('lose')
+        }
       } else {
-        mat.uniforms.fadeOutTime.value = Math.max(mat.uniforms.fadeOutTime.value-0.5, 0);
+        mat.uniforms.fadeOutTime.value = Math.max(mat.uniforms.fadeOutTime.value-0.01, 0);
       }
     })
   }

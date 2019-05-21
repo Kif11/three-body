@@ -54,7 +54,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.setAttribute('position', this.characterPos);
     this.targetQuat = new THREE.Quaternion();
 
-    this.walkingSpeed = 0.1;
+    this.walkingSpeed = 0.03;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -64,7 +64,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech2');
-      }, 5000);
+      }, 500);
     });
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
       this.targetPos.set(5.8 ,this.characterHeight, 13.8);
@@ -73,11 +73,15 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech4');
-      }, 5000);
+      }, 500);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       //now set to following camera. if ever reaches shade.. trigger happy ending
+      this.targetPos.set(32.25, this.characterHeight, 54.42);
       this.reachedCharacter = false;
+    });
+    this.el.sceneEl.addEventListener('win', (event) => {
+      this.el.sceneEl.emit('speechWin');
     });
   },
 
@@ -108,7 +112,5 @@ AFRAME.registerComponent('character-mover', {
     var idx = 10*Math.sin(time/3000);
     this.characterPos.y = this.characterHeight + 1 + 0.1*Math.sin(idx)/idx;
     this.el.setAttribute('position', this.characterPos);
-
-
   }
 });
