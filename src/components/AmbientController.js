@@ -11,12 +11,12 @@ AFRAME.registerComponent('ambient-controller', {
     this.el.sceneEl.addEventListener('speech1', (event) => {
     });
 
-    this.el.sceneEl.addEventListener('speech2', (event) => {
-      // this.el.components.sound__2.pool.children[0].setVolume(0.2)
+    this.el.sceneEl.addEventListener('speech3-ended', (event) => {
+      this.el.components.sound__2.pool.children[0].setVolume(0.2)
     });
 
-    this.el.sceneEl.addEventListener('speech2-ended', (event) => {
-      // this.el.components.sound__3.pool.children[0].setVolume(0.2)
+    this.el.sceneEl.addEventListener('speech4-ended', (event) => {
+      this.el.components.sound__3.pool.children[0].setVolume(0.2)
     });
    }
 })

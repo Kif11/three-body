@@ -84,19 +84,19 @@ const App = () => (
         ambient-controller
         sound__1="
           src: #track1;
-          volume:0;
+          volume:2;
           loop: true;
           positional: false;
         "
         sound__2="
           src: #track2;
-          volume:0;
+          volume:2;
           loop: true;
           positional: false;
         "xw
         sound__3="
           src: #track3;
-          volume:0;
+          volume:2;
           loop: true;
           positional: false;
         "
@@ -120,25 +120,25 @@ const App = () => (
         speech-controller
         sound__1="
           src: #speech1;
-          volume:2;
+          volume:0;
           loop: false;
           positional: true;
         "
         sound__2="
           src: #speech2;
-          volume:2;
+          volume:0;
           loop: false;
           positional: true;
         "
         sound__3="
           src: #speech3;
-          volume:2;
+          volume:0;
           loop: false;
           positional: true;
         "
         sound__4="
           src: #speech4;
-          volume:2;
+          volume:0;
           loop: false;
           positional: true;
         "
@@ -156,11 +156,11 @@ const App = () => (
       <a-entity sun="sunRadius:0.06; pathRadius:0.8; speed:-0.004; offset:1" />
       <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
 
-      <a-gltf-model id="ruins" src="#ruins" position="5 0.1 -4" set-gltf-material="castShadow: true;" />
-      <a-gltf-model id="arc" src="#arc" gltf-model="assets/arc/arc.gltf" position="-3.59305 0.51061 6.26451" rotation="0 146.86455275249853" scale="0.9 0.9 0.9" set-gltf-material="castShadow: true"></a-gltf-model>
+      <a-gltf-model id="ruins" src="#ruins" position="5 0.1 10" set-gltf-material="castShadow: true;" />
+      <a-gltf-model id="arc" src="#arc" gltf-model="assets/arc/arc.gltf" position="-12 0.51061 3.8" rotation="0 117 0" scale="0.9 0.9 0.9" set-gltf-material="castShadow: true"></a-gltf-model>
       <a-gltf-model id="dunes" src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
       <a-gltf-model id="dried_body" src="#dried_body" gltf-model="assets/dried_body/dried_body.gltf" scale="0.39461 0.39461 0.39461" position="4.93378 0.05593 -0.47953" rotation="0 19.212420786326764" set-gltf-material="color: #02080e; receiveShadow: true"></a-gltf-model>
-      <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="" set-gltf-material="color: #e2aa73; receiveShadow: true"></a-gltf-model>
+      <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
 
       <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
       <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -2.5 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>

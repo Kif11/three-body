@@ -63,8 +63,8 @@ export default class CharacterStateMachine {
       case 3:
         ref.reachedCharacter = false; //continuously follow character
         //if we are in the shade.. then
-        var distanceToShade = ref.characterPos.distanceTo(new THREE.Vector3(5, ref.characterHeight, -4));
-        if(distanceToShade < 2){
+        var distanceToShade = ref.characterPos.distanceTo(new THREE.Vector3(-36, ref.characterHeight, 30));
+        if(distanceToShade < 4){
           ref.el.sceneEl.emit('win');
         }
         break;

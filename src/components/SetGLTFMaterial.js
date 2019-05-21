@@ -18,26 +18,20 @@ AFRAME.registerComponent('set-gltf-material', {
       type: 'boolean',
       default: false
     },
+    collideWith: {
+      type: 'boolean',
+      default: false
+    },
   },
   init: function () {
 
     const system = document.querySelector('a-scene').systems['sunSystem'];
 
     this.material = new SunCalibratedMaterial(system);
-    const { color } = this.data;
+    const { color, collideWith } = this.data;
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
       const mesh = scene.children[0];
-
-      // grab colliders from gltfs from kiko
-      const boxg = new THREE.BoxGeometry(2,15,2);
-      const boxMesh = new THREE.Mesh(boxg, new THREE.MeshBasicMaterial({wireframe:true}));
-      this.el.setObject3D('colliders', boxMesh);
-
-      if(!this.el.sceneEl.object3D.colliders) {
-        this.el.sceneEl.object3D.colliders = [];
-      }
-      this.el.sceneEl.object3D.colliders.push(boxMesh);
 
       if (mesh) {
         mesh.castShadow = this.data.castShadow;
@@ -54,6 +48,14 @@ AFRAME.registerComponent('set-gltf-material', {
 
         if (color) {
           mesh.material.color = new THREE.Color(color);
+        }
+
+        // grab colliders from gltfs from kiko
+        if(collideWith){
+          if(!this.el.sceneEl.object3D.colliders) {
+            this.el.sceneEl.object3D.colliders = [];
+          }
+          this.el.sceneEl.object3D.colliders.push(mesh);
         }
       }
     });

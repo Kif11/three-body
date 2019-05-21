@@ -67,7 +67,7 @@ AFRAME.registerComponent('character-mover', {
       }, 5000);
     });
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
-      this.targetPos.set(10,this.characterHeight,10);
+      this.targetPos.set(5.8 ,this.characterHeight, 13.8);
       this.reachedCharacter = false;
     });
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
