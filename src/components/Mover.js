@@ -14,6 +14,7 @@ AFRAME.registerComponent('mover', {
     this.wasd = camera.getAttribute('wasd-controls');
     this.camera = camera.object3D;
 
+    this.wasd.acceleration = 150;
     // this.colliderSystem = document.querySelector('a-scene').systems['collider'];
 
     const system = document.querySelector('a-scene').systems['sunSystem'];

@@ -76,19 +76,10 @@ AFRAME.registerSystem('sunSystem', {
     var hazeGeo = new THREE.CylinderGeometry( 100, 100, 30, 32, null, true );
     this.haze = new THREE.Mesh(hazeGeo, hazeMat);
     this.haze.frustumCulled = false;
-    this.haze.position.set(0,15,-30)
+    this.haze.position.set(0,15,0);
     this.haze.scale.set(1,1,1);
     this.sceneEl.object3D.add(this.haze);
     this.registerMaterial(hazeMat);
-
-    this.haze2 = new THREE.Mesh(hazeGeo, hazeMat.clone());
-    // this.haze2.material.uniforms.hazeColor.value = new THREE.Color("#ffc450");
-    this.haze2.frustumCulled = false;
-    this.haze2.position.set(0,22,-30)
-    this.haze2.scale.set(1.1,1.5,1.1);
-    this.haze2.rotateY(Math.PI);
-    // this.sceneEl.object3D.add(this.haze2);
-    this.registerMaterial(this.haze2.material);
 
     this.startAnimation = false;
     this.fadingOut = false;
