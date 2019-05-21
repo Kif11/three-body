@@ -27,7 +27,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
+    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:190000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
