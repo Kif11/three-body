@@ -7,6 +7,7 @@ uniform vec3 sunCentroid;
 uniform float shininess;
 uniform float opacity;
 uniform float time;
+uniform float fadeOutTime;
 
 #include <common>
 #include <packing>

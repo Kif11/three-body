@@ -1,5 +1,7 @@
 import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
+import HazeFrag from '../shaders/HazeFrag.glsl';
+import HazeVert from '../shaders/HazeVert.glsl';
 
 AFRAME.registerSystem('sunSystem', {
   schema: {
@@ -55,13 +57,54 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.object3D.add(this.sunLight2)
     this.sceneEl.object3D.add(this.sunLight3)
 
-    this.startAnimation = false;
-    this.animationTime = this.data.timeOffset;
-
-    this.sceneEl.addEventListener('speech1-ended', () => {
-      this.startAnimation = true;
+    //add haze plane
+    var hazeMat = new THREE.ShaderMaterial({
+      uniforms: {
+        sunCentroid: {value: new THREE.Vector3(0,0,0)},
+        fadeOutTime: {value: 0},
+        hazeColor2: {value: new THREE.Color("#f7f5e7")},
+        hazeColor1: {value: new THREE.Color("#ffcc00")},
+        time: {value: 0},
+      },
+      side:THREE.DoubleSide,
+      transparent: true,
+      vertexShader: HazeVert,
+      fragmentShader: HazeFrag,
+      depthWrite: false,
     });
 
+    var hazeGeo = new THREE.CylinderGeometry( 100, 100, 30, 32, null, true );
+    this.haze = new THREE.Mesh(hazeGeo, hazeMat);
+    this.haze.frustumCulled = false;
+    this.haze.position.set(0,15,-30)
+    this.haze.scale.set(1,1,1);
+    this.sceneEl.object3D.add(this.haze);
+    this.registerMaterial(hazeMat);
+
+    this.haze2 = new THREE.Mesh(hazeGeo, hazeMat.clone());
+    // this.haze2.material.uniforms.hazeColor.value = new THREE.Color("#ffc450");
+    this.haze2.frustumCulled = false;
+    this.haze2.position.set(0,22,-30)
+    this.haze2.scale.set(1.1,1.5,1.1);
+    this.haze2.rotateY(Math.PI);
+    // this.sceneEl.object3D.add(this.haze2);
+    this.registerMaterial(this.haze2.material);
+
+    this.startAnimation = false;
+    this.fadingOut = false;
+    this.animationTime = this.data.timeOffset;
+
+    this.sceneEl.addEventListener('speech1', () => {
+      this.startAnimation = true;
+    });
+    this.sceneEl.addEventListener('speech4-ended', () => {
+      window.setTimeout(() => {
+        this.fadingOut = true;
+      }, 20000);
+    });
+    this.sceneEl.addEventListener('win', () => {
+      this.fadingOut = false;
+    });
   },
 
   registerSun: function (el, initData) {
@@ -136,6 +179,11 @@ AFRAME.registerSystem('sunSystem', {
     this.materials.forEach((mat) => {
       mat.uniforms.sunCentroid.value = sunCentroid;
       mat.uniforms.time.value = time/1000;
+      if(this.fadingOut){
+        mat.uniforms.fadeOutTime.value += 0.1;
+      } else {
+        mat.uniforms.fadeOutTime.value = Math.max(mat.uniforms.fadeOutTime.value-0.5, 0);
+      }
     })
   }
 });

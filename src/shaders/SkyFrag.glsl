@@ -13,6 +13,7 @@ uniform vec3 env_c2;
 uniform vec3 heat_c1;
 uniform vec3 heat_c2;
 uniform vec3 night_c1;
+uniform float fadeOutTime;
 
 uniform sampler2D flowTexture;
 varying vec2 vUv;
@@ -63,6 +64,6 @@ void main() {
   @import ./FogReplaceFrag;
 
   gl_FragColor = mix(gl_FragColor, c1, clamp(pow(1.0 - l, 5.0) + pow(1.0 - l3, 5.0)+ pow(1.0 - l2, 5.0), 0.0, 1.0));
-  gl_FragColor += starColor;
+  // gl_FragColor += starColor;
 
 }

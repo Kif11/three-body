@@ -92,6 +92,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
       diffuseTex: {value: this.diffuseTex},
       timeInFrames: {value: 0},
       sunCentroid: {value: 0},
+      fadeOutTime: {value: 0},
       time: {value: 0}
     });
     var phongShader = THREE.ShaderLib.phong;

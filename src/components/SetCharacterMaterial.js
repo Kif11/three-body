@@ -1,6 +1,4 @@
 import AFRAME from 'aframe';
-import GroundFrag from '../shaders/GroundFrag.glsl';
-import GroundVert from '../shaders/GroundVert.glsl';
 
 import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
 import EyeFrag from '../shaders/EyeFrag.glsl';

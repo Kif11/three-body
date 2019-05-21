@@ -37,6 +37,7 @@ AFRAME.registerComponent('sky', {
         sunRadius3: { value: 0 },
         skyRadius: { value: 0 },
         time: { value: 0 },
+        fadeOutTime: { value: 0 },
         env_c1: {value: new THREE.Color("#ecd8ab")},
         env_c2: {value: new THREE.Color("#f7dbb6")},
         heat_c1: {value: new THREE.Color("#f95c35")},

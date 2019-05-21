@@ -1,6 +1,4 @@
 import AFRAME from 'aframe';
-import GroundFrag from '../shaders/GroundFrag.glsl';
-import GroundVert from '../shaders/GroundVert.glsl';
 
 import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
 
@@ -30,6 +28,16 @@ AFRAME.registerComponent('set-gltf-material', {
     this.el.addEventListener('model-loaded', () => {
       const scene = this.el.getObject3D('mesh');
       const mesh = scene.children[0];
+
+      // grab colliders from gltfs from kiko
+      const boxg = new THREE.BoxGeometry(2,15,2);
+      const boxMesh = new THREE.Mesh(boxg, new THREE.MeshBasicMaterial({wireframe:true}));
+      this.el.setObject3D('colliders', boxMesh);
+
+      if(!this.el.sceneEl.object3D.colliders) {
+        this.el.sceneEl.object3D.colliders = [];
+      }
+      this.el.sceneEl.object3D.colliders.push(boxMesh);
 
       if (mesh) {
         mesh.castShadow = this.data.castShadow;

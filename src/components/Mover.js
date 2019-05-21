@@ -9,7 +9,12 @@ AFRAME.registerComponent('mover', {
     this.rig = rig.object3D;
 
     const camera = document.querySelector('a-camera');
+    this.collider = this.el.components.collider;
+
+    this.wasd = camera.getAttribute('wasd-controls');
     this.camera = camera.object3D;
+
+    // this.colliderSystem = document.querySelector('a-scene').systems['collider'];
 
     const system = document.querySelector('a-scene').systems['sunSystem'];
     system.registerMainCharacter(this.camera);
@@ -26,7 +31,11 @@ AFRAME.registerComponent('mover', {
     });
   },
   tick: function (time, timeDelta) {
-    if(this.pressed){
+    var collided = this.collider.collide();
+    //handle web
+    this.wasd.enabled = !collided;
+    //handle vr
+    if(this.pressed && !collided){
       const tweenForward = new THREE.Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion);
       if(this.lastAxis.y < 0){
         //move backwards
