@@ -6,90 +6,74 @@
 	"accessors":[
 		{
 			"bufferView":0,
-			"componentType":5121,
-			"count":84,
+			"componentType":5123,
+			"count":1332,
 			"type":"SCALAR",
 			"min":[0
 			],
-			"max":[83
+			"max":[1331
 			]
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":84,
+			"count":1332,
 			"type":"VEC3",
-			"min":[-17.4486885,0,-15.8976936
+			"min":[-15.9083557,-0.000132443514,-15.905529
 			],
-			"max":[17.4486885,22.3761234,15.8976936
+			"max":[15.9072971,22.1994743,15.9089441
 			]
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":84,
-			"type":"SCALAR",
-			"min":[-2.18014145
+			"count":1332,
+			"type":"VEC2",
+			"min":[0.00974657014,-8.65678215
 			],
-			"max":[2.63762689
+			"max":[9.97804546,0.990253389
 			]
 		},
 		{
 			"bufferView":3,
 			"componentType":5126,
-			"count":84,
-			"type":"VEC2",
-			"min":[0.00974658877,-8.58998013
-			],
-			"max":[9.96761227,0.990253389
-			]
-		},
-		{
-			"bufferView":4,
-			"componentType":5126,
-			"count":84,
+			"count":1332,
 			"type":"VEC3",
-			"min":[-1,-1,-0.820022941
+			"min":[-1,-0.997663021,-1
 			],
-			"max":[1,0.864358425,1
+			"max":[1,0.997038543,1
 			]
 		}
 	],
 	"buffers":[
 		{
 			"uri":"pyramid_data.bin",
-			"byteLength":3108,
+			"byteLength":45288,
 			"name":"main_buffer"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":84,
+			"byteLength":2664,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteOffset":84,
-			"byteLength":1008,
+			"byteOffset":2664,
+			"byteLength":15984,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteOffset":1092,
-			"byteLength":336,
+			"byteOffset":18648,
+			"byteLength":10656,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteOffset":1428,
-			"byteLength":672,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteOffset":2100,
-			"byteLength":1008,
+			"byteOffset":29304,
+			"byteLength":15984,
 			"target":34962
 		}
 	],
@@ -104,9 +88,8 @@
 			"primitives":[
 				{
 					"attributes":{
-						"NORMAL":4,
-						"TEXCOORD_0":3,
-						"_curvature":2,
+						"NORMAL":3,
+						"TEXCOORD_0":2,
 						"POSITION":1
 					},
 					"indices":0
