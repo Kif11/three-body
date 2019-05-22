@@ -1,6 +1,6 @@
 AFRAME.registerComponent('ambient-controller', {
   init:function() {
-
+    this.easingIn = {};
     this.el.sceneEl.addEventListener('begin-game', (evt) => {
       this.el.components.sound__1.playSound();
       this.el.components.sound__2.playSound();
@@ -12,17 +12,29 @@ AFRAME.registerComponent('ambient-controller', {
     });
 
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
-      this.el.components.sound__2.pool.children[0].setVolume(0.2)
+      this.easingIn['2'] = this.el.components.sound__2.pool.children[0];
     });
 
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       window.setTimeout(() => {
-        this.el.components.sound__3.pool.children[0].setVolume(0.2)
+        this.easingIn['3'] = this.el.components.sound__3.pool.children[0];
       }, 2000);
     });
 
     this.el.sceneEl.addEventListener('win', (event) => {
       this.el.components.sound__3.pool.children[0].setVolume(0);
     });
-   }
+  },
+  tick: function(time, timeDelta) {
+    for(var key in this.easingIn) {
+      var value = this.easingIn[key];
+      var curVolume = value.getVolume();
+      curVolume += 0.001;
+      if(curVolume > 0.2){
+        delete this.easingIn[key];
+      } else {
+        value.setVolume(curVolume);
+      }
+    }
+  }
 })
