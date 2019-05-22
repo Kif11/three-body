@@ -33,3 +33,6 @@
   cursor: pointer;
   opacity: 0.8;
 }
+.a-loader-title {
+  color: black;
+}
