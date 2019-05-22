@@ -54,7 +54,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.setAttribute('position', this.characterPos);
     this.targetQuat = new THREE.Quaternion();
 
-    this.walkingSpeed = 0.03;
+    this.walkingSpeed = 0.04;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -69,6 +69,12 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
       this.targetPos.set(5.8 ,this.characterHeight, 13.8);
       this.reachedCharacter = false;
+      window.setTimeout(() => {
+        this.el.sceneEl.emit('comment1');
+      }, 1500);
+    });
+    this.el.sceneEl.addEventListener('comment1-ended', (event) => {
+      this.commentOver = true;
     });
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
       window.setTimeout(() => {
@@ -76,9 +82,10 @@ AFRAME.registerComponent('character-mover', {
       }, 500);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
-      //now set to following camera. if ever reaches shade.. trigger happy ending
-      this.targetPos.set(32.25, this.characterHeight, 54.42);
-      this.reachedCharacter = false;
+      window.setTimeout(() => {
+        this.targetPos.set(32.25, this.characterHeight, 54.42);
+        this.reachedCharacter = false;
+      }, 1000);
     });
     this.el.sceneEl.addEventListener('win', (event) => {
       this.el.sceneEl.emit('speechWin');

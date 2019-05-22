@@ -39,10 +39,17 @@ export default class CharacterStateMachine {
         break;
 
       case 1:
-        window.setTimeout(() => {
-          ref.el.sceneEl.emit('speech3');
-        }, 500);
-        this.state += 1;
+        //if comment 1 is over then start speech3
+        if(ref.commentOver){
+          window.setTimeout(() => {
+            ref.el.sceneEl.emit('speech3');
+          }, 500);
+          this.state += 1;
+        } else {
+          //try again
+          ref.reachedCharacter = false;
+        }
+
         break;
 
       case 2:

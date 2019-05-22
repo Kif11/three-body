@@ -16,7 +16,9 @@ AFRAME.registerComponent('ambient-controller', {
     });
 
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
-      this.el.components.sound__3.pool.children[0].setVolume(0.2)
+      window.setTimeout(() => {
+        this.el.components.sound__3.pool.children[0].setVolume(0.2)
+      }, 2000);
     });
    }
 })
