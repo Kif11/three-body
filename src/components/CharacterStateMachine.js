@@ -65,14 +65,18 @@ export default class CharacterStateMachine {
         break;
       case 4:
         //should be inside...
-        ref.reachedCharacter = false;
-        var cameraEl = document.querySelector('#camera');
-        var camWorldPos = new THREE.Vector3();
-        camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
-        var distanceToShade = camWorldPos.distanceTo(new THREE.Vector3(60.74943, this.characterHeight, 52.90357));
-        if(distanceToShade < 10){
-          ref.el.sceneEl.emit('win');
-          ref.reachedCharacter = true;
+        if(ref.commentOver){
+          ref.reachedCharacter = false;
+          var cameraEl = document.querySelector('#camera');
+          var camWorldPos = new THREE.Vector3();
+          camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
+          var distanceToShade = camWorldPos.distanceTo(new THREE.Vector3(60.74943, this.characterHeight, 52.90357));
+          if(distanceToShade < 10){
+            ref.el.sceneEl.emit('win');
+            ref.reachedCharacter = true;
+          }
+        } else {
+          ref.reachedCharacter = false;
         }
         break;
     }

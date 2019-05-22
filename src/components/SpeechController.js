@@ -21,6 +21,9 @@ AFRAME.registerComponent('speech-controller', {
     this.el.sceneEl.addEventListener('comment1', (event) => {
      this.el.components.sound__6.playSound();
     });
+    this.el.sceneEl.addEventListener('comment2', (event) => {
+     this.el.components.sound__7.playSound();
+    });
     this.el.addEventListener('sound-ended', (event) =>   {
       if(event.detail.id == 1){
         this.el.sceneEl.emit('speech1-ended');
@@ -32,6 +35,8 @@ AFRAME.registerComponent('speech-controller', {
         this.el.sceneEl.emit('speech4-ended');
       } else if(event.detail.id == 6){
         this.el.sceneEl.emit('comment1-ended');
+      } else if(event.detail.id == 7){
+        this.el.sceneEl.emit('comment2-ended');
       }
     });
 

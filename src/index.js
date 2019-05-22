@@ -47,6 +47,7 @@ const App = () => (
       <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
       <audio id="speechWin" src="assets/speech/comment1.mp3" preload="auto"></audio>
       <audio id="comment1" src="assets/speech/comment1.mp3" preload="auto"></audio>
+      <audio id="comment2" src="assets/speech/comment2.mp3" preload="auto"></audio>
       <audio id="track1" src="assets/ambient/track1.mp3" preload="auto"></audio>
       <audio id="track2" src="assets/ambient/track2.mp3" preload="auto"></audio>
       <audio id="track3" src="assets/ambient/track3.mp3" preload="auto"></audio>
@@ -167,6 +168,12 @@ const App = () => (
         "
         sound__6="
           src: #comment1;
+          volume:2;
+          loop: false;
+          positional: true;
+        "
+        sound__7="
+          src: #comment2;
           volume:2;
           loop: false;
           positional: true;

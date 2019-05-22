@@ -86,6 +86,13 @@ AFRAME.registerComponent('character-mover', {
         this.targetPos.set(32.25, this.characterHeight, 54.42);
         this.reachedCharacter = false;
       }, 1000);
+      window.setTimeout(() => {
+        this.el.sceneEl.emit('comment2');
+        this.commentOver = false;
+      }, 4000);
+    });
+    this.el.sceneEl.addEventListener('comment2-ended', (event) => {
+      this.commentOver = true;
     });
     this.el.sceneEl.addEventListener('win', (event) => {
       this.el.sceneEl.emit('speechWin');

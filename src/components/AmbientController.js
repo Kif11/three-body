@@ -20,5 +20,9 @@ AFRAME.registerComponent('ambient-controller', {
         this.el.components.sound__3.pool.children[0].setVolume(0.2)
       }, 2000);
     });
+
+    this.el.sceneEl.addEventListener('win', (event) => {
+      this.el.components.sound__3.pool.children[0].setVolume(0);
+    });
    }
 })
