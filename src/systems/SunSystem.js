@@ -173,7 +173,6 @@ AFRAME.registerSystem('sunSystem', {
       if(this.fadingOut){
         mat.uniforms.fadeOutTime.value += 0.001;
         if (mat.uniforms.fadeOutTime.value > 1){
-          //triger lose
           this.sceneEl.emit('lose')
         }
       } else {

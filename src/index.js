@@ -27,7 +27,7 @@ const App = () => (
   <a-scene
     stats
     background="color: black"
-    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:19000; color: #ffe4aa;"
+    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -74,6 +74,12 @@ const App = () => (
 
     <a-entity id="scene1">
       <div id="buttonsContainer">
+        <div class="introText">
+          You are now entering Civilization Number 183.
+          This civilization has advanced to the Middle Ages.
+          Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe. .
+          The civilization of Three Body will take its first leap. What more will you uncover?
+        </div>
         <div class="startBtn" id="startBtn">
           enter 3body.net
         </div>

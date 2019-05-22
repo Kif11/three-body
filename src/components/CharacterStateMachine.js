@@ -43,7 +43,7 @@ export default class CharacterStateMachine {
         if(ref.commentOver){
           window.setTimeout(() => {
             ref.el.sceneEl.emit('speech3');
-          }, 500);
+          }, 1000);
           this.state += 1;
         } else {
           //try again
