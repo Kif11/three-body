@@ -4,7 +4,7 @@ AFRAME.registerComponent('web-ui-controller', {
   init: function () {
     const { sceneEl } = this.el;
     const startBtnEl = document.getElementById('startBtn');
-    const loseScreen = document.getElementById('loseScene');
+    const loseScreen = document.getElementById('loseScreen');
     const mainScene = document.getElementById('mainScene');
     const introScreen = document.getElementById('introScreen');
     const enterVRButton = document.querySelector('.VRButton');
@@ -15,19 +15,18 @@ AFRAME.registerComponent('web-ui-controller', {
     });
 
     startBtnEl.addEventListener('click', event => {
+      sceneEl.enterVR();
       mainScene.setAttribute('visible', 'true');
       introScreen.setAttribute('style', 'visibility: hidden');
-
       enterVRButton.classList.add('visible');
-
-      sceneEl.enterVR();
       this.el.emit('begin-game');
     })
 
     sceneEl.addEventListener('lose', event => {
+      sceneEl.exitVR();
       loseScreen.setAttribute('style', 'visibility: visible');
       mainScene.setAttribute('visible', 'false');
-      loseScreen.style.display = 'flex';
+      enterVRButton.classList.remove('visible');
     })
   }
 });
