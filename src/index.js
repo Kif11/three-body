@@ -25,7 +25,7 @@ import CameraRig from './CameraRig';
 // 224000 0.02
 const App = () => (
   <a-scene
-    loading-screen="dotsColor: black; backgroundColor: black"
+    loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
     sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
     renderer="
