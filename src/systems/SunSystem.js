@@ -91,7 +91,7 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.addEventListener('speech4-ended', () => {
       window.setTimeout(() => {
         this.fadingOut = true;
-      }, 30000);
+      }, 40000);
     });
     this.sceneEl.addEventListener('win', () => {
       this.fadingOut = false;
