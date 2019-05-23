@@ -22,10 +22,9 @@ import CameraRig from './CameraRig';
 // <audio id="speech2" src="assets/speech/followMe.mp3" preload="auto"></audio>
 // <audio id="speech3" src="assets/speech/speech3.mp3" preload="auto"></audio>
 // <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
-//224000 0.02
+// 224000 0.02
 const App = () => (
   <a-scene
-    stats
     loading-screen="dotsColor: black; backgroundColor: black"
     background="color: black"
     sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
@@ -37,6 +36,7 @@ const App = () => (
       shadowMapEnabled: true;
     "
     fog="type: exponential; color: #ffe4aa; density: 0.004;"
+    vr-mode-ui="enterVRButton: .VRButton"
   >
     {CameraRig()}
     <a-assets>
@@ -74,21 +74,23 @@ const App = () => (
 
     <a-entity web-ui-controller />
 
-    <a-entity id="scene1">
+    <div class="VRButton"></div>
+
+    <a-entity id="introScreen">
       <div id="buttonsContainer">
         <div class="introText">
           You are now entering Civilization Number 183.
           This civilization has advanced to the Middle Ages.
-          Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe. .
+          Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe.
           The civilization of Three Body will take its first leap. What more will you uncover?
         </div>
-        <div class="startBtn" id="startBtn">
-          enter 3body.net
+        <div id="startBtn">
+          ENTER 3BODY.NET
         </div>
       </div>
     </a-entity>
 
-    <a-entity id="scene3">
+    <a-entity id="loseScreen">
       <div id="loseScreenContainer">
         <div class="endBtn" id="endBtn">
           you burn and lose. try again
@@ -96,7 +98,7 @@ const App = () => (
       </div>
     </a-entity>
 
-    <a-entity id="scene2">
+    <a-entity id="mainScene" visible="false">
       <a-entity
         id="ambientSounds"
         ambient-controller
@@ -111,7 +113,7 @@ const App = () => (
           volume:0;
           loop: true;
           positional: false;
-        "xw
+        "
         sound__3="
           src: #track3;
           volume:0;
@@ -193,7 +195,7 @@ const App = () => (
       <a-entity sun="sunRadius:0.1; pathRadius:0.8; speed:-0.006; offset:2" />
 
       <a-gltf-model id="ruins" src="#ruins" position="5 0.1 10" set-gltf-material="castShadow: true;" />
-      <a-gltf-model id="arc" src="#arc" gltf-model="assets/arc/arc.gltf" position="-12 0.51061 3.8" rotation="0 117 0" scale="0.9 0.9 0.9" set-gltf-material="castShadow: true"></a-gltf-model>
+      <a-gltf-model id="arc" src="#arc" gltf-model="assets/arc/arc.gltf" position="-14.53465 -0.0303 2.96051" rotation="0 117" scale="0.9 0.9 0.9" set-gltf-material="castShadow: true"></a-gltf-model>
       <a-gltf-model id="dunes" src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
       <a-gltf-model id="dried_body" src="#dried_body" gltf-model="assets/dried_body/dried_body.gltf" scale="0.39461 0.39461 0.39461" position="5.8 0.1 13.8" rotation="0 19.212420786326764" set-gltf-material="color: #02080e; receiveShadow: true"></a-gltf-model>
       <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
