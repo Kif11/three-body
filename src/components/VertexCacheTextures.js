@@ -16,7 +16,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     params:  { type: 'asset' },
     fps:  { type: 'int', default: 30 },
     mode:  { type: 'string', default: 'fluid' },
-    fragmentShader: {type: 'string'}
+    fragmentShader: { type: 'string' }
   },
 
   init: function () {
@@ -61,11 +61,11 @@ AFRAME.registerComponent('vertex-cache-textures', {
       this.fbxModel = response;
     } else if (type == 'pos') {
       this.posTex = response;
-    } else if(type == 'color') {
+    } else if (type == 'color') {
       this.colorTex = response;
-    } else if(type == 'normals') {
+    } else if (type == 'normals') {
       this.normalTex = response;
-    }else if(type == 'params') {
+    } else if (type == 'params') {
       this.params = response;
     }
     if (this.posTex && this.colorTex && this.normalTex && this.fbxModel && this.params) {
@@ -82,30 +82,30 @@ AFRAME.registerComponent('vertex-cache-textures', {
       });
     }
 
-    var uniforms = ({
-      bbox_max: {value: this.params.bbox_max},
-      bbox_min: {value: this.params.bbox_min},
-      numFrames: {value: this.params.numframes},
-      posTex: {value: 0},
-      colorTex: {value: 0},
-      normalTex: {value: 0},
-      diffuseTex: {value: this.diffuseTex},
-      timeInFrames: {value: 0},
-      sunCentroid: {value: 0},
-      fadeOutTime: {value: 0},
-      time: {value: 0}
+    const uniforms = ({
+      bbox_max: { value: this.params.bbox_max },
+      bbox_min: { value: this.params.bbox_min },
+      numFrames: { value: this.params.numframes },
+      posTex: { value: 0 },
+      colorTex: { value: 0 },
+      normalTex: { value: 0 },
+      diffuseTex: { value: this.diffuseTex },
+      timeInFrames: { value: 0 },
+      sunCentroid: { value: 0 },
+      fadeOutTime: { value: 0 },
+      time: { value: 0 }
     });
-    var phongShader = THREE.ShaderLib.phong;
-    var mUniforms = THREE.UniformsUtils.merge([phongShader.uniforms, uniforms]);
+    const phongShader = THREE.ShaderLib.phong;
+    const mUniforms = THREE.UniformsUtils.merge([phongShader.uniforms, uniforms]);
 
-    var fragmentShader;
+    let fragmentShader;
     if (this.data.fragmentShader) {
       fragmentShader = CharacterSoftFrag;
     } else {
       fragmentShader = (this.data.mode === 'fluid') ? VertexCacheFluidFrag: VertexCacheSoftFrag;
     }
     // ANIMATION PARAMETERS
-    var material = new THREE.ShaderMaterial({
+    const material = new THREE.ShaderMaterial({
       uniforms: mUniforms,
       vertexShader: (this.data.mode === 'fluid') ? VertexCacheFluidVert: VertexCacheSoftVert,
       fragmentShader: fragmentShader,
@@ -158,12 +158,12 @@ AFRAME.registerComponent('vertex-cache-textures', {
     colorTexture.needsUpdate = true
     this.model.material.uniforms.colorTex.value = colorTexture;
 
-    const normalTexture = new THREE.DataTexture( exrNormalBytes, texWidth, texHeight, THREE.RGBAFormat, THREE.FloatType );
-    normalTexture.magFilter = THREE.NearestFilter;
-    normalTexture.minFilter = THREE.NearestFilter;
-    normalTexture.wrapT = normalTexture.wrapS =THREE.RepeatWrapping;
-    normalTexture.needsUpdate = true
-    this.model.material.uniforms.normalTex.value = normalTexture;
+    // const normalTexture = new THREE.DataTexture( exrNormalBytes, texWidth, texHeight, THREE.RGBAFormat, THREE.FloatType );
+    // normalTexture.magFilter = THREE.NearestFilter;
+    // normalTexture.minFilter = THREE.NearestFilter;
+    // normalTexture.wrapT = normalTexture.wrapS =THREE.RepeatWrapping;
+    // normalTexture.needsUpdate = true
+    // this.model.material.uniforms.normalTex.value = normalTexture;
   },
 
   buildModel: function () {
@@ -180,7 +180,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
   tick: function (time, timeDelta) {
     if(!this.model) return;
     if(!this.animating) return;
-    var currentFrame = Math.ceil(this.time/this.data.fps);
+    const currentFrame = Math.ceil(this.time/this.data.fps);
     if(currentFrame >= this.params.numframes) {
       this.time = 0
     }
