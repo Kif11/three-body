@@ -18,13 +18,14 @@ import './components/WebUIController';
 import './systems/SunSystem';
 
 import CameraRig from './CameraRig';
-// <audio id="speech1" src="assets/speech/speech1.mp3" preload="auto"></audio>
-// <audio id="speech2" src="assets/speech/followMe.mp3" preload="auto"></audio>
-// <audio id="speech3" src="assets/speech/speech3.mp3" preload="auto"></audio>
-// <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
-// 224000 0.02
+import Fire from './Fire';
+
+// Good sky setting
+// sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
+
 const App = () => (
   <a-scene
+    debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
     sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
@@ -71,11 +72,11 @@ const App = () => (
       <a-asset-item id="charNormalExr" src="assets/char/char_norm.exr" response-type="arraybuffer" />
       <a-asset-item id="charParams" src="assets/char/char_minmax.json" response-type="json"/>
 
-      {/* Fire */}
-      <a-asset-item id="fire" src="assets/fire_hi/fire_mesh.fbx" />
-      <a-asset-item id="firePosExr" src="assets/fire_hi/fire_pos.exr" response-type="arraybuffer"/>
-      <a-asset-item id="fireColorExr" src="assets/fire_hi/fire_col.exr" response-type="arraybuffer" />
-      <a-asset-item id="fireParams" src="assets/fire_hi/fire_minmax.json" response-type="json"/>
+      {/* Vertex cache */}
+      <a-asset-item id="fire" src="assets/fire/fire_mesh.fbx" />
+      <a-asset-item id="firePosExr" src="assets/fire/fire_pos.exr" response-type="arraybuffer" />
+      <a-asset-item id="fireColorExr" src="assets/fire/fire_col.exr" response-type="arraybuffer" />
+      <a-asset-item id="fireParams" src="assets/fire/fire_minmax.json" response-type="json" />
     </a-assets>
 
     <a-entity web-ui-controller />
@@ -143,7 +144,6 @@ const App = () => (
           starter: true;
         "
         set-character-material="color: #ffffff;"
-        character-mover
         speech-controller
         sound__1="
           src: #speech1;
@@ -187,15 +187,14 @@ const App = () => (
           loop: false;
           positional: true;
         "
-      />
-      <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams; mode:fluid;" scale="1 1 1"></a-entity>
-      <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams; mode:fluid;" scale="1 1 1"></a-entity>
-      <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams; mode:fluid;" scale="1 1 1"></a-entity>
-      <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams; mode:fluid;" scale="1 1 1"></a-entity>
-      <a-entity vertex-cache-textures="fbxModel:#fire; posTex:#firePosExr; colorTex:#fireColorExr; params:#fireParams; mode:fluid;" scale="1 1 1"></a-entity>
-
-      {/* <a-sphere color="yellow" radius="0.01" position="0 1 -4"  shadow="cast: true; receive: true" ></a-sphere> */}
-      {/* <a-gltf-model src="#mountains" scale="0.5 0.1 0.5" set-gltf-material="color: #e2aa73; receiveShadow: true;" /> */}
+      >
+        {Fire("fire1", "0.22 1.9 0", "0 0 23", "0.1 0.1 0.1")}
+        {Fire("fire2", "0.2 1.8 0.16", "-18 86 14", "0.07 0.07 0.07")}
+        {Fire("fire3", "0.29095 1.78598 0.02063", "-18.190837037608507 86.59856002945801 14.0116828799281", "0.09 0.09 0.09")}
+        {Fire("fire4", "0.19745 1.9725 -0.08298", "-0.7855251371243587 69.31872588610752 5.68087653872213", "0.02292 0.05157 0.06232")}
+        {Fire("fire5", "-0.27743 1.77242 0.0320", "-33.94087386795971 69.4762892797685 10.626075268496248", "0.09107 0.09107 0.09107")}
+        {Fire("fire6", "-0.22639 1.81131 0.0963", "18.127238722348984 -18.017230825683868 23.793791316192", "0.06443 0.06443 0.06443")}
+      </a-gltf-model>
 
       {/* Environment */}
 
@@ -233,7 +232,5 @@ const App = () => (
     </a-entity>
   </a-scene>
 );
-
-     // <a-entity vertex-cache-textures="fbxModel:#cloth; posTex:#clothPosExr; normalTex:#clothNormalExr; diffuseTex:#clothDiffuse; params:#clothParams; mode:'soft';" position="-4.2 0.2 0.2" scale="0.02 0.02 0.02"></a-entity>
 
 document.querySelector('body').appendChild(App());
