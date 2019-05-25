@@ -16,7 +16,8 @@ AFRAME.registerComponent('vertex-cache-textures', {
     params:  { type: 'asset' },
     fps:  { type: 'int', default: 30 },
     mode:  { type: 'string', default: 'fluid' },
-    fragmentShader: {type: 'string'}
+    fragmentShader: {type: 'string'},
+    starter: {type: 'bool', default: false}
   },
 
   init: function () {
@@ -28,8 +29,17 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.params = null;
     this.load = this.load.bind(this);
     this.animating = true;
+    this.el.sceneEl.addEventListener('begin-game', (evt) => {
+      this.exrModuleReady = this.data.starter;
+    });
     this.el.addEventListener('start-vertex-animation', (evt) => {
       this.animating = true;
+    });
+    this.el.sceneEl.addEventListener('exr-ready', (evt) => {
+      this.exrModuleReady = true;
+    });
+    this.el.sceneEl.addEventListener('exr-module-busy', (evt) => {
+      this.exrModuleReady = false;
     });
   },
 
@@ -69,7 +79,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
       this.params = response;
     }
     if (this.posTex && this.colorTex && this.normalTex && this.fbxModel && this.params) {
-      this.buildModel();
+      this.readyBuildModel = true;
     }
   },
 
@@ -126,25 +136,22 @@ AFRAME.registerComponent('vertex-cache-textures', {
   },
 
   handleEXRTextures: function () {
+    console.log('handling')
+    this.el.sceneEl.emit('exr-module-busy')
+
     let exrPos = new Module.EXRLoader(this.posTex);
     let exrColor = new Module.EXRLoader(this.colorTex);
     let exrNormal = new Module.EXRLoader(this.normalTex);
 
     // Cache image data to this variables to avoid call
     // to this member functions in the render for loop
-    const exrPosBytes = exrPos.getBytes();
+    this.exrPosBytes = exrPos.getBytes();
     const exrColorBytes = exrColor.getBytes();
     const exrNormalBytes = exrNormal.getBytes();
     const texWidth = exrPos.width();
     const texHeight = exrPos.height();
 
-    // javascript code must explicitly delete any C++ object handles,
-    // to clear the emscripten heap
-    exrPos.delete();
-    exrColor.delete();
-    exrNormal.delete();
-
-    const posTexture = new THREE.DataTexture( exrPosBytes, texWidth, texHeight, THREE.RGBAFormat, THREE.FloatType );
+    const posTexture = new THREE.DataTexture( this.exrPosBytes, texWidth, texHeight, THREE.RGBAFormat, THREE.FloatType );
     posTexture.magFilter = THREE.NearestFilter;
     posTexture.minFilter = THREE.NearestFilter;
     posTexture.wrapT = posTexture.wrapS =THREE.RepeatWrapping;
@@ -164,6 +171,16 @@ AFRAME.registerComponent('vertex-cache-textures', {
     normalTexture.wrapT = normalTexture.wrapS =THREE.RepeatWrapping;
     normalTexture.needsUpdate = true
     this.model.material.uniforms.normalTex.value = normalTexture;
+    this.readyBuildModel = false;
+    // javascript code must explicitly delete any C++ object handles,
+    // to clear the emscripten heap
+    window.setTimeout(() => {
+      exrPos.delete();
+      exrColor.delete();
+      exrNormal.delete();
+      this.el.sceneEl.emit('exr-ready')
+    }, 1000);
+
   },
 
   buildModel: function () {
@@ -178,6 +195,9 @@ AFRAME.registerComponent('vertex-cache-textures', {
   },
 
   tick: function (time, timeDelta) {
+    if(this.readyBuildModel && this.exrModuleReady){
+      this.buildModel();
+    }
     if(!this.model) return;
     if(!this.animating) return;
     var currentFrame = Math.ceil(this.time/this.data.fps);
