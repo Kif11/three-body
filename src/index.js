@@ -100,7 +100,9 @@ const App = () => (
     <a-entity id="loseScreen">
       <div id="loseScreenContainer">
         <div class="endBtn" id="endBtn">
-          you burn and lose. try again
+        Civilization Number 183 fell into ruin in flames.
+        The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
+        We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
