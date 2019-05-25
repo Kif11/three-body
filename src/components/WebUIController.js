@@ -2,21 +2,31 @@ import AFRAME from 'aframe';
 
 AFRAME.registerComponent('web-ui-controller', {
   init: function () {
-    const startBtnEl = document.getElementById('buttonsContainer');
-    const loseScreen = document.getElementById('loseScreenContainer');
-    document.getElementById('scene2').setAttribute('visible', 'false');
+    const { sceneEl } = this.el;
+    const startBtnEl = document.getElementById('startBtn');
+    const loseScreen = document.getElementById('loseScreen');
+    const mainScene = document.getElementById('mainScene');
+    const introScreen = document.getElementById('introScreen');
+    const enterVRButton = document.querySelector('.VRButton');
+
+    sceneEl.addEventListener('loaded', (event) => {
+      // all game assets loaded
+      introScreen.setAttribute('style', 'visibility: visible');
+    });
 
     startBtnEl.addEventListener('click', event => {
-      document.getElementById('scene2').setAttribute('visible', 'true');
-      startBtnEl.style.display = 'none';
-      // const sceneEl = document.querySelector('a-scene');
-      // sceneEl.enterVR();
+      sceneEl.enterVR();
+      mainScene.setAttribute('visible', 'true');
+      introScreen.setAttribute('style', 'visibility: hidden');
+      enterVRButton.classList.add('visible');
       this.el.emit('begin-game');
     })
 
-    this.el.sceneEl.addEventListener('lose', event => {
-      document.getElementById('scene2').setAttribute('visible', 'false');
-      loseScreen.style.display = 'flex';
+    sceneEl.addEventListener('lose', event => {
+      sceneEl.exitVR();
+      loseScreen.setAttribute('style', 'visibility: visible');
+      mainScene.setAttribute('visible', 'false');
+      enterVRButton.classList.remove('visible');
     })
   }
 });
