@@ -100,7 +100,9 @@ const App = () => (
     <a-entity id="loseScreen">
       <div id="loseScreenContainer">
         <div class="endBtn" id="endBtn">
-          you burn and lose. try again
+        Civilization Number 183 fell into ruin in flames.
+        The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
+        We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
@@ -133,7 +135,7 @@ const App = () => (
         id="character"
         src="#mask"
         vertex-cache-textures="
-          mode: 'soft';
+          mode: soft;
           fps: 100;
           fbxModel: #char;
           params: #charParams;
@@ -141,6 +143,7 @@ const App = () => (
           normalTex: #charNormalExr;
           diffuseTex: #charDiffuse;
           fragmentShader: 'CharacterSoftFrag';
+          starter: true;
         "
         set-character-material="color: #ffffff;"
         speech-controller
@@ -219,13 +222,15 @@ const App = () => (
       <a-gltf-model id="cliff7" rotation="0 19.987059725343638 0" src="#cliff" position="-437.62339 -2.5 244" scale="1.94443 1.19725 1.94443" set-gltf-material="color: #e2aa73"></a-gltf-model>
       <a-gltf-model id="cliff8" rotation="0 126.67924963003964" src="#cliff" gltf-model="assets/cliff/cliff.gltf" position="124.97708 -2.5 -342.52154" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
 
-      <a-gltf-model 
+      <a-gltf-model
         id="moon_rock"
         src="#moon_rock"
         position="-198 -2.5 -340"
         scale="1.2 1.2 1.2"
         set-gltf-material="color: #e2aa73"
       />
+
+
     </a-entity>
   </a-scene>
 );

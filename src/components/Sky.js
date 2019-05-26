@@ -6,25 +6,20 @@ const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('sky', {
   schema: {
-    widthSegments: {
-      default: 30,
-      type: 'int'
-    },
-    heightSegments: {
-      default: 30,
-      type: 'int'
-    }
   },
 
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
     const { widthSegments, heightSegments } = this.data;
 
-    var sphereGeo = new THREE.SphereBufferGeometry(
+    var sphereGeo = new THREE.IcosahedronGeometry(
       system.data.skyRadius,
-      widthSegments,
-      heightSegments,
+      1 //effectively makes a sphere
     );
+
+    var noiseTex = new THREE.TextureLoader().load('assets/star.png', (tex) => {
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    });
 
     var sphereMat = new THREE.ShaderMaterial({
       uniforms: {
@@ -45,6 +40,7 @@ AFRAME.registerComponent('sky', {
         night_c1: {value: new THREE.Color("#0d1a2f")},
         fogColor: {value: 0},
         fogDensity: {value: 0},
+        perlinNoiseTex: {value: noiseTex},
       },
       vertexShader: SkyVert,
       fragmentShader: SkyFrag,
