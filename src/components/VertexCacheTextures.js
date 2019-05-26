@@ -15,6 +15,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     fbxModel:  { type: 'asset' },
     params:  { type: 'asset' },
     fps:  { type: 'int', default: 30 },
+    offset: { type: 'int', default: 0 },
     mode:  { type: 'string', default: 'fluid' },
     fragmentShader: { type: 'string' }
   },
@@ -30,7 +31,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.animating = true;
     this.el.addEventListener('start-vertex-animation', (evt) => {
       this.animating = true;
-    });
+    });    
   },
 
   update: function () {
@@ -169,7 +170,9 @@ AFRAME.registerComponent('vertex-cache-textures', {
   buildModel: function () {
     this.handleFbxModel();
     this.handleEXRTextures();
-    this.time = 0;
+
+    this.time = this.data.offset * this.data.fps;
+    
     this.el.emit('vertex-cache-loaded');
   },
 
@@ -178,14 +181,14 @@ AFRAME.registerComponent('vertex-cache-textures', {
   },
 
   tick: function (time, timeDelta) {
-    if(!this.model) return;
-    if(!this.animating) return;
-    const currentFrame = Math.ceil(this.time/this.data.fps);
-    if(currentFrame >= this.params.numframes) {
+    if (!this.model) return;
+    if (!this.animating) return;
+    const currentFrame = Math.ceil(this.time / this.data.fps);
+    if (currentFrame >= this.params.numframes) {
       this.time = 0
     }
     this.model.material.uniforms.timeInFrames.value = currentFrame;
-    this.model.material.uniforms.time.value = time/1000;
+    this.model.material.uniforms.time.value = time / 1000;
     this.time += timeDelta;
   }
 });
