@@ -86,7 +86,7 @@ AFRAME.registerSystem('sunSystem', {
     this.gameOver = false;
 
     this.animationTime = this.data.timeOffset;
-    this.sceneEl.addEventListener('speech3', () => {
+    this.sceneEl.addEventListener('start-sun-animation', () => {
       this.startAnimation = true;
     });
     this.sceneEl.addEventListener('speech4-ended', () => {

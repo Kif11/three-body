@@ -53,6 +53,7 @@ AFRAME.registerComponent('character-mover', {
     this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
     this.el.setAttribute('position', this.characterPos);
     this.targetQuat = new THREE.Quaternion();
+    this.lookAtDir = new THREE.Vector3();
 
     this.walkingSpeed = 0.04;
     this.reachedCharacter = true;
@@ -64,7 +65,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech2');
-      }, 2000);
+      }, 4000);
     });
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
       this.targetPos.set(5.8 ,this.characterHeight, 13.8);
@@ -79,7 +80,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech4');
-      }, 40000);
+      }, 36000);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       this.walkingSpeed = 0.05;
@@ -112,29 +113,40 @@ AFRAME.registerComponent('character-mover', {
   },
 
   updateTargetPos: function () {
-    this.stateMachine.getTargetPos(this.targetPos);
     this.characterPos.y = this.characterHeight;
-    var dir = new THREE.Vector3().subVectors(this.targetPos, this.characterPos);
-    //always face facePos
-    setQuaternionFromDirection(dir.clone().normalize(), UP, this.targetQuat);
 
-    var dist = dir.length();
-    if(dist < 1) {
-      this.reachedCharacter = true;
-      this.stateMachine.updateState(this);
-      return;
+    if(!this.reachedCharacter){
+      this.stateMachine.getTargetPos(this.targetPos);
+      this.lookAtDir.subVectors(this.targetPos, this.characterPos);
+      //always face facePos
+      setQuaternionFromDirection(this.lookAtDir.clone().normalize(), UP, this.targetQuat);
+      var dist = this.lookAtDir.length();
+      if(dist < 1) {
+        this.reachedCharacter = true;
+        this.stateMachine.updateState(this);
+        return;
+      }
+      this.lookAtDir.multiplyScalar(this.walkingSpeed/dist);
+      this.characterPos.add(this.lookAtDir)
+      this.el.object3D.quaternion.slerp(this.targetQuat, 0.1);
+    } else {
+      //rotate to face user, when not facing a target
+      var cameraEl = document.querySelector('#camera');
+      var camWorldPos = new THREE.Vector3();
+      camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
+      camWorldPos.y = this.characterHeight;
+      this.lookAtDir.subVectors(camWorldPos, this.characterPos);
+
+      setQuaternionFromDirection(this.lookAtDir.normalize(), UP, this.targetQuat);
+      this.el.object3D.quaternion.slerp(this.targetQuat, 0.1);
     }
-    dir.multiplyScalar(this.walkingSpeed/dist);
-    this.characterPos.add(dir)
-    this.el.object3D.quaternion.slerp(this.targetQuat, 0.1);
-
 
   },
 
   tick: function (time, timeDelta) {
-    if(!this.reachedCharacter) {
-      this.updateTargetPos();
-    }
+    this.updateTargetPos();
+
+    // move character up and down 
     var idx = 10*Math.sin(time/3000);
     this.characterPos.y = this.characterHeight + 1 + 0.1*Math.sin(idx)/idx;
     this.el.setAttribute('position', this.characterPos);
