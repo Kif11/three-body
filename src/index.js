@@ -13,7 +13,6 @@ import './components/CharacterMover';
 import './components/SpeechController';
 import './components/AmbientController';
 import './components/VertexCacheTextures';
-import './components/FireManager';
 import './components/WebUIController';
 import './systems/SunSystem';
 
@@ -28,7 +27,7 @@ const App = () => (
     debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
-    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
+    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:174000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -46,7 +45,7 @@ const App = () => (
       <audio id="speech2" src="assets/speech/speech2.mp3" preload="auto"></audio>
       <audio id="speech3" src="assets/speech/speech3.mp3" preload="auto"></audio>
       <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
-      <audio id="speechWin" src="assets/speech/comment1.mp3" preload="auto"></audio>
+      <audio id="speechWin" src="assets/speech/speech5.mp3" preload="auto"></audio>
       <audio id="comment1" src="assets/speech/comment1.mp3" preload="auto"></audio>
       <audio id="comment2" src="assets/speech/comment2.mp3" preload="auto"></audio>
       <audio id="track1" src="assets/ambient/track1.mp3" preload="auto"></audio>
@@ -145,6 +144,7 @@ const App = () => (
           fragmentShader: 'CharacterSoftFrag';
           starter: true;
         "
+        character-mover
         set-character-material="color: #ffffff;"
         speech-controller
         sound__1="

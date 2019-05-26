@@ -64,14 +64,14 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech2');
-      }, 500);
+      }, 2000);
     });
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
       this.targetPos.set(5.8 ,this.characterHeight, 13.8);
       this.reachedCharacter = false;
       window.setTimeout(() => {
         this.el.sceneEl.emit('comment1');
-      }, 1500);
+      }, 4000);
     });
     this.el.sceneEl.addEventListener('comment1-ended', (event) => {
       this.commentOver = true;
@@ -79,23 +79,28 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech4');
-      }, 500);
+      }, 1000);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
+      this.walkingSpeed = 0.05;
       window.setTimeout(() => {
         this.targetPos.set(32.25, this.characterHeight, 54.42);
         this.reachedCharacter = false;
-      }, 1000);
+      }, 3000);
       window.setTimeout(() => {
         this.el.sceneEl.emit('comment2');
         this.commentOver = false;
-      }, 4000);
+        document.querySelectorAll('.fire').forEach(el => el.emit('start-char-fire'))
+      }, 6000);
     });
     this.el.sceneEl.addEventListener('comment2-ended', (event) => {
       this.commentOver = true;
     });
     this.el.sceneEl.addEventListener('win', (event) => {
-      this.el.sceneEl.emit('speechWin');
+      window.setTimeout(() => {
+        this.el.sceneEl.emit('speechWin');
+        document.querySelectorAll('.fire').forEach(el => el.emit('stop-char-fire'))
+      }, 5000);
     });
   },
 

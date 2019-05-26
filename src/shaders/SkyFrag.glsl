@@ -54,9 +54,9 @@ void main() {
   vec4 c1 = vec4(0.999, 0.999, 1.0, 1.0);
 
   //stars
-  vec4 b1 = texture2D(perlinNoiseTex, 5.0*vUv);
-  float cs = b1.r + b1.g + b1.b;
-  float ss =clamp(pow(cs,2.0),0.0,1.0);
+  vec4 b1 = texture2D(perlinNoiseTex, 7.0*vUv);
+  float cs = b1.r+b1.g;
+  float ss =clamp(pow(cs,3.0),0.0,1.0);
   vec4 starColor = abs(clamp(distHorizon, -1.0, .0))*(vPos.y/(0.01 + skyRadius))*1.5*vec4(ss, ss, ss, 1.0);
 
   gl_FragColor = backgroundColor;
