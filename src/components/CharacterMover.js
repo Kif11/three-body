@@ -4,6 +4,15 @@ const THREE = AFRAME.THREE;
 import SunCalibratedMaterial from '../shaders/SunCalibratedMaterial';
 import CharacterStateMachine from '../components/CharacterStateMachine';
 
+
+//CONSTANTS
+const CHARACTER_HEIGHT = -1;
+const DEHYDRATED_BODY_POS = new THREE.Vector3(5.8, CHARACTER_HEIGHT, 13.8);
+const PYRAMID_ENTRANCE_POS = new THREE.Vector3(32.25, CHARACTER_HEIGHT, 54.42);
+
+
+
+
 const t1 = new THREE.Vector3();
 const t2 = new THREE.Vector3();
 const t3 = new THREE.Vector3();
@@ -48,9 +57,8 @@ AFRAME.registerComponent('character-mover', {
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
 
-    this.characterHeight = -1;
     this.targetPos = new THREE.Vector3(0, 1, -40);
-    this.characterPos = new THREE.Vector3(0, this.characterHeight, -40);
+    this.characterPos = new THREE.Vector3(0, CHARACTER_HEIGHT, -40);
     this.el.setAttribute('position', this.characterPos);
     this.targetQuat = new THREE.Quaternion();
     this.lookAtDir = new THREE.Vector3();
@@ -59,6 +67,8 @@ AFRAME.registerComponent('character-mover', {
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
+
+    // EVENT CHAIN 
     this.el.sceneEl.addEventListener('begin-game', (event) => {
       this.reachedCharacter = false;
     });
@@ -68,7 +78,7 @@ AFRAME.registerComponent('character-mover', {
       }, 4000);
     });
     this.el.sceneEl.addEventListener('speech2-ended', (event) => {
-      this.targetPos.set(5.8 ,this.characterHeight, 13.8);
+      this.targetPos.copy(DEHYDRATED_BODY_POS);
       this.reachedCharacter = false;
       window.setTimeout(() => {
         this.el.sceneEl.emit('comment1');
@@ -78,14 +88,27 @@ AFRAME.registerComponent('character-mover', {
       this.commentOver = true;
     });
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
+      //START THE PACING CYCLE
+      this.walkingSpeed = 0.002;
+      this.targetPos.copy(DEHYDRATED_BODY_POS);
+      this.targetPos.x += 4*(Math.random()-0.5);
+      this.reachedCharacter = false;
       window.setTimeout(() => {
+        //TELLS USER TO RUN
+        this.stateMachine.state = -1;
         this.el.sceneEl.emit('speech4');
       }, 36000);
+      window.setTimeout(() => {
+        //LOOK AT THE SKY
+        this.stateMachine.state = 3;
+        this.targetPos.set(this.characterPos.x ,CHARACTER_HEIGHT, DEHYDRATED_BODY_POS.z - 3);
+      }, 34000);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       this.walkingSpeed = 0.05;
       window.setTimeout(() => {
-        this.targetPos.set(32.25, this.characterHeight, 54.42);
+        this.stateMachine.state = 4;
+        this.targetPos.copy(PYRAMID_ENTRANCE_POS);
         this.reachedCharacter = false;
       }, 3000);
       window.setTimeout(() => {
@@ -113,7 +136,7 @@ AFRAME.registerComponent('character-mover', {
   },
 
   updateTargetPos: function () {
-    this.characterPos.y = this.characterHeight;
+    this.characterPos.y = CHARACTER_HEIGHT;
 
     if(!this.reachedCharacter){
       this.stateMachine.getTargetPos(this.targetPos);
@@ -134,7 +157,7 @@ AFRAME.registerComponent('character-mover', {
       var cameraEl = document.querySelector('#camera');
       var camWorldPos = new THREE.Vector3();
       camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
-      camWorldPos.y = this.characterHeight;
+      camWorldPos.y = CHARACTER_HEIGHT;
       this.lookAtDir.subVectors(camWorldPos, this.characterPos);
 
       setQuaternionFromDirection(this.lookAtDir.normalize(), UP, this.targetQuat);
@@ -146,9 +169,9 @@ AFRAME.registerComponent('character-mover', {
   tick: function (time, timeDelta) {
     this.updateTargetPos();
 
-    // move character up and down 
+    // move character up and down
     var idx = 10*Math.sin(time/3000);
-    this.characterPos.y = this.characterHeight + 1 + 0.1*Math.sin(idx)/idx;
+    this.characterPos.y = CHARACTER_HEIGHT + 1 + 0.1*Math.sin(idx)/idx;
     this.el.setAttribute('position', this.characterPos);
   }
 });

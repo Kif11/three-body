@@ -10,6 +10,11 @@ BEGIN SPEECH 4 (prediction)
 BEGIN SPEECH 5 (find shade)
 REACH SHELTER, OR BURN
 **/
+
+//CONSTANTS
+const CHARACTER_HEIGHT = -1;
+const DEHYDRATED_BODY_POS = new THREE.Vector3(5.8, CHARACTER_HEIGHT, 13.8);
+
 export default class CharacterStateMachine {
   constructor(){
     this.state = 0;
@@ -52,21 +57,30 @@ export default class CharacterStateMachine {
           //try again
           ref.reachedCharacter = false;
         }
-
         break;
 
       case 2:
-        ref.targetPos.set(60.74943, ref.characterHeight, 52.90357);
+        //keep generating new targets, never update state
+        ref.targetPos.copy(DEHYDRATED_BODY_POS);
+        ref.targetPos.x += 4*(Math.random()-0.5);
+        ref.reachedCharacter = false;
+      break;
+
+      case 3:
+      break;
+
+      case 4:
+        ref.targetPos.set(60.74943, CHARACTER_HEIGHT, 52.90357);
         ref.reachedCharacter = false;
         this.state += 1;
         break;
 
-      case 3:
-        ref.targetPos.set(55.74943, ref.characterHeight, 53.1357);
+      case 5:
+        ref.targetPos.set(55.74943, CHARACTER_HEIGHT, 53.1357);
         ref.reachedCharacter = false;
         this.state += 1;
         break;
-      case 4:
+      case 6:
         //should be inside...
         if(ref.commentOver){
           ref.reachedCharacter = false;
