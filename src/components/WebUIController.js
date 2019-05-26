@@ -4,6 +4,7 @@ AFRAME.registerComponent('web-ui-controller', {
   init: function () {
     const { sceneEl } = this.el;
     const startBtnEl = document.getElementById('startBtn');
+    const winScreen = document.getElementById('winScreen');
     const loseScreen = document.getElementById('loseScreen');
     const mainScene = document.getElementById('mainScene');
     const introScreen = document.getElementById('introScreen');
@@ -25,6 +26,13 @@ AFRAME.registerComponent('web-ui-controller', {
     sceneEl.addEventListener('lose', event => {
       sceneEl.exitVR();
       loseScreen.setAttribute('style', 'visibility: visible');
+      mainScene.setAttribute('visible', 'false');
+      enterVRButton.classList.remove('visible');
+    })
+
+    sceneEl.addEventListener('gameOver', event => {
+      sceneEl.exitVR();
+      winScreen.setAttribute('style', 'visibility: visible');
       mainScene.setAttribute('visible', 'false');
       enterVRButton.classList.remove('visible');
     })

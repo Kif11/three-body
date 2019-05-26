@@ -83,18 +83,22 @@ AFRAME.registerSystem('sunSystem', {
 
     this.startAnimation = false;
     this.fadingOut = false;
-    this.animationTime = this.data.timeOffset;
+    this.gameOver = false;
 
-    this.sceneEl.addEventListener('speech1', () => {
+    this.animationTime = this.data.timeOffset;
+    this.sceneEl.addEventListener('speech3', () => {
       this.startAnimation = true;
     });
     this.sceneEl.addEventListener('speech4-ended', () => {
       window.setTimeout(() => {
-        this.fadingOut = true;
+        if(!this.gameOver){
+          this.fadingOut = true;
+        }
       }, 40000);
     });
     this.sceneEl.addEventListener('win', () => {
       this.fadingOut = false;
+      this.gameOver = true;
     });
   },
 
@@ -131,8 +135,13 @@ AFRAME.registerSystem('sunSystem', {
   tick: function (time, timeDelta) {
     var center;
     if(this.startAnimation){
-      this.animationTime += timeDelta;
+      if(this.animationTime > 174000 + 150000){
+        this.animationTime += timeDelta;
+      } else {
+        this.animationTime += 2*timeDelta;
+      }
     }
+
     center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(this.animationTime/-2000*this.data.speed), this.data.skyRadius*Math.cos(this.animationTime/-2000*this.data.speed));
 
     this.center.position.copy(center);

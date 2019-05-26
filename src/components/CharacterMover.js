@@ -54,7 +54,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.setAttribute('position', this.characterPos);
     this.targetQuat = new THREE.Quaternion();
 
-    this.walkingSpeed = 0.04;
+    this.walkingSpeed = 0.4;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -79,10 +79,10 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speech3-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speech4');
-      }, 1000);
+      }, 40000);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
-      this.walkingSpeed = 0.05;
+      this.walkingSpeed = 0.5;
       window.setTimeout(() => {
         this.targetPos.set(32.25, this.characterHeight, 54.42);
         this.reachedCharacter = false;
@@ -93,14 +93,21 @@ AFRAME.registerComponent('character-mover', {
         document.querySelectorAll('.fire').forEach(el => el.emit('start-char-fire'))
       }, 6000);
     });
+    this.el.sceneEl.addEventListener('speech5-ended', (event) => {
+      window.setTimeout(() => {
+        this.el.sceneEl.emit('gameOver');
+      }, 10000);
+    });
     this.el.sceneEl.addEventListener('comment2-ended', (event) => {
       this.commentOver = true;
     });
     this.el.sceneEl.addEventListener('win', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('speechWin');
+      }, 3000);
+      window.setTimeout(() => {
         document.querySelectorAll('.fire').forEach(el => el.emit('stop-char-fire'))
-      }, 5000);
+      }, 7000);
     });
   },
 
@@ -126,7 +133,7 @@ AFRAME.registerComponent('character-mover', {
 
   tick: function (time, timeDelta) {
     if(!this.reachedCharacter) {
-      this.updateTargetPos()
+      this.updateTargetPos();
     }
     var idx = 10*Math.sin(time/3000);
     this.characterPos.y = this.characterHeight + 1 + 0.1*Math.sin(idx)/idx;

@@ -41,8 +41,8 @@ const App = () => (
     {CameraRig()}
     <a-assets>
       {/* Audio */}
-      <audio id="speech1" src="assets/speech/speech1.mp3" preload="auto"></audio>
-      <audio id="speech2" src="assets/speech/speech2.mp3" preload="auto"></audio>
+      <audio id="speech1" src="assets/speech/followMe.mp3" preload="auto"></audio>
+      <audio id="speech2" src="assets/speech/followMe.mp3" preload="auto"></audio>
       <audio id="speech3" src="assets/speech/speech3.mp3" preload="auto"></audio>
       <audio id="speech4" src="assets/speech/speech4.mp3" preload="auto"></audio>
       <audio id="speechWin" src="assets/speech/speech5.mp3" preload="auto"></audio>
@@ -95,9 +95,16 @@ const App = () => (
         </div>
       </div>
     </a-entity>
-
+    <a-entity id="winScreen">
+      <div id="endingScreenContainer">
+        <div class="endBtn" id="endBtn">
+        The seeds of civilization are with you.
+        We invite you to log on in the future.
+        </div>
+      </div>
+    </a-entity>
     <a-entity id="loseScreen">
-      <div id="loseScreenContainer">
+      <div id="endingScreenContainer">
         <div class="endBtn" id="endBtn">
         Civilization Number 183 fell into ruin in flames.
         The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.

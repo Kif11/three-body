@@ -12,7 +12,7 @@
   font-family: monospace;
 }
 
-#loseScreenContainer {
+#endingScreenContainer {
   position: absolute;
   align-items: center;
   justify-content: center;
@@ -67,6 +67,10 @@
 }
 
 #loseScreen {
+  visibility: hidden;
+}
+
+#winScreen {
   visibility: hidden;
 }
 

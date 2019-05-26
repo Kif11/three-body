@@ -1,6 +1,8 @@
 AFRAME.registerComponent('ambient-controller', {
   init:function() {
     this.easingIn = {};
+    this.easingOut = {};
+
     this.el.sceneEl.addEventListener('begin-game', (evt) => {
       this.el.components.sound__1.playSound();
       this.el.components.sound__2.playSound();
@@ -22,7 +24,8 @@ AFRAME.registerComponent('ambient-controller', {
     });
 
     this.el.sceneEl.addEventListener('win', (event) => {
-      this.el.components.sound__3.pool.children[0].setVolume(0);
+      this.easingOut['2'] = this.el.components.sound__2.pool.children[0];
+      this.easingOut['3'] = this.el.components.sound__3.pool.children[0];
     });
   },
   tick: function(time, timeDelta) {
@@ -32,6 +35,16 @@ AFRAME.registerComponent('ambient-controller', {
       curVolume += 0.001;
       if(curVolume > 0.2){
         delete this.easingIn[key];
+      } else {
+        value.setVolume(curVolume);
+      }
+    }
+    for(var key in this.easingOut) {
+      var value = this.easingOut[key];
+      var curVolume = value.getVolume();
+      curVolume -= 0.001;
+      if(curVolume <= 0){
+        delete this.easingOut[key];
       } else {
         value.setVolume(curVolume);
       }
