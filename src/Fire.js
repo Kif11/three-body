@@ -1,7 +1,7 @@
 import AFRAME from 'aframe';
 import JSX from './JSX';
 
-const Fire = (id, position, rotation, scale) => (
+const Fire = (id, position, rotation, scale, offset, fps) => (
   <a-entity
     class="fire"
     id={id}
@@ -22,12 +22,14 @@ const Fire = (id, position, rotation, scale) => (
       dur: 5000;
       easing: linear;
     "
-    vertex-cache-textures="
+    vertex-cache-textures={`
+      fps: ${fps};
+      offset: ${offset};
       params: assets/fire/fire_minmax.json;
       fbxModel: assets/fire/fire_mesh.fbx;
       posTex: assets/fire/fire_pos.exr;
       colorTex: assets/fire/fire_col.exr
-    "
+    `}
   />
 )
 
