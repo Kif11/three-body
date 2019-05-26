@@ -54,7 +54,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.setAttribute('position', this.characterPos);
     this.targetQuat = new THREE.Quaternion();
 
-    this.walkingSpeed = 0.4;
+    this.walkingSpeed = 0.04;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -82,7 +82,7 @@ AFRAME.registerComponent('character-mover', {
       }, 40000);
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
-      this.walkingSpeed = 0.5;
+      this.walkingSpeed = 0.05;
       window.setTimeout(() => {
         this.targetPos.set(32.25, this.characterHeight, 54.42);
         this.reachedCharacter = false;
