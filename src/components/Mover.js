@@ -60,13 +60,13 @@ AFRAME.registerComponent('mover', {
         //move backwards
         var collided = this.collider.collide(true);
         if(!collided) {
-          this.rig.position.sub(tweenForward.multiplyScalar(0.07))
+          this.rig.position.sub(tweenForward.multiplyScalar(0.04))
         }
       } else {
         //move forwards
         var collided = this.collider.collide(false);
         if(!collided) {
-          this.rig.position.add(tweenForward.multiplyScalar(0.07))
+          this.rig.position.add(tweenForward.multiplyScalar(0.04))
         }
       }
     } else {

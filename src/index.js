@@ -86,7 +86,7 @@ const App = () => (
 
       <a-entity
         oculus-go-controls
-        mover
+        mover="speed: 15;"
         collider="camera: true;"
       >
         {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
@@ -95,9 +95,9 @@ const App = () => (
 
     <a-entity web-ui-controller />
 
-    <a-entity id="introScreen">
-      <div id="buttonsContainer">
-        <div class="introText">
+    <a-entity class="hidden" id="introScreen">
+      <div class="screenContainer">
+        <div class="screenText">
           You are now entering Civilization Number 183.
           This civilization has advanced to the Middle Ages.
           Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe.
@@ -108,20 +108,23 @@ const App = () => (
         </div>
       </div>
     </a-entity>
-    <a-entity id="winScreen">
-      <div id="endingScreenContainer">
-        <div class="endBtn" id="endBtn">
-        The seeds of civilization are with you.
-        We invite you to log on in the future.
+
+    <a-entity class="hidden" id="winScreen">
+      <div class="screenContainer">
+        <div class="screenText">
+          You survived! The seeds of civilization are with you.
+          <br />
+          We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
-    <a-entity id="loseScreen">
-      <div id="endingScreenContainer">
-        <div class="endBtn" id="endBtn">
-        Civilization Number 183 fell into ruin in flames.
-        The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
-        We invite you to log on in the future.
+  
+    <a-entity class="hidden" id="loseScreen">
+      <div class="screenContainer">
+        <div class="screenText">
+          Civilization Number 183 fell into ruin in flames.
+          The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
+          We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
@@ -164,7 +167,7 @@ const App = () => (
           fragmentShader: 'CharacterSoftFrag';
           starter: true;
         "
-        character-mover="speed: 65;"
+        character-mover
         set-character-material="color: #ffffff;"
         speech-controller
         sound__1="

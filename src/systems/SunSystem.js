@@ -182,7 +182,7 @@ AFRAME.registerSystem('sunSystem', {
       if(this.fadingOut){
         mat.uniforms.fadeOutTime.value += 0.001;
         if (mat.uniforms.fadeOutTime.value > 1){
-          this.sceneEl.emit('lose')
+          this.sceneEl.emit('gameLose')
         }
       } else {
         mat.uniforms.fadeOutTime.value = Math.max(mat.uniforms.fadeOutTime.value-0.01, 0);
