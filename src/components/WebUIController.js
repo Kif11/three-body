@@ -12,7 +12,7 @@ AFRAME.registerComponent('web-ui-controller', {
 
     sceneEl.addEventListener('loaded', (event) => {
       // all game assets loaded
-      introScreen.setAttribute('style', 'visibility: visible');
+      introScreen.classList.remove('hidden');
     });
 
     startBtnEl.addEventListener('click', event => {
@@ -23,14 +23,14 @@ AFRAME.registerComponent('web-ui-controller', {
       this.el.emit('begin-game');
     })
 
-    sceneEl.addEventListener('lose', event => {
+    sceneEl.addEventListener('gameLose', event => {
       sceneEl.exitVR();
       loseScreen.setAttribute('style', 'visibility: visible');
       mainScene.setAttribute('visible', 'false');
       enterVRButton.classList.remove('visible');
     })
 
-    sceneEl.addEventListener('gameOver', event => {
+    sceneEl.addEventListener('gameWin', event => {
       sceneEl.exitVR();
       winScreen.setAttribute('style', 'visibility: visible');
       mainScene.setAttribute('visible', 'false');

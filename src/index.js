@@ -16,8 +16,9 @@ import './components/AmbientController';
 import './components/VertexCacheTextures';
 import './components/WebUIController';
 import './systems/SunSystem';
+import './components/Mover';
+import './components/Collider';
 
-import CameraRig from './CameraRig';
 import Fire from './Fire';
 
 // Good sky setting
@@ -39,7 +40,8 @@ const App = () => (
     fog="type: exponential; color: #ffe4aa; density: 0.004;"
     vr-mode-ui="enterVRButton: .VRButton"
   >
-    {CameraRig()}
+    <div class="VRButton"></div>
+
     <a-assets>
       {/* Audio */}
       <audio id="speech1" src="assets/speech/speech1.mp3" preload="auto"></audio>
@@ -79,13 +81,24 @@ const App = () => (
       <a-asset-item id="fireParams" src="assets/fire/fire_minmax.json" response-type="json" />
     </a-assets>
 
+    {/* Character hight is 1.6 + cameraRig.z position */}
+    <a-entity id="cameraRig" position="0 0.4 4">
+      <a-camera id="camera" />
+
+      <a-entity
+        oculus-go-controls
+        mover="speed: 15;"
+        collider="camera: true;"
+      >
+        {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
+      </a-entity>
+    </a-entity>
+
     <a-entity web-ui-controller />
 
-    <div class="VRButton"></div>
-
-    <a-entity id="introScreen">
-      <div id="buttonsContainer">
-        <div class="introText">
+    <a-entity class="hidden" id="introScreen">
+      <div class="screenContainer">
+        <div class="screenText">
           You are now entering Civilization Number 183.
           This civilization has advanced to the Middle Ages.
           Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe.
@@ -96,20 +109,23 @@ const App = () => (
         </div>
       </div>
     </a-entity>
-    <a-entity id="winScreen">
-      <div id="endingScreenContainer">
-        <div class="endBtn" id="endBtn">
-        The seeds of civilization are with you.
-        We invite you to log on in the future.
+
+    <a-entity class="hidden" id="winScreen">
+      <div class="screenContainer">
+        <div class="screenText">
+          You survived! The seeds of civilization are with you.
+          <br />
+          We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
-    <a-entity id="loseScreen">
-      <div id="endingScreenContainer">
-        <div class="endBtn" id="endBtn">
-        Civilization Number 183 fell into ruin in flames.
-        The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
-        We invite you to log on in the future.
+  
+    <a-entity class="hidden" id="loseScreen">
+      <div class="screenContainer">
+        <div class="screenText">
+          Civilization Number 183 fell into ruin in flames.
+          The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
+          We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
@@ -238,7 +254,6 @@ const App = () => (
         scale="1.2 1.2 1.2"
         set-gltf-material="color: #e2aa73"
       />
-
 
     </a-entity>
   </a-scene>
