@@ -2,6 +2,13 @@ import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
 
 AFRAME.registerComponent('mover', {
+  schema: {
+    speed: {
+      type: 'int',
+      default: 65
+    }
+  },
+
   init: function () {
     this.pressed = false;
     this.moveBackward = false;
@@ -15,7 +22,7 @@ AFRAME.registerComponent('mover', {
     this.wasd = camera.getAttribute('wasd-controls');
     this.camera = camera.object3D;
 
-    this.wasd.acceleration = 150;
+    this.wasd.acceleration = this.data.speed;
     this.forward = true;
 
     const system = document.querySelector('a-scene').systems['sunSystem'];

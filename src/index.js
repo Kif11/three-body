@@ -15,8 +15,9 @@ import './components/AmbientController';
 import './components/VertexCacheTextures';
 import './components/WebUIController';
 import './systems/SunSystem';
+import './components/Mover';
+import './components/Collider';
 
-import CameraRig from './CameraRig';
 import Fire from './Fire';
 
 // Good sky setting
@@ -38,7 +39,8 @@ const App = () => (
     fog="type: exponential; color: #ffe4aa; density: 0.004;"
     vr-mode-ui="enterVRButton: .VRButton"
   >
-    {CameraRig()}
+    <div class="VRButton"></div>
+
     <a-assets>
       {/* Audio */}
       <audio id="speech1" src="assets/speech/speech1.mp3" preload="auto"></audio>
@@ -78,9 +80,20 @@ const App = () => (
       <a-asset-item id="fireParams" src="assets/fire/fire_minmax.json" response-type="json" />
     </a-assets>
 
-    <a-entity web-ui-controller />
+    {/* Character hight is 1.6 + cameraRig.z position */}
+    <a-entity id="cameraRig" position="0 0.4 4">
+      <a-camera id="camera" />
 
-    <div class="VRButton"></div>
+      <a-entity
+        oculus-go-controls
+        mover
+        collider="camera: true;"
+      >
+        {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
+      </a-entity>
+    </a-entity>
+
+    <a-entity web-ui-controller />
 
     <a-entity id="introScreen">
       <div id="buttonsContainer">
@@ -144,7 +157,7 @@ const App = () => (
           fragmentShader: 'CharacterSoftFrag';
           starter: true;
         "
-        character-mover
+        character-mover="speed: 65;"
         set-character-material="color: #ffffff;"
         speech-controller
         sound__1="
@@ -229,7 +242,6 @@ const App = () => (
         scale="1.2 1.2 1.2"
         set-gltf-material="color: #e2aa73"
       />
-
 
     </a-entity>
   </a-scene>
