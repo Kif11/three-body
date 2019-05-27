@@ -108,9 +108,16 @@ const App = () => (
         </div>
       </div>
     </a-entity>
-
+    <a-entity id="winScreen">
+      <div id="endingScreenContainer">
+        <div class="endBtn" id="endBtn">
+        The seeds of civilization are with you.
+        We invite you to log on in the future.
+        </div>
+      </div>
+    </a-entity>
     <a-entity id="loseScreen">
-      <div id="loseScreenContainer">
+      <div id="endingScreenContainer">
         <div class="endBtn" id="endBtn">
         Civilization Number 183 fell into ruin in flames.
         The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.

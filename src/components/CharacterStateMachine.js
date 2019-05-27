@@ -43,7 +43,10 @@ export default class CharacterStateMachine {
         if(ref.commentOver){
           window.setTimeout(() => {
             ref.el.sceneEl.emit('speech3');
-          }, 1000);
+          }, 5000);
+          window.setTimeout(() => {
+            ref.el.sceneEl.emit('start-sun-animation');
+          }, 10);
           this.state += 1;
         } else {
           //try again
