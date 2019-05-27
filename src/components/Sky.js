@@ -14,7 +14,7 @@ AFRAME.registerComponent('sky', {
 
     var sphereGeo = new THREE.IcosahedronGeometry(
       system.data.skyRadius,
-      1 //effectively makes a sphere
+      3 //effectively makes a sphere
     );
 
     var noiseTex = new THREE.TextureLoader().load('assets/star.png', (tex) => {

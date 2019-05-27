@@ -55,7 +55,7 @@ void main() {
 
   //stars
   vec4 b1 = texture2D(perlinNoiseTex, 7.0*vUv);
-  float cs = b1.r+b1.g;
+  float cs = b1.r;
   float ss =clamp(pow(cs,3.0),0.0,1.0);
   vec4 starColor = abs(clamp(distHorizon, -1.0, .0))*(vPos.y/(0.01 + skyRadius))*1.5*vec4(ss, ss, ss, 1.0);
 

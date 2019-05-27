@@ -1,7 +1,5 @@
 import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
-import HazeFrag from '../shaders/HazeFrag.glsl';
-import HazeVert from '../shaders/HazeVert.glsl';
 
 AFRAME.registerSystem('sunSystem', {
   schema: {
@@ -56,30 +54,6 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.object3D.add(this.sunLight1)
     this.sceneEl.object3D.add(this.sunLight2)
     this.sceneEl.object3D.add(this.sunLight3)
-
-    //add haze plane
-    var hazeMat = new THREE.ShaderMaterial({
-      uniforms: {
-        sunCentroid: {value: new THREE.Vector3(0,0,0)},
-        fadeOutTime: {value: 0},
-        hazeColor2: {value: new THREE.Color("#f7f5e7")},
-        hazeColor1: {value: new THREE.Color("#ffcc00")},
-        time: {value: 0},
-      },
-      side:THREE.DoubleSide,
-      transparent: true,
-      vertexShader: HazeVert,
-      fragmentShader: HazeFrag,
-      depthWrite: false,
-    });
-
-    var hazeGeo = new THREE.CylinderGeometry( 100, 100, 30, 32, null, true );
-    this.haze = new THREE.Mesh(hazeGeo, hazeMat);
-    this.haze.frustumCulled = false;
-    this.haze.position.set(0,15,0);
-    this.haze.scale.set(1,1,1);
-    this.sceneEl.object3D.add(this.haze);
-    this.registerMaterial(hazeMat);
 
     this.startAnimation = false;
     this.fadingOut = false;
