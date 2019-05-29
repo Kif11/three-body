@@ -8,6 +8,7 @@ const Fire = (id, position, rotation, scale, offset, fps) => (
     position={position}
     rotation={rotation}
     scale="0 0 0"
+    visible="false"
     animation__start={`
       property: scale;
       to: ${scale};
@@ -21,6 +22,20 @@ const Fire = (id, position, rotation, scale, offset, fps) => (
       startEvents: stop-char-fire;
       dur: 5000;
       easing: linear;
+    "
+    animation__invisible="
+      property: visible;
+      to: false;
+      from: true;
+      startEvents: stop-char-fire;
+      dur: 1;
+    "
+    animation__visible="
+      property: visible;
+      to: true;
+      from: false;
+      startEvents: start-char-fire;
+      dur: 1;
     "
     vertex-cache-textures={`
       fps: ${fps};

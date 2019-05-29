@@ -14,19 +14,22 @@ REACH SHELTER, OR BURN
 //CONSTANTS
 const CHARACTER_HEIGHT = -1;
 const DEHYDRATED_BODY_POS = new THREE.Vector3(5.8, CHARACTER_HEIGHT, 13.8);
-
+const WIN_POS = new THREE.Vector3(60.74943, CHARACTER_HEIGHT, 52.90357);
 export default class CharacterStateMachine {
   constructor(){
     this.state = 0;
+    this.camera = document.querySelector('#camera');
+    this.tmps = {
+      v1: new THREE.Vector3(),
+      v2: new THREE.Vector3(),
+    }
   }
   getTargetPos(targetPos) {
     switch(this.state){
       case 0:
         //REACH USER
-        var cameraEl = document.querySelector('#camera');
-        var worldPos = new THREE.Vector3();
-        worldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
-        var forward = new THREE.Vector3(0,0,1).transformDirection(cameraEl.object3D.matrixWorld)
+        var worldPos = this.tmps.v1.setFromMatrixPosition(this.camera.object3D.matrixWorld);
+        var forward = this.tmps.v2.set(0,0,1).transformDirection(this.camera.object3D.matrixWorld)
         worldPos.sub(forward.normalize().multiplyScalar(1.5));
         targetPos.set(worldPos.x,-1,worldPos.z);
         break;
@@ -84,10 +87,9 @@ export default class CharacterStateMachine {
         //should be inside...
         if(ref.commentOver){
           ref.reachedCharacter = false;
-          var cameraEl = document.querySelector('#camera');
-          var camWorldPos = new THREE.Vector3();
-          camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
-          var distanceToShade = camWorldPos.distanceTo(new THREE.Vector3(60.74943, this.characterHeight, 52.90357));
+          var camWorldPos = this.tmps.v1.setFromMatrixPosition(this.camera.object3D.matrixWorld);
+          camWorldPos.setFromMatrixPosition(this.camera.object3D.matrixWorld);
+          var distanceToShade = camWorldPos.distanceTo(WIN_POS);
           if(distanceToShade < 10){
             ref.el.sceneEl.emit('win');
             ref.reachedCharacter = true;

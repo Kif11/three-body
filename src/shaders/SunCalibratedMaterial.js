@@ -9,8 +9,11 @@ import perlin from './PerlinNoise.glsl';
 // sun calibrated materials need to have access to the sun system in order to properly update
 // the sunCentroid parameter. must include sunCentroid and time uniform to work properly.
 export default class SunCalibratedMaterial extends THREE.MeshPhongMaterial {
-  constructor(system){
+  constructor(system, color){
     super();
+    if(color){
+      this.color = color;
+    }
     this.onBeforeCompile = (shader) => {
       shader.uniforms.time = { value: 0 };
       shader.uniforms.sunCentroid = { value: new THREE.Vector3() };

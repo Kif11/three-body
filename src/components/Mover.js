@@ -16,7 +16,7 @@ AFRAME.registerComponent('mover', {
     const rig = document.querySelector('#cameraRig');
     this.rig = rig.object3D;
 
-    const camera = document.querySelector('a-camera');
+    const camera = document.querySelector('#camera');
     this.collider = this.el.components.collider;
 
     this.wasd = camera.getAttribute('wasd-controls');
@@ -34,14 +34,14 @@ AFRAME.registerComponent('mover', {
     this.el.addEventListener('trackpadup', () => {
       this.pressed = false;
     });
-    this.el.addEventListener('triggerdown', () => {
-      this.moveBackward = true;
-      this.pressed = true;
-    });
-    this.el.addEventListener('triggerup', () => {
-      this.moveBackward = false;
-      this.pressed = false;
-    });
+    // this.el.addEventListener('triggerdown', () => {
+    //   this.moveBackward = true;
+    //   this.pressed = true;
+    // });
+    // this.el.addEventListener('triggerup', () => {
+    //   this.moveBackward = false;
+    //   this.pressed = false;
+    // });
     window.addEventListener('keydown', (evt) => {
       if(evt.key == 'w'){
         this.forward = true;

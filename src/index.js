@@ -10,12 +10,15 @@ import './components/DefaultMaterial';
 import './components/Sun';
 import './components/Sky';
 import './components/RingOfFire';
+import './components/Pendulum';
 import './components/CharacterMover';
 import './components/SpeechController';
 import './components/AmbientController';
 import './components/VertexCacheTextures';
 import './components/WebUIController';
 import './systems/SunSystem';
+import './systems/RaycasterSystem';
+
 import './components/Mover';
 import './components/Collider';
 
@@ -26,6 +29,7 @@ import Fire from './Fire';
 
 const App = () => (
   <a-scene
+    stats
     debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
@@ -83,11 +87,10 @@ const App = () => (
 
     {/* Character hight is 1.6 + cameraRig.z position */}
     <a-entity id="cameraRig" position="0 0.4 4">
-      <a-camera id="camera" />
-
-      <a-entity
+      <a-camera id="camera"/>
+      <a-entity id="controller"
         oculus-go-controls
-        mover="speed: 15;"
+        mover="speed: 65;"
         collider="camera: true;"
       >
         {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
@@ -119,7 +122,7 @@ const App = () => (
         </div>
       </div>
     </a-entity>
-  
+
     <a-entity class="hidden" id="loseScreen">
       <div class="screenContainer">
         <div class="screenText">
@@ -237,6 +240,7 @@ const App = () => (
       <a-gltf-model id="dried_body" src="#dried_body" gltf-model="assets/dried_body/dried_body.gltf" scale="0.39461 0.39461 0.39461" position="5.8 0.1 13.8" rotation="0 19.212420786326764" set-gltf-material="color: #02080e; receiveShadow: true"></a-gltf-model>
       <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
       <a-entity id="ring_of_fire" ring-of-fire />
+      <a-entity id="pendulum" pendulum/>
 
       <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
       <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -2.5 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
