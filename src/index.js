@@ -73,6 +73,8 @@ const App = () => (
       <a-asset-item id="moon_rock" src="assets/moon_rock/moon_rock.gltf" />
       <a-asset-item id="dried_body" src="assets/dried_body/dried_body.gltf" />
       <a-asset-item id="pyramid" src="assets/pyramid/pyramid.gltf" />
+      <a-asset-item id="pendulum" src="assets/pendulum/pendulum.gltf" />
+      <a-asset-item id="pendulum_base" src="assets/pendulum_base/pendulum_base.gltf" />
 
       {/* Character */}
       <a-asset-item id="mask" src="assets/mask/mask.gltf" />
@@ -260,11 +262,18 @@ const App = () => (
       <a-gltf-model id="arc" src="#arc" gltf-model="assets/arc/arc.gltf" position="-14.53465 -0.0303 2.96051" rotation="0 117" scale="0.9 0.9 0.9" set-gltf-material="castShadow: true"></a-gltf-model>
       <a-gltf-model id="dunes" src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
       <a-gltf-model id="dried_body" src="#dried_body" gltf-model="assets/dried_body/dried_body.gltf" scale="0.39461 0.39461 0.39461" position="5.8 0.1 13.8" rotation="0 19.212420786326764" set-gltf-material="color: #02080e; receiveShadow: true"></a-gltf-model>
-      <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
+      <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="1.2 1.2 1.2" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
       <a-entity id="ring_of_fire" ring-of-fire />
       <a-entity id="pendulum1" pendulum="" position="56.65371 0.1 -10.96281" rotation="0 -137.60268999420876"></a-entity>
       <a-entity id="pendulum2" pendulum="" position="62.13069 0.1 12.97489" rotation="0 -14.317642342524142"></a-entity>
       <a-entity id="pendulum3" pendulum="" position="82.1473 0.10011 -6.10995" rotation="0 -67.05095893297973"></a-entity>
+
+      <a-entity position="40 1 -26" scale="0.54 0.54 0.54">
+        <a-gltf-model id="pendulumModel" rotation="0 0 0" src="#pendulum" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" />
+        <a-gltf-model id="pendulumModel" rotation="0 120 0" src="#pendulum" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" />
+        <a-gltf-model id="pendulumModel" rotation="0 240 0" src="#pendulum" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" />
+        {/* <a-gltf-model id="pendulumBase" rotation="0 0 0" src="#pendulum_base" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" /> */ }
+      </a-entity>
 
       <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
       <a-gltf-model id="cliff2" rotation="0 10.34188820211136 0" src="#cliff" position="155.357 -2.5 -35.56886" scale="1.5073 0.96664 2.1263" set-gltf-material="color: #e2aa73"></a-gltf-model>
