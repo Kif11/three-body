@@ -29,6 +29,7 @@ const Fire = (id, position, rotation, scale, offset, fps) => (
       from: true;
       startEvents: stop-char-fire;
       dur: 1;
+      delay: 5000;
     "
     animation__visible="
       property: visible;

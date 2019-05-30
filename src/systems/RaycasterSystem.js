@@ -104,7 +104,6 @@ AFRAME.registerSystem('raycasterSystem', {
   },
 
   tick: function (time, timeDelta) {
-    console.log(timeDelta)
     this.updateTriggerRay();
   }
 });

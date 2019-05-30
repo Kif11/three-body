@@ -13,11 +13,11 @@ AFRAME.registerComponent('ambient-controller', {
     this.el.sceneEl.addEventListener('speech1', (event) => {
     });
 
-    this.el.sceneEl.addEventListener('speech3-ended', (event) => {
+    this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       this.easingIn['2'] = this.el.components.sound__2.pool.children[0];
     });
 
-    this.el.sceneEl.addEventListener('speech4-ended', (event) => {
+    this.el.sceneEl.addEventListener('speech6-ended', (event) => {
       window.setTimeout(() => {
         this.easingIn['3'] = this.el.components.sound__3.pool.children[0];
       }, 2000);

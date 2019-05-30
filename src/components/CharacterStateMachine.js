@@ -14,7 +14,9 @@ REACH SHELTER, OR BURN
 //CONSTANTS
 const CHARACTER_HEIGHT = -1;
 const DEHYDRATED_BODY_POS = new THREE.Vector3(5.8, CHARACTER_HEIGHT, 13.8);
+const PENDULUM_POS = new THREE.Vector3(66.65371, CHARACTER_HEIGHT, -0.96281);
 const WIN_POS = new THREE.Vector3(60.74943, CHARACTER_HEIGHT, 52.90357);
+
 export default class CharacterStateMachine {
   constructor(){
     this.state = 0;
@@ -63,27 +65,34 @@ export default class CharacterStateMachine {
         break;
 
       case 2:
+        window.setTimeout(() => {
+          ref.el.sceneEl.emit('speech4');
+        }, 5000);
+        this.state += 1;
+      break;
+
+      case 3:
         //keep generating new targets, never update state
         ref.targetPos.copy(DEHYDRATED_BODY_POS);
         ref.targetPos.x += 4*(Math.random()-0.5);
         ref.reachedCharacter = false;
       break;
 
-      case 3:
+      case 4:
       break;
 
-      case 4:
+      case 5:
         ref.targetPos.set(60.74943, CHARACTER_HEIGHT, 52.90357);
         ref.reachedCharacter = false;
         this.state += 1;
         break;
 
-      case 5:
+      case 6:
         ref.targetPos.set(55.74943, CHARACTER_HEIGHT, 53.1357);
         ref.reachedCharacter = false;
         this.state += 1;
         break;
-      case 6:
+      case 7:
         //should be inside...
         if(ref.commentOver){
           ref.reachedCharacter = false;

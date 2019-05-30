@@ -63,7 +63,7 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.addEventListener('start-sun-animation', () => {
       this.startAnimation = true;
     });
-    this.sceneEl.addEventListener('speech4-ended', () => {
+    this.sceneEl.addEventListener('speech6-ended', () => {
       window.setTimeout(() => {
         if(!this.gameOver){
           this.fadingOut = true;
@@ -107,13 +107,10 @@ AFRAME.registerSystem('sunSystem', {
   },
 
   tick: function (time, timeDelta) {
+    
     var center;
     if(this.startAnimation){
-      if(this.animationTime > 174000 + 150000){
-        this.animationTime += timeDelta;
-      } else {
-        this.animationTime += 2*timeDelta;
-      }
+      this.animationTime += timeDelta;
     }
 
     center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(this.animationTime/-2000*this.data.speed), this.data.skyRadius*Math.cos(this.animationTime/-2000*this.data.speed));
