@@ -28,7 +28,6 @@ AFRAME.registerComponent('fire-manager', {
   tick: function (time, timeDelta) {
     if (this.animateScale) {
       let scale = this.el.getAttribute('scale');
-      console.log('scale', scale);
       
       scale.add(this.scaleIncrement.clone().multiplyScalar(time / 10000));
       if (scale.x > this.scaleMax){
