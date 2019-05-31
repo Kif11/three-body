@@ -1,6 +1,8 @@
 import AFRAME from 'aframe';
 const THREE = AFRAME.THREE;
 
+const PENDULUM_POS = new THREE.Vector3(34, -1, -19);
+
 AFRAME.registerComponent('mover', {
   schema: {
     speed: {
@@ -11,7 +13,7 @@ AFRAME.registerComponent('mover', {
 
   init: function () {
     this.pressed = false;
-    this.moveBackward = false;
+    this.lastAxis = new THREE.Vector2();
 
     const rig = document.querySelector('#cameraRig');
     this.rig = rig.object3D;
@@ -28,20 +30,20 @@ AFRAME.registerComponent('mover', {
     const system = document.querySelector('a-scene').systems['sunSystem'];
     system.registerMainCharacter(this.camera);
 
+    this.raycasterSystem = document.querySelector('a-scene').systems['raycasterSystem'];
+
     this.el.addEventListener('trackpaddown', () => {
       this.pressed = true;
     });
     this.el.addEventListener('trackpadup', () => {
       this.pressed = false;
     });
-    // this.el.addEventListener('triggerdown', () => {
-    //   this.moveBackward = true;
-    //   this.pressed = true;
-    // });
-    // this.el.addEventListener('triggerup', () => {
-    //   this.moveBackward = false;
-    //   this.pressed = false;
-    // });
+
+    this.el.addEventListener('axismove', (evt) => {
+      this.lastAxis.x = evt.detail.axis[0];
+      this.lastAxis.y = evt.detail.axis[1];
+    });
+
     window.addEventListener('keydown', (evt) => {
       if(evt.key == 'w'){
         this.forward = true;
@@ -56,18 +58,26 @@ AFRAME.registerComponent('mover', {
     if(this.pressed){
       const tweenForward = new THREE.Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion);
       tweenForward.y = 0;
-      if (this.moveBackward){
+      if(this.lastAxis.y < 0){
         //move backwards
-        var collided = this.collider.collide(true);
+        var collided = this.collider.collide(false);
         if(!collided) {
-          this.rig.position.sub(tweenForward.multiplyScalar(0.04))
+          this.rig.position.sub(tweenForward.multiplyScalar(0.03))
         }
       } else {
         //move forwards
-        var collided = this.collider.collide(false);
+        var collided = this.collider.collide(true);
         if(!collided) {
-          this.rig.position.add(tweenForward.multiplyScalar(0.04))
+          this.rig.position.add(tweenForward.multiplyScalar(0.03))
         }
+      }
+      var dist = this.rig.position.distanceTo(PENDULUM_POS);
+      if(dist < 20){
+        //enable laser
+        this.raycasterSystem.laserPlane.visible = true;
+      } else {
+        //disable laser
+        this.raycasterSystem.laserPlane.visible = false;
       }
     } else {
       //handle web

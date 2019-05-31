@@ -202,13 +202,13 @@ const App = () => (
           src: #speech4;
           volume:2;
           loop: false;
-          positional: false;
+          positional: true;
         "
         sound__5="
           src: #speech5;
           volume:2;
           loop: false;
-          positional: false;
+          positional: true;
         "
         sound__6="
           src: #speech6;
@@ -264,14 +264,11 @@ const App = () => (
       <a-gltf-model id="dried_body" src="#dried_body" gltf-model="assets/dried_body/dried_body.gltf" scale="0.39461 0.39461 0.39461" position="5.8 0.1 13.8" rotation="0 19.212420786326764" set-gltf-material="color: #02080e; receiveShadow: true"></a-gltf-model>
       <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="1.2 1.2 1.2" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
       <a-entity id="ring_of_fire" ring-of-fire />
-      <a-entity id="pendulum1" pendulum="" position="56.65371 0.1 -10.96281" rotation="0 -137.60268999420876"></a-entity>
-      <a-entity id="pendulum2" pendulum="" position="62.13069 0.1 12.97489" rotation="0 -14.317642342524142"></a-entity>
-      <a-entity id="pendulum3" pendulum="" position="82.1473 0.10011 -6.10995" rotation="0 -67.05095893297973"></a-entity>
 
-      <a-entity position="40 1 -26" scale="0.54 0.54 0.54">
-        <a-gltf-model id="pendulumModel" rotation="0 0 0" src="#pendulum" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" />
-        <a-gltf-model id="pendulumModel" rotation="0 120 0" src="#pendulum" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" />
-        <a-gltf-model id="pendulumModel" rotation="0 240 0" src="#pendulum" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" />
+      <a-entity position="34 1 -19" >
+        <a-gltf-model id="pendulumModel" rotation="0 0 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
+        <a-gltf-model id="pendulumModel" rotation="0 120 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
+        <a-gltf-model id="pendulumModel" rotation="0 240 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
         {/* <a-gltf-model id="pendulumBase" rotation="0 0 0" src="#pendulum_base" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" /> */ }
       </a-entity>
 

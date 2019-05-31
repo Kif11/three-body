@@ -25,16 +25,14 @@ AFRAME.registerSystem('raycasterSystem', {
     const controller = document.querySelector('#controller');
     this.controllerObject = controller.object3D;
 
-    var planeGeo = new THREE.PlaneGeometry( 0.05,6 );
+    var planeGeo = new THREE.PlaneGeometry( 0.01,10 );
     var m1 = new THREE.Matrix4().makeRotationX(Math.PI/2)
-    var m2 = new THREE.Matrix4().makeTranslation(0,0,3)
+    var m2 = new THREE.Matrix4().makeTranslation(0,0,5)
     planeGeo.applyMatrix(m2.multiply(m1))
     var planeMat = new THREE.ShaderMaterial({
       uniforms: {
         sunCentroid: {value: new THREE.Vector3(0,0,0)},
         fadeOutTime: {value: 0},
-        fireRingColor2: {value: new THREE.Color("#ffffff")},
-        fireRingColor1: {value: new THREE.Color("#ffffff")},
         time: {value: 0},
       },
       side:THREE.DoubleSide,
@@ -45,6 +43,7 @@ AFRAME.registerSystem('raycasterSystem', {
     });
     this.laserPlane = new THREE.Mesh(planeGeo, planeMat);
     this.sceneEl.object3D.add(this.laserPlane);
+    this.laserPlane.visible = false;
 
     const system = document.querySelector('a-scene').systems['sunSystem'];
     system.registerMaterial(planeMat);
@@ -68,7 +67,6 @@ AFRAME.registerSystem('raycasterSystem', {
 
     window.addEventListener( 'mouseup', (event) => {
       this.mouseDown = false;
-
       this.sceneEl.emit('raycast-finished');
     }, false );
 

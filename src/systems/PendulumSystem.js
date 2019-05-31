@@ -12,12 +12,15 @@ AFRAME.registerSystem('pendulum', {
   registerPendulum: function(pendulum) {
     this.pendulums.push(pendulum);
   },
-  getSynchStatus: function(pendulum) {
+  getSynchStatus: function() {
     return (this.totalDist < 1)? true : false;
   },
   tick: function (time, timeDelta) {
     if( Math.abs(this.pendulums[0].dampeningFactor) < 0.1 || Math.abs(this.pendulums[1].dampeningFactor) < 0.1 || Math.abs(this.pendulums[2].dampeningFactor) < 0.1 ){
       this.totalDist = 10;
+      this.pendulums.forEach((p) => {
+        p.brighten(0);
+      })
       return;
     }
     //assume we have 3 pendulums .
@@ -27,7 +30,7 @@ AFRAME.registerSystem('pendulum', {
 
     this.totalDist = (dist1 + dist2 + dist3)/3;
     this.pendulums.forEach((p) => {
-      p.brighten(1/this.totalDist/25);
+      p.brighten(1/this.totalDist/100);
     })
   }
 });
