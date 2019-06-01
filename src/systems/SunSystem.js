@@ -63,6 +63,9 @@ AFRAME.registerSystem('sunSystem', {
     this.animationTime = this.data.timeOffset;
     this.sceneEl.addEventListener('begin-game', () => {
       this.fadingIn = true;
+      this.materials.forEach((mat) => {
+        mat.uniforms.fadeOutTime.value = -1;
+      })
     });
     this.sceneEl.addEventListener('start-sun-animation', () => {
       this.startAnimation = true;
