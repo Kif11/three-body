@@ -165,6 +165,10 @@ AFRAME.registerSystem('sunSystem', {
       fadeOutTime += 0.001;
       if(fadeOutTime >= 0){
         this.fadingIn = false;
+        this.sceneEl.emit('fade-in-complete');
+        var introText = document.querySelector('#introText');
+        introText.setAttribute("visible", false);
+        console.log(introText)
       }
     } else {
       fadeOutTime = Math.max(fadeOutTime-0.01, 0);

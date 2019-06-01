@@ -252,7 +252,8 @@ const App = () => (
       </a-gltf-model>
 
       {/* Environment */}
-
+      <a-text id="introText" value="You are now entering Civilization Number 183. This civilization has advanced to the Middle Ages. Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe. The civilization of Three Body will take its first leap. What more will you uncover?"
+      negate="true" scale="2 2 1" font="	https://cdn.aframe.io/fonts/DejaVu-sdf.fnt" position="-2 2 -4"></a-text>
       <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
       <a-entity id="sky" sky />
 

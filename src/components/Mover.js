@@ -58,18 +58,10 @@ AFRAME.registerComponent('mover', {
     if(this.pressed){
       const tweenForward = new THREE.Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion);
       tweenForward.y = 0;
-      if(this.lastAxis.y < 0){
-        //move backwards
-        var collided = this.collider.collide(false);
-        if(!collided) {
-          this.rig.position.sub(tweenForward.multiplyScalar(0.03))
-        }
-      } else {
-        //move forwards
-        var collided = this.collider.collide(true);
-        if(!collided) {
-          this.rig.position.add(tweenForward.multiplyScalar(0.03))
-        }
+      //move forwards
+      var collided = this.collider.collide(true);
+      if(!collided) {
+        this.rig.position.sub(tweenForward.multiplyScalar(0.6/timeDelta))
       }
       var dist = this.rig.position.distanceTo(PENDULUM_POS);
       if(dist < 20){

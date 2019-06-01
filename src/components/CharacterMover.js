@@ -33,7 +33,7 @@ AFRAME.registerComponent('character-mover', {
     this.stateMachine = new CharacterStateMachine();
 
     // EVENT CHAIN
-    this.el.sceneEl.addEventListener('begin-game', (event) => {
+    this.el.sceneEl.addEventListener('fade-in-complete', (event) => {
       this.reachedCharacter = false;
     });
     this.el.sceneEl.addEventListener('speech1-ended', (event) => {
