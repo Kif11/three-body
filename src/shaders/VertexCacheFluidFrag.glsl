@@ -1,4 +1,3 @@
-uniform float time;
 varying vec3 vColor;
 
 void main() {

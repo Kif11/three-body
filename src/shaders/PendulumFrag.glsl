@@ -30,6 +30,7 @@ uniform float fadeOutTime;
 varying vec3 vViewPosition;
 varying float vReflectionFactor;
 uniform float glow;
+uniform vec3 glowColor;
 
 #ifndef FLAT_SHADED
 
@@ -118,7 +119,7 @@ void main() {
 
 	#include <envmap_fragment>
 
-	gl_FragColor = clamp(pow(vReflectionFactor,3.0)*glow,0.0,1.0)*vec4(1.0,1.0,1.0,1.0) + vec4( outgoingLight, diffuseColor.a );
+	gl_FragColor = clamp(pow(vReflectionFactor,3.0)*glow,0.0,1.0)*vec4(glowColor,1.0) + vec4( outgoingLight, diffuseColor.a );
 
 	#include <tonemapping_fragment>
 	#include <encodings_fragment>

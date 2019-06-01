@@ -3,7 +3,6 @@ uniform float fadeOutTime;
 uniform vec3 sunCentroid;
 
 varying vec2 vUv;
-varying vec3 vPos;
 
 @import ./PerlinNoise;
 

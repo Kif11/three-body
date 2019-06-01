@@ -1,5 +1,4 @@
 varying vec3 vColor;
-varying vec2 vUv;
 
 uniform float bbox_max;
 uniform float bbox_min;
@@ -10,7 +9,6 @@ uniform sampler2D posTex;
 uniform sampler2D colorTex;
 
 void main() {
-  vUv = uv;
   float tt = timeInFrames/numFrames + 1.0/numFrames;
   vec4 texPos = texture2D(posTex, vec2(uv.x, uv.y + tt - .25/numFrames));
   vec4 texColor = texture2D(colorTex, vec2(uv.x, uv.y + tt - .25/numFrames));
