@@ -61,7 +61,7 @@ AFRAME.registerComponent('mover', {
       //move forwards
       var collided = this.collider.collide(true);
       if(!collided) {
-        this.rig.position.sub(tweenForward.multiplyScalar(0.6/timeDelta))
+        this.rig.position.sub(tweenForward.multiplyScalar(0.8/timeDelta))
       }
       var dist = this.rig.position.distanceTo(PENDULUM_POS);
       if(dist < 20){

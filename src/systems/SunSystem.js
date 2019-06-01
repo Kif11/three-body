@@ -179,6 +179,5 @@ AFRAME.registerSystem('sunSystem', {
       mat.uniforms.time.value = time/1000;
       mat.uniforms.fadeOutTime.value = fadeOutTime;
     })
-    debugger;
   }
 });

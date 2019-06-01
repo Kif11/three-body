@@ -7,7 +7,7 @@ import CharacterStateMachine from '../components/CharacterStateMachine';
 
 //CONSTANTS
 const CHARACTER_HEIGHT = -1;
-const DEHYDRATED_BODY_POS = new THREE.Vector3(5.8, CHARACTER_HEIGHT, 13.8);
+const DEHYDRATED_BODY_POS = new THREE.Vector3(5.8, CHARACTER_HEIGHT, 15.8);
 const PYRAMID_ENTRANCE_POS = new THREE.Vector3(32.25, CHARACTER_HEIGHT, 54.42);
 const PENDULUM_POS = new THREE.Vector3(34, CHARACTER_HEIGHT, -19);
 
@@ -65,12 +65,12 @@ AFRAME.registerComponent('character-mover', {
         //TELLS USER TO RUN
         this.stateMachine.state = -1;
         this.el.sceneEl.emit('speech6');
-      }, 59000);
+      }, 69000);
       window.setTimeout(() => {
         //LOOK AT THE SKY
         this.stateMachine.state = 4;
         this.targetPos.set(this.characterPos.x ,CHARACTER_HEIGHT, PENDULUM_POS.z - 3);
-      }, 57000);
+      }, 67000);
       window.setTimeout(() => {
         const psystem = document.querySelector('a-scene').systems['pendulum'];
         const synch = psystem.getSynchStatus();
@@ -80,7 +80,7 @@ AFRAME.registerComponent('character-mover', {
           this.el.sceneEl.emit('speech7');
         }
         //speech 5
-      }, 30000);
+      }, 40000);
     });
 
     this.el.sceneEl.addEventListener('speech6-ended', (event) => {
