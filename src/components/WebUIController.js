@@ -19,6 +19,7 @@ AFRAME.registerComponent('web-ui-controller', {
       sceneEl.enterVR();
       mainScene.setAttribute('visible', 'true');
       introScreen.setAttribute('style', 'visibility: hidden');
+      introScreen.setAttribute('visible', 'false');
       enterVRButton.classList.add('visible');
       this.el.emit('begin-game');
     })

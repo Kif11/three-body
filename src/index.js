@@ -16,6 +16,8 @@ import './components/SpeechController';
 import './components/AmbientController';
 import './components/VertexCacheTextures';
 import './components/WebUIController';
+import './components/Intro';
+
 import './systems/SunSystem';
 import './systems/RaycasterSystem';
 import './systems/PendulumSystem';
@@ -30,7 +32,6 @@ import Fire from './Fire';
 
 const App = () => (
   <a-scene
-    stats
     debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
@@ -106,12 +107,13 @@ const App = () => (
     <a-entity web-ui-controller />
 
     <a-entity class="hidden" id="introScreen">
+      <a-entity id="introPlane" intro />
       <div class="screenContainer">
         <div class="screenText">
-          You are now entering Civilization Number 183.
+          {/*You are now entering Civilization Number 183.
           This civilization has advanced to the Middle Ages.
           Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe.
-          The civilization of Three Body will take its first leap. What more will you uncover?
+          The civilization of Three Body will take its first leap. What more will you uncover?*/}
         </div>
         <div id="startBtn">
           ENTER 3BODY.NET

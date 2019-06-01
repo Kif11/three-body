@@ -73,7 +73,7 @@ export default class CharacterStateMachine {
 
       case 3:
         //keep generating new targets, never update state
-        ref.targetPos.copy(DEHYDRATED_BODY_POS);
+        ref.targetPos.copy(PENDULUM_POS);
         ref.targetPos.x += 4*(Math.random()-0.5);
         ref.reachedCharacter = false;
       break;

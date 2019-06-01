@@ -17,7 +17,7 @@ export default class SunCalibratedMaterial extends THREE.MeshPhongMaterial {
     this.onBeforeCompile = (shader) => {
       shader.uniforms.time = { value: 0 };
       shader.uniforms.sunCentroid = { value: new THREE.Vector3() };
-      shader.uniforms.fadeOutTime = { value: 0 };
+      shader.uniforms.fadeOutTime = { value: -1 };
       shader.vertexShader = phongVert;
       shader.fragmentShader = phongFrag;
       this.shader = shader;

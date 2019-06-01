@@ -19,6 +19,7 @@ AFRAME.registerComponent('character-mover', {
 
   init: function () {
     const system = document.querySelector('a-scene').systems['sunSystem'];
+    this.cameraEl = document.querySelector('#camera');
 
     this.targetPos = new THREE.Vector3(0, 1, -40);
     this.characterPos = new THREE.Vector3(0, CHARACTER_HEIGHT, -40);
@@ -64,12 +65,12 @@ AFRAME.registerComponent('character-mover', {
         //TELLS USER TO RUN
         this.stateMachine.state = -1;
         this.el.sceneEl.emit('speech6');
-      }, 52000);
+      }, 59000);
       window.setTimeout(() => {
         //LOOK AT THE SKY
         this.stateMachine.state = 4;
-        this.targetPos.set(this.characterPos.x ,CHARACTER_HEIGHT, DEHYDRATED_BODY_POS.z - 3);
-      }, 50000);
+        this.targetPos.set(this.characterPos.x ,CHARACTER_HEIGHT, PENDULUM_POS.z - 3);
+      }, 57000);
       window.setTimeout(() => {
         const psystem = document.querySelector('a-scene').systems['pendulum'];
         const synch = psystem.getSynchStatus();
@@ -132,9 +133,8 @@ AFRAME.registerComponent('character-mover', {
       this.el.object3D.quaternion.slerp(this.targetQuat, 0.1);
     } else {
       //rotate to face user, when not facing a target
-      var cameraEl = document.querySelector('#camera');
       var camWorldPos = new THREE.Vector3();
-      camWorldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
+      camWorldPos.setFromMatrixPosition(this.cameraEl.object3D.matrixWorld);
       camWorldPos.y = CHARACTER_HEIGHT;
       this.lookAtDir.subVectors(camWorldPos, this.characterPos);
 

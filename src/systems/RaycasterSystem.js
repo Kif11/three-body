@@ -32,7 +32,7 @@ AFRAME.registerSystem('raycasterSystem', {
     var planeMat = new THREE.ShaderMaterial({
       uniforms: {
         sunCentroid: {value: new THREE.Vector3(0,0,0)},
-        fadeOutTime: {value: 0},
+        fadeOutTime: {value: -1},
         time: {value: 0},
       },
       side:THREE.DoubleSide,

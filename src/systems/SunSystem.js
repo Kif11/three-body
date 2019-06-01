@@ -57,6 +57,7 @@ AFRAME.registerSystem('sunSystem', {
 
     this.startAnimation = false;
     this.fadingOut = false;
+    this.fadingIn = true;
     this.gameOver = false;
 
     this.animationTime = this.data.timeOffset;
@@ -107,7 +108,7 @@ AFRAME.registerSystem('sunSystem', {
   },
 
   tick: function (time, timeDelta) {
-    
+
     var center;
     if(this.startAnimation){
       this.animationTime += timeDelta;
@@ -147,17 +148,27 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.object3D.fog.density = Math.min(t+0.1,1)*0.005;
     this.sceneEl.object3D.fog.color = this.fogNightColor.lerp(this.fogColor, t)
 
+
+    var fadeOutTime = this.materials[0].uniforms.fadeOutTime.value;
+    if(this.fadingOut){
+    fadeOutTime += 0.001;
+      if (fadeOutTime > 1){
+        this.sceneEl.emit('gameLose')
+      }
+    } else if(this.fadingIn){
+      fadeOutTime += 0.001;
+      if(fadeOutTime >= 0){
+        this.fadingIn = false;
+      }
+    } else {
+      fadeOutTime = Math.max(fadeOutTime-0.01, 0);
+    }
+
     this.materials.forEach((mat) => {
       mat.uniforms.sunCentroid.value = sunCentroid;
       mat.uniforms.time.value = time/1000;
-      if(this.fadingOut){
-        mat.uniforms.fadeOutTime.value += 0.001;
-        if (mat.uniforms.fadeOutTime.value > 1){
-          this.sceneEl.emit('gameLose')
-        }
-      } else {
-        mat.uniforms.fadeOutTime.value = Math.max(mat.uniforms.fadeOutTime.value-0.01, 0);
-      }
+      mat.uniforms.fadeOutTime.value = fadeOutTime;
     })
+    debugger;
   }
 });

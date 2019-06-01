@@ -31,7 +31,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.animating = true;
     this.el.addEventListener('start-vertex-animation', (evt) => {
       this.animating = true;
-    });    
+    });
   },
 
   update: function () {
@@ -93,7 +93,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
       diffuseTex: { value: this.diffuseTex },
       timeInFrames: { value: 0 },
       sunCentroid: { value: 0 },
-      fadeOutTime: { value: 0 },
+      fadeOutTime: { value: -1 },
       time: { value: 0 }
     });
     const phongShader = THREE.ShaderLib.phong;
@@ -172,7 +172,7 @@ AFRAME.registerComponent('vertex-cache-textures', {
     this.handleEXRTextures();
 
     this.time = this.data.offset * this.data.fps;
-    
+
     this.el.emit('vertex-cache-loaded');
   },
 

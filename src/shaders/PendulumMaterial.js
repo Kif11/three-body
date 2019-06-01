@@ -16,7 +16,7 @@ export default class PendulumMaterial extends THREE.MeshPhongMaterial {
     this.onBeforeCompile = (shader) => {
       shader.uniforms.time = { value: 0 };
       shader.uniforms.sunCentroid = { value: new THREE.Vector3() };
-      shader.uniforms.fadeOutTime = { value: 0 };
+      shader.uniforms.fadeOutTime = { value: -1 };
       shader.uniforms.glow = { value: 0 };
 
       shader.vertexShader = phongVert;

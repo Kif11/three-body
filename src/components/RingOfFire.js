@@ -13,7 +13,7 @@ AFRAME.registerComponent('ring-of-fire', {
     var fireRingMat = new THREE.ShaderMaterial({
       uniforms: {
         sunCentroid: {value: new THREE.Vector3(0,0,0)},
-        fadeOutTime: {value: 0},
+        fadeOutTime: {value: -1},
         fireRingColor2: {value: new THREE.Color("#f7f5e7")},
         fireRingColor1: {value: new THREE.Color("#ffcc00")},
         time: {value: 0},

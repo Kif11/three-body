@@ -79,7 +79,7 @@ AFRAME.registerComponent('pendulum', {
 
     this.el.sceneEl.addEventListener( 'raycast-active-onset', (event) => {
       var t = this.raycasterSystem.intersectObject(this.ball);
-      if(t[0] && t[0].distance < 20){
+      if(t[0]){
         this.lookControls.enabled = false;
         this.raycasting = true;
       }

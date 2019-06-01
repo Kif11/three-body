@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Gothic+Coding|Questrial&display=swap');
+
 html, body {
   color: white;
-  font-size: 18px;
-  font-family: monospace;
+  font-size: 35px;
+  font-family: 'Questrial', sans-serif;
+  font-weight: 80;
 }
 
 .screenContainer {
@@ -16,14 +19,14 @@ html, body {
 }
 
 .screenText {
-  flex-basis: 25%; 
-  line-height: 26px;
   width: 60%;
   text-align: justify;
+  opacity: 0.5;
+  line-height: 80%;
 }
 
 #introScreen .screenContainer {
-  background-color: #001427;
+  /* background-color: #001427; */
 }
 
 #loseScreen .screenContainer {
@@ -38,17 +41,14 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
-  height: 50px;
-  padding: 0px 20px 0px 20px;
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
+  opacity: 0.4;
+
+  text-shadow: 0 0 36px white;
 }
 
 #startBtn:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .VRButton {
