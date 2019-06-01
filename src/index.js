@@ -34,7 +34,7 @@ const App = () => (
     debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
-    sunSystem="speed: 0.02; skyRadius: 500; timeOffset:174000; color: #ffe4aa;"
+    sunSystem="speed: 0.02; skyRadius: 500; timeOffset: 174000; color: #ffe4aa;"
     renderer="
       antialias: true;
       physicallyCorrectLights: true;
@@ -265,11 +265,11 @@ const App = () => (
       <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="1.2 1.2 1.2" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
       <a-entity id="ring_of_fire" ring-of-fire />
 
-      <a-entity position="34 1 -19" >
+      <a-entity position="34 0.5 -19" >
         <a-gltf-model id="pendulumModel" rotation="0 0 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
         <a-gltf-model id="pendulumModel" rotation="0 120 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
         <a-gltf-model id="pendulumModel" rotation="0 240 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
-        {/* <a-gltf-model id="pendulumBase" rotation="0 0 0" src="#pendulum_base" position="0 0 0" scale="2 2 2" set-gltf-material="color: #e2aa73" /> */ }
+        <a-gltf-model id="pendulumBase" rotation="0 0 0" src="#pendulum_base" position="0 0 0" set-gltf-material="color: #e2aa73" />
       </a-entity>
 
       <a-gltf-model id="cliff1" rotation="0 -139.75185468374448 0" src="#cliff" position="76.8745 -5.17808 -101.02159" scale="1.01696 1.77721 1.6834" set-gltf-material="color: #e2aa73"></a-gltf-model>
