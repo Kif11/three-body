@@ -117,9 +117,12 @@ AFRAME.registerSystem('sunSystem', {
 
     var center;
     if(this.startAnimation){
-      this.animationTime += timeDelta;
+      if(this.animationTime < 350122){
+        this.animationTime += timeDelta;
+      } else {
+        this.animationTime += 0.5*timeDelta; //slow down the ending
+      }
     }
-
     center = new THREE.Vector3(0, this.data.skyRadius*Math.sin(this.animationTime/-2000*this.data.speed), this.data.skyRadius*Math.cos(this.animationTime/-2000*this.data.speed));
 
     this.center.position.copy(center);
