@@ -9,10 +9,19 @@ AFRAME.registerComponent('web-ui-controller', {
     const mainScene = document.getElementById('mainScene');
     const introScreen = document.getElementById('introScreen');
     const enterVRButton = document.querySelector('.VRButton');
+    const introText = document.getElementById('introText');
 
     sceneEl.addEventListener('loaded', (event) => {
       // all game assets loaded
       introScreen.classList.remove('hidden');
+    });
+
+    sceneEl.addEventListener('enter-vr', (event) => {      
+      introText.emit('show-intro-text');
+    });
+
+    sceneEl.addEventListener('fade-in-complete', (event) => {
+      introText.emit('hide-intro-text');
     });
 
     startBtnEl.addEventListener('click', event => {

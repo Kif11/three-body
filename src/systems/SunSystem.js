@@ -162,13 +162,10 @@ AFRAME.registerSystem('sunSystem', {
         this.sceneEl.emit('gameLose')
       }
     } else if(this.fadingIn){
-      fadeOutTime += 0.001;
+      fadeOutTime += 0.0008;
       if(fadeOutTime >= 0){
         this.fadingIn = false;
         this.sceneEl.emit('fade-in-complete');
-        var introText = document.querySelector('#introText');
-        introText.setAttribute("visible", false);
-        console.log(introText)
       }
     } else {
       fadeOutTime = Math.max(fadeOutTime-0.01, 0);
@@ -179,6 +176,5 @@ AFRAME.registerSystem('sunSystem', {
       mat.uniforms.time.value = time/1000;
       mat.uniforms.fadeOutTime.value = fadeOutTime;
     })
-    debugger;
   }
 });
