@@ -14,6 +14,7 @@ AFRAME.registerComponent('mover', {
   init: function () {
     this.pressed = false;
     this.lastAxis = new THREE.Vector2();
+    this.vrMovingSpeed = 1;
 
     const rig = document.querySelector('#cameraRig');
     this.rig = rig.object3D;
@@ -61,7 +62,7 @@ AFRAME.registerComponent('mover', {
       //move forwards
       var collided = this.collider.collide(true);
       if(!collided) {
-        this.rig.position.sub(tweenForward.multiplyScalar(0.8/timeDelta))
+        this.rig.position.sub(tweenForward.multiplyScalar(this.vrMovingSpeed / timeDelta))
       }
       var dist = this.rig.position.distanceTo(PENDULUM_POS);
       if(dist < 20){

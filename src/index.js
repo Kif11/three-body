@@ -184,61 +184,61 @@ const App = () => (
         speech-controller
         sound__1="
           src: #speech1;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__2="
           src: #speech2;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__3="
           src: #speech3;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__4="
           src: #speech4;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__5="
           src: #speech5;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__6="
           src: #speech6;
-          volume:2;
+          volume:5;
           loop: false;
-          positional: false;
+          positional: true;
         "
         sound__7="
           src: #speech7;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__8="
           src: #speechWin;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__9="
           src: #comment1;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
         sound__10="
           src: #comment2;
-          volume:2;
+          volume:5;
           loop: false;
           positional: true;
         "
@@ -252,8 +252,29 @@ const App = () => (
       </a-gltf-model>
 
       {/* Environment */}
-      <a-text id="introText" value="You are now entering Civilization Number 183. This civilization has advanced to the Middle Ages. Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe. The civilization of Three Body will take its first leap. What more will you uncover?"
-      negate="true" scale="2 2 1" font="	https://cdn.aframe.io/fonts/DejaVu-sdf.fnt" position="-2 2 -4"></a-text>
+      <a-text
+        id="introText"
+        value="You are now entering civilization number 183 of planet Trisolaris. This civilization has advanced to the Middle Ages. Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe. The civilization of Three Body will take its first leap."
+        width="4"
+        negate="true"
+        position="-4.5 3 -6"
+        scale="2.5 2 1"
+        font="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"
+        opacity="0"
+        animation__fadein="
+          property: opacity;
+          to: 1;
+          dur: 8000;
+          easing: easeInOutExpo;
+          startEvents: show-intro-text;
+        "
+        animation__fadeout="
+          property: opacity;
+          to: 0;
+          dur: 8000;
+          startEvents: hide-intro-text;
+        "
+      />
       <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
       <a-entity id="sky" sky />
 
