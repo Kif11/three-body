@@ -165,7 +165,7 @@ AFRAME.registerSystem('sunSystem', {
         this.sceneEl.emit('gameLose')
       }
     } else if(this.fadingIn){
-      fadeOutTime += 0.01;
+      fadeOutTime += 0.0008;
       if(fadeOutTime >= 0){
         this.fadingIn = false;
         this.sceneEl.emit('fade-in-complete');
