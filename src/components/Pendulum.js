@@ -134,9 +134,9 @@ AFRAME.registerComponent('pendulum', {
     var newAxis = this.axis.clone().applyQuaternion(this.quat).multiplyScalar(this.length);
     var newPos = this.root.clone().add(newAxis);
     if(this.startingAngle < 0 ) {
-      this.curTime -= 0.002*timeDelta;
+      this.curTime -= 0.0015*timeDelta;
     } else {
-      this.curTime += 0.002*timeDelta;
+      this.curTime += 0.0015*timeDelta;
     }
     this.ball.position.copy(newPos);
   }

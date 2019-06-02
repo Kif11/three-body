@@ -32,6 +32,7 @@ import Fire from './Fire';
 
 const App = () => (
   <a-scene
+    stats
     debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
