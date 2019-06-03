@@ -110,34 +110,8 @@ const App = () => (
     <a-entity class="hidden" id="introScreen">
       <a-entity id="introPlane" intro />
       <div class="screenContainer">
-        <div class="screenText">
-          {/*You are now entering Civilization Number 183.
-          This civilization has advanced to the Middle Ages.
-          Nicolaus Copernicus has successfully discovered the heliocentric nature of this universe.
-          The civilization of Three Body will take its first leap. What more will you uncover?*/}
-        </div>
         <div id="startBtn">
           ENTER 3BODY.NET
-        </div>
-      </div>
-    </a-entity>
-
-    <a-entity class="hidden" id="winScreen">
-      <div class="screenContainer">
-        <div class="screenText">
-          You survived! The seeds of civilization are with you.
-          <br />
-          We invite you to log on in the future.
-        </div>
-      </div>
-    </a-entity>
-
-    <a-entity class="hidden" id="loseScreen">
-      <div class="screenContainer">
-        <div class="screenText">
-          Civilization Number 183 fell into ruin in flames.
-          The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body.
-          We invite you to log on in the future.
         </div>
       </div>
     </a-entity>
@@ -274,6 +248,64 @@ const App = () => (
           to: 0;
           dur: 8000;
           startEvents: hide-intro-text;
+        "
+        animation__invisible="
+          property: visible;
+          to: false;
+          from: true;
+          delay: 8000;
+          startEvents: hide-intro-text;
+        "
+      />
+      <a-text
+        id="winningText"
+        value="You survived! The seeds of civilization are with you. We invite you to log on in the future."
+        width="4"
+        negate="true"
+        position="-4.5 3 -6"
+        scale="2.5 2 1"
+        visible="false"
+        font="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"
+        opacity="0"
+        animation__fadein="
+          property: opacity;
+          to: 1;
+          dur: 16000;
+          easing: linear;
+          startEvents: show-win-text;
+        "
+        animation__visible="
+          property: visible;
+          to: true;
+          from: false;
+          dur: 1;
+          startEvents: show-win-text;
+        "
+      />
+      <a-text
+        id="losingText"
+        value="Civilization Number 183 fell into ruin in flames. The seed of civilization remains. It will germinate and again progress through the unpredictable world of Three Body. We invite you to log on in the future."
+        width="4"
+        negate="true"
+        position="-4.5 3 -6"
+        scale="2.5 2 1"
+        visible="false"
+        font="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"
+        color="black"
+        opacity="0"
+        animation__fadein="
+          property: opacity;
+          to: 1;
+          dur: 16000;
+          easing: linear;
+          startEvents: show-lose-text;
+        "
+        animation__visible="
+          property: visible;
+          to: true;
+          from: false;
+          dur: 1;
+          startEvents: show-lose-text;
         "
       />
       <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />

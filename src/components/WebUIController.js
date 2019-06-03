@@ -4,19 +4,19 @@ AFRAME.registerComponent('web-ui-controller', {
   init: function () {
     const { sceneEl } = this.el;
     const startBtnEl = document.getElementById('startBtn');
-    const winScreen = document.getElementById('winScreen');
-    const loseScreen = document.getElementById('loseScreen');
     const mainScene = document.getElementById('mainScene');
     const introScreen = document.getElementById('introScreen');
     const enterVRButton = document.querySelector('.VRButton');
     const introText = document.getElementById('introText');
+    const winningText = document.getElementById('winningText');
+    const losingText = document.getElementById('losingText');
 
     sceneEl.addEventListener('loaded', (event) => {
       // all game assets loaded
       introScreen.classList.remove('hidden');
     });
 
-    sceneEl.addEventListener('enter-vr', (event) => {      
+    sceneEl.addEventListener('enter-vr', (event) => {
       introText.emit('show-intro-text');
     });
 
@@ -34,17 +34,23 @@ AFRAME.registerComponent('web-ui-controller', {
     })
 
     sceneEl.addEventListener('gameLose', event => {
-      sceneEl.exitVR();
-      loseScreen.setAttribute('style', 'visibility: visible');
-      mainScene.setAttribute('visible', 'false');
-      enterVRButton.classList.remove('visible');
+      losingText.emit('show-lose-text');
+      //position in front of cam once
+      this.setFrontOfCamera(losingText);
     })
 
     sceneEl.addEventListener('gameWin', event => {
-      sceneEl.exitVR();
-      winScreen.setAttribute('style', 'visibility: visible');
-      mainScene.setAttribute('visible', 'false');
-      enterVRButton.classList.remove('visible');
+      winningText.emit('show-win-text');
+      //position in front of cam once
+      this.setFrontOfCamera(winningText);
     })
+  },
+  setFrontOfCamera: function(entity) {
+    const camera = document.querySelector('#camera');
+    var left = new THREE.Vector3().set(-1,0,0).transformDirection(camera.object3D.matrixWorld)
+    var worldPos = new THREE.Vector3().setFromMatrixPosition(camera.object3D.matrixWorld).add(left.multiplyScalar(4.5));
+    var forward = new THREE.Vector3().set(0,0,-1).transformDirection(camera.object3D.matrixWorld)
+    entity.object3D.position.copy(worldPos).add(forward.multiplyScalar(10));
+    entity.object3D.lookAt(worldPos);
   }
 });

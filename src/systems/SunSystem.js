@@ -56,7 +56,8 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.object3D.add(this.sunLight3)
 
     this.startAnimation = false;
-    this.fadingOut = false;
+    this.fadingOutWhite = false;
+    this.fadingOutBlack = false;
     this.fadingIn = false;
     this.gameOver = false;
 
@@ -73,12 +74,17 @@ AFRAME.registerSystem('sunSystem', {
     this.sceneEl.addEventListener('speech6-ended', () => {
       window.setTimeout(() => {
         if(!this.gameOver){
-          this.fadingOut = true;
+          this.fadingOutWhite = true;
         }
       }, 40000);
     });
+    this.sceneEl.addEventListener('speechWin-ended', (event) => {
+      window.setTimeout(() => {
+        this.fadingOutBlack = true;
+      }, 10000);
+    });
     this.sceneEl.addEventListener('win', () => {
-      this.fadingOut = false;
+      this.fadingOutWhite = false;
       this.gameOver = true;
     });
   },
@@ -159,9 +165,10 @@ AFRAME.registerSystem('sunSystem', {
 
 
     var fadeOutTime = this.materials[0].uniforms.fadeOutTime.value;
-    if(this.fadingOut){
+    if(this.fadingOutWhite){
     fadeOutTime += 0.001;
-      if (fadeOutTime > 1){
+      if (fadeOutTime > 1.002){
+      } else if(fadeOutTime > 1.0){
         this.sceneEl.emit('gameLose')
       }
     } else if(this.fadingIn){
@@ -169,6 +176,10 @@ AFRAME.registerSystem('sunSystem', {
       if(fadeOutTime >= 0){
         this.fadingIn = false;
         this.sceneEl.emit('fade-in-complete');
+      }
+    } else if (this.fadingOutBlack) {
+      if (fadeOutTime > -1){
+        fadeOutTime -= 0.001;
       }
     } else {
       fadeOutTime = Math.max(fadeOutTime-0.01, 0);

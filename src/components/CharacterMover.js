@@ -99,7 +99,7 @@ AFRAME.registerComponent('character-mover', {
     this.el.sceneEl.addEventListener('speechWin-ended', (event) => {
       window.setTimeout(() => {
         this.el.sceneEl.emit('gameWin');
-      }, 10000);
+      }, 15000);
     });
     this.el.sceneEl.addEventListener('comment2-ended', (event) => {
       this.commentOver = true;
