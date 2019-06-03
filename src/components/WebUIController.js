@@ -10,7 +10,6 @@ AFRAME.registerComponent('web-ui-controller', {
     const introText = document.getElementById('introText');
     const winningText = document.getElementById('winningText');
     const losingText = document.getElementById('losingText');
-
     sceneEl.addEventListener('loaded', (event) => {
       // all game assets loaded
       introScreen.classList.remove('hidden');
@@ -49,7 +48,9 @@ AFRAME.registerComponent('web-ui-controller', {
     const camera = document.querySelector('#camera');
     var left = new THREE.Vector3().set(-1,0,0).transformDirection(camera.object3D.matrixWorld)
     var worldPos = new THREE.Vector3().setFromMatrixPosition(camera.object3D.matrixWorld).add(left.multiplyScalar(4.5));
+    worldPos.y = 3;
     var forward = new THREE.Vector3().set(0,0,-1).transformDirection(camera.object3D.matrixWorld)
+    forward.y = 0;
     entity.object3D.position.copy(worldPos).add(forward.multiplyScalar(10));
     entity.object3D.lookAt(worldPos);
   }

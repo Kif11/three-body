@@ -173,7 +173,7 @@ AFRAME.registerSystem('sunSystem', {
       }
     } else if(this.fadingIn){
       fadeOutTime += 0.0008;
-      if(fadeOutTime >= 0){
+      if(fadeOutTime >= -0.0001){
         this.fadingIn = false;
         this.sceneEl.emit('fade-in-complete');
       }
@@ -182,7 +182,7 @@ AFRAME.registerSystem('sunSystem', {
         fadeOutTime -= 0.001;
       }
     } else {
-      fadeOutTime = Math.max(fadeOutTime-0.01, 0);
+      fadeOutTime = Math.max(fadeOutTime-0.01, 0.0001);
     }
 
     this.materials.forEach((mat) => {
