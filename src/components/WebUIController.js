@@ -34,22 +34,22 @@ AFRAME.registerComponent('web-ui-controller', {
 
     sceneEl.addEventListener('gameLose', event => {
       losingText.emit('show-lose-text');
-      //position in front of cam once
       this.setFrontOfCamera(losingText);
+      document.querySelectorAll('.fire').forEach(el => el.emit('stop-char-fire'));
     })
 
     sceneEl.addEventListener('gameWin', event => {
       winningText.emit('show-win-text');
-      //position in front of cam once
       this.setFrontOfCamera(winningText);
     })
   },
+
   setFrontOfCamera: function(entity) {
     const camera = document.querySelector('#camera');
-    var left = new THREE.Vector3().set(-1,0,0).transformDirection(camera.object3D.matrixWorld)
-    var worldPos = new THREE.Vector3().setFromMatrixPosition(camera.object3D.matrixWorld).add(left.multiplyScalar(4.5));
+    const left = new THREE.Vector3().set(-1,0,0).transformDirection(camera.object3D.matrixWorld)
+    const worldPos = new THREE.Vector3().setFromMatrixPosition(camera.object3D.matrixWorld).add(left.multiplyScalar(4.5));
     worldPos.y = 3;
-    var forward = new THREE.Vector3().set(0,0,-1).transformDirection(camera.object3D.matrixWorld)
+    const forward = new THREE.Vector3().set(0,0,-1).transformDirection(camera.object3D.matrixWorld)
     forward.y = 0;
     entity.object3D.position.copy(worldPos).add(forward.multiplyScalar(10));
     entity.object3D.lookAt(worldPos);

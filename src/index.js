@@ -28,12 +28,10 @@ import './components/Collider';
 import Fire from './Fire';
 
 // Good sky setting
-// sunSystem="speed: 0.02; skyRadius: 500; timeOffset:224000; color: #ffe4aa;"
+// sunSystem="speed: 0.02; skyRadius: 500; timeOffset: 174000; color: #ffe4aa;"
 
 const App = () => (
   <a-scene
-    stats
-    debug
     loading-screen="dotsColor: white; backgroundColor: black"
     background="color: black"
     sunSystem="speed: 0.02; skyRadius: 500; timeOffset: 174000; color: #ffe4aa;"
@@ -322,7 +320,7 @@ const App = () => (
       <a-gltf-model id="dunes" src="#dunes" scale="1 1 1" set-gltf-material="color: #e2aa73; receiveShadow: true;" />
       <a-gltf-model id="dried_body" src="#dried_body" gltf-model="assets/dried_body/dried_body.gltf" scale="0.39461 0.39461 0.39461" position="5.8 0.1 13.8" rotation="0 19.212420786326764" set-gltf-material="color: #02080e; receiveShadow: true"></a-gltf-model>
       <a-gltf-model id="pyramid" src="#pyramid" gltf-model="assets/pyramid/pyramid.gltf" rotation="0 -85.67151431693634" position="60.74943 -0.13907 52.90357" scale="1.2 1.2 1.2" set-gltf-material="color: #e2aa73; receiveShadow: true; collideWith: true"></a-gltf-model>
-      <a-entity id="ring_of_fire" ring-of-fire />
+      <a-entity id="ring_of_fire" ring-of-fire scale="1.55 1.55 1.55" />
 
       <a-entity position="34 0.5 -19" >
         <a-gltf-model id="pendulumModel" rotation="0 0 0" src="#pendulum" position="0 0 0"  pendulum="color: #504f4c"/>
