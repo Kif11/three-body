@@ -2,9 +2,13 @@
 
 html, body {
   color: white;
-  font-size: 3.5vw;
+  font-size: 145%;
   font-family: 'Questrial', sans-serif;
   font-weight: 80;
+}
+
+.a-loader-title {
+  color: black;
 }
 
 .screenContainer {
@@ -25,6 +29,27 @@ html, body {
   line-height: 80%;
 }
 
+#buttonsContainer {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  z-index: 999;
+}
+
+#buttonsContainer .btnImage {
+  display: flex;
+  width: 50px;
+  opacity: 0.6;
+}
+
+#buttonsContainer .btnImage:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 #introScreen .screenContainer {
   /* background-color: #001427; */
 }
@@ -41,14 +66,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.4;
-
-  text-shadow: 0 0 36px white;
+  opacity: 0.6;
+  text-shadow: 0 0 30px white;
 }
 
 #startBtn:hover {
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .VRButton {

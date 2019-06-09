@@ -92,8 +92,8 @@ const App = () => (
     </a-assets>
 
     {/* Character hight is 1.6 + cameraRig.z position */}
-    <a-entity id="cameraRig" position="0 0.4 4">
-      <a-camera id="camera"/>
+    <a-entity id="cameraRig" position="0 0.4 4" visible="false">
+      <a-camera id="camera" active="false" />
       <a-entity id="controller"
         oculus-go-controls
         mover="speed: 65;"
@@ -106,12 +106,20 @@ const App = () => (
     <a-entity web-ui-controller />
 
     <a-entity class="hidden" id="introScreen">
-      <a-entity id="introPlane" intro />
       <div class="screenContainer">
+        <div id="buttonsContainer">
+          <a href="https://codercat.tk" target="_blank">
+            <img class="btnImage" src="assets/info.png" alt="info" />
+          </a>
+        </div>
         <div id="startBtn">
           ENTER 3BODY.NET
         </div>
       </div>
+      <a-entity position="0 0 4">
+        <a-camera id="introCamera" active="true" look-controls-enabled="false" wasd-controls-enabled="false" />
+      </a-entity>
+      <a-entity id="introPlane" intro />
     </a-entity>
 
     <a-entity id="mainScene" visible="false">
@@ -120,19 +128,19 @@ const App = () => (
         ambient-controller
         sound__1="
           src: #track1;
-          volume:0;
+          volume: 0;
           loop: true;
           positional: false;
         "
         sound__2="
           src: #track2;
-          volume:0;
+          volume: 0;
           loop: true;
           positional: false;
         "
         sound__3="
           src: #track3;
-          volume:0;
+          volume: 0;
           loop: true;
           positional: false;
         "
