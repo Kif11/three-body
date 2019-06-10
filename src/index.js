@@ -96,7 +96,7 @@ const App = () => (
       <a-camera id="camera" active="false" />
       <a-entity id="controller"
         oculus-go-controls
-        mover="speed: 65;"
+        mover="speed: 120;"
         collider="camera: true;"
       >
         {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
