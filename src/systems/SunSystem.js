@@ -159,30 +159,30 @@ AFRAME.registerSystem('sunSystem', {
     sunCentroid.multiplyScalar(1/3);
     var t = sunCentroid.y/this.data.skyRadius;
 
-    t = Math.min(Math.max(t, 0), 1)
+    t = Math.min(Math.max(t, 0), 1);
     this.sceneEl.object3D.fog.density = Math.min(t+0.1,1)*0.005;
-    this.sceneEl.object3D.fog.color = this.fogNightColor.lerp(this.fogColor, t)
+    this.sceneEl.object3D.fog.color = this.fogNightColor.lerp(this.fogColor, t);
 
 
     var fadeOutTime = this.materials[0].uniforms.fadeOutTime.value;
     if(this.fadingOutWhite){
-    fadeOutTime += 0.001;
+    fadeOutTime += 0.0167/timeDelta;
       if (fadeOutTime > 1.002){
       } else if(fadeOutTime > 1.0){
         this.sceneEl.emit('gameLose')
       }
     } else if(this.fadingIn){
-      fadeOutTime += 0.0008;
+      fadeOutTime += 0.013/timeDelta;
       if(fadeOutTime >= -0.0001){
         this.fadingIn = false;
         this.sceneEl.emit('fade-in-complete');
       }
     } else if (this.fadingOutBlack) {
       if (fadeOutTime > -1){
-        fadeOutTime -= 0.001;
+        fadeOutTime -= 0.0167/timeDelta;
       }
     } else {
-      fadeOutTime = Math.max(fadeOutTime-0.01, 0.0001);
+      fadeOutTime = Math.max(fadeOutTime-0.167/timeDelta, 0.0001);
     }
 
     this.materials.forEach((mat) => {

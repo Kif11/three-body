@@ -3,7 +3,6 @@ import AFRAME from 'aframe';
 import JSX from './JSX';
 import './style.css';
 
-import './components/Spinner';
 import './components/SetGLTFMaterial';
 import './components/SetCharacterMaterial';
 import './components/DefaultMaterial';
