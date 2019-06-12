@@ -107,7 +107,7 @@ const App = () => (
     <a-entity class="hidden" id="introScreen">
       <div class="screenContainer">
         <div id="buttonsContainer">
-          <a href="https://codercat.tk" target="_blank">
+          <a href="https://medium.com/@snayss/making-of-webvr-experience-three-body-a45d4b75b1d2" target="_blank">
             <img class="btnImage" src="assets/info.png" alt="info" />
           </a>
         </div>
