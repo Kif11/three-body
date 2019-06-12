@@ -10,6 +10,7 @@ AFRAME.registerComponent('web-ui-controller', {
     const introText = document.getElementById('introText');
     const winningText = document.getElementById('winningText');
     const losingText = document.getElementById('losingText');
+    const creditText = document.getElementById('creditText');
     const mainCamera = document.getElementById('camera');
 
     sceneEl.addEventListener('loaded', (event) => {
@@ -38,11 +39,27 @@ AFRAME.registerComponent('web-ui-controller', {
       losingText.emit('show-lose-text');
       this.setFrontOfCamera(losingText);
       document.querySelectorAll('.fire').forEach(el => el.emit('stop-char-fire'));
+      window.setTimeout(() => {
+        losingText.emit('hide-lose-text');
+      }, 28000);
+      window.setTimeout(() => {
+        this.setFrontOfCamera(creditText);
+        creditText.setAttribute('color', 'black');
+        creditText.emit('show-credit-text');
+      }, 33000);
     })
 
     sceneEl.addEventListener('gameWin', event => {
       winningText.emit('show-win-text');
       this.setFrontOfCamera(winningText);
+      window.setTimeout(() => {
+        winningText.emit('hide-win-text');
+      }, 28000);
+      window.setTimeout(() => {
+        this.setFrontOfCamera(creditText);
+        creditText.setAttribute('color', 'white');
+        creditText.emit('show-credit-text');
+      }, 33000);
     })
   },
 

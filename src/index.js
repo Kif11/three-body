@@ -287,6 +287,19 @@ const App = () => (
           dur: 1;
           startEvents: show-win-text;
         "
+        animation__fadeout="
+          property: opacity;
+          to: 0;
+          dur: 4000;
+          startEvents: hide-win-text;
+        "
+        animation__invisible="
+          property: visible;
+          to: false;
+          from: true;
+          delay: 4000;
+          startEvents: hide-win-text;
+        "
       />
       <a-text
         id="losingText"
@@ -313,6 +326,46 @@ const App = () => (
           from: false;
           dur: 1;
           startEvents: show-lose-text;
+        "
+        animation__fadeout="
+          property: opacity;
+          to: 0;
+          dur: 4000;
+          startEvents: hide-lose-text;
+        "
+        animation__invisible="
+          property: visible;
+          to: false;
+          from: true;
+          delay: 4000;
+          startEvents: hide-lose-text;
+        "
+      />
+      <a-text
+        id="creditText"
+        value="Created by Codercat Studio \n\n\n  Special thanks to: \n\n Sourceress (Claire) - Writer \n Misha Samorodin - Environment Artist \n Unknown - Graffiti Artist"
+        width="4"
+        negate="true"
+        position="-4.5 3 -6"
+        scale="2.5 2 1"
+        visible="false"
+        depthTest="false"
+        font="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"
+        color="red"
+        opacity="0"
+        animation__fadein="
+          property: opacity;
+          to: 1;
+          dur: 4000;
+          easing: linear;
+          startEvents: show-credit-text;
+        "
+        animation__visible="
+          property: visible;
+          to: true;
+          from: false;
+          dur: 1;
+          startEvents: show-credit-text;
         "
       />
       <a-entity light="type: hemisphere; color: #1c3865; groundColor: #1c3865; intensity: 0.9" />
