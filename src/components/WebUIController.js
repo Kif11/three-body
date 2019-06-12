@@ -41,12 +41,12 @@ AFRAME.registerComponent('web-ui-controller', {
       document.querySelectorAll('.fire').forEach(el => el.emit('stop-char-fire'));
       window.setTimeout(() => {
         losingText.emit('hide-lose-text');
-      }, 28000);
+      }, 22000);
       window.setTimeout(() => {
         this.setFrontOfCamera(creditText);
         creditText.setAttribute('color', 'black');
         creditText.emit('show-credit-text');
-      }, 33000);
+      }, 27000);
     })
 
     sceneEl.addEventListener('gameWin', event => {
@@ -54,12 +54,12 @@ AFRAME.registerComponent('web-ui-controller', {
       this.setFrontOfCamera(winningText);
       window.setTimeout(() => {
         winningText.emit('hide-win-text');
-      }, 28000);
+      }, 22000);
       window.setTimeout(() => {
         this.setFrontOfCamera(creditText);
         creditText.setAttribute('color', 'white');
         creditText.emit('show-credit-text');
-      }, 33000);
+      }, 27000);
     })
   },
 

@@ -27,7 +27,7 @@ AFRAME.registerComponent('character-mover', {
     this.targetQuat = new THREE.Quaternion();
     this.lookAtDir = new THREE.Vector3();
 
-    this.walkingSpeed = 0.54;
+    this.walkingSpeed = 0.7;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -84,7 +84,7 @@ AFRAME.registerComponent('character-mover', {
     });
 
     this.el.sceneEl.addEventListener('speech6-ended', (event) => {
-      this.walkingSpeed = 0.8;
+      this.walkingSpeed = 0.9;
       window.setTimeout(() => {
         this.stateMachine.state = 5;
         this.targetPos.copy(PYRAMID_ENTRANCE_POS);
