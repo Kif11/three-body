@@ -23,7 +23,7 @@ AFRAME.registerComponent('web-ui-controller', {
     });
 
     startBtnEl.addEventListener('click', event => {
-      // sceneEl.enterVR();
+      sceneEl.enterVR();
       mainScene.setAttribute('visible', 'true');
       introScreen.setAttribute('style', 'visibility: hidden');
       introScreen.setAttribute('visible', 'false');

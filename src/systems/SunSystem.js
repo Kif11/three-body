@@ -166,23 +166,23 @@ AFRAME.registerSystem('sunSystem', {
 
     var fadeOutTime = this.materials[0].uniforms.fadeOutTime.value;
     if(this.fadingOutWhite){
-    fadeOutTime += 0.0167/timeDelta;
+    fadeOutTime += 0.00006523*timeDelta;
       if (fadeOutTime > 1.002){
       } else if(fadeOutTime > 1.0){
         this.sceneEl.emit('gameLose')
       }
     } else if(this.fadingIn){
-      fadeOutTime += 0.013/timeDelta;
+      fadeOutTime += 0.00005078*timeDelta;
       if(fadeOutTime >= -0.0001){
         this.fadingIn = false;
         this.sceneEl.emit('fade-in-complete');
       }
     } else if (this.fadingOutBlack) {
       if (fadeOutTime > -1){
-        fadeOutTime -= 0.0167/timeDelta;
+        fadeOutTime -= 0.00006523*timeDelta;
       }
     } else {
-      fadeOutTime = Math.max(fadeOutTime-0.167/timeDelta, 0.0001);
+      fadeOutTime = Math.max(fadeOutTime-0.0006523*timeDelta, 0.0001);
     }
 
     this.materials.forEach((mat) => {
