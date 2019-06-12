@@ -91,7 +91,7 @@ const App = () => (
     </a-assets>
 
     {/* Character hight is 1.6 + cameraRig.z position */}
-    <a-entity id="cameraRig" position="0 0.4 4" visible="false">
+    <a-entity id="cameraRig" position="0 0.4 4">
       <a-camera id="camera" active="false" />
       <a-entity id="controller"
         oculus-go-controls
