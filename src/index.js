@@ -95,6 +95,8 @@ const App = () => (
       <a-camera id="camera" active="false" />
       <a-entity id="controller"
         oculus-go-controls
+        oculus-touch-controls
+        vive-controls
         mover="speed: 120;"
         collider="camera: true;"
       >
