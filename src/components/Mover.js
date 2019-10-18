@@ -15,7 +15,7 @@ AFRAME.registerComponent('mover', {
     this.pressed = false;
     this.pressedQuest = false;
     this.lastAxis = new THREE.Vector2();
-    this.vrMovingSpeed = 1;
+    this.vrMovingSpeed = 0.0039;
 
     const rig = document.querySelector('#cameraRig');
     this.rig = rig.object3D;
