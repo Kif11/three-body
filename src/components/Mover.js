@@ -13,6 +13,7 @@ AFRAME.registerComponent('mover', {
 
   init: function () {
     this.pressed = false;
+    this.pressedQuest = false;
     this.lastAxis = new THREE.Vector2();
     this.vrMovingSpeed = 1;
 
@@ -53,29 +54,46 @@ AFRAME.registerComponent('mover', {
         this.forward = false;
       }
     });
+
+    /*
+      Oculus touch controller events
+    */
+    this.el.addEventListener('thumbsticktouchstart', (evt) => {
+      this.pressedQuest = true;
+    })
+    this.el.addEventListener('thumbsticktouchend', (evt) => {
+      this.pressedQuest = false;
+    })
   },
+
   tick: function (time, timeDelta) {
-    //handle vr
     if(this.pressed){
       const tweenForward = new THREE.Vector3(0, 0, 1).applyQuaternion(this.camera.quaternion);
-      tweenForward.y = 0;
-      //move forwards
-      var collided = this.collider.collide(true);
-      if(!collided) {
-        this.rig.position.sub(tweenForward.multiplyScalar(this.vrMovingSpeed / timeDelta))
-      }
-      var dist = this.rig.position.distanceTo(PENDULUM_POS);
-      if(dist < 20){
-        //enable laser
-        this.raycasterSystem.laserPlane.visible = true;
-      } else {
-        //disable laser
-        this.raycasterSystem.laserPlane.visible = false;
-      }
+      this.handleMove(tweenForward, timeDelta);
+    } else if (this.pressedQuest){
+      const tweenForward = new THREE.Vector3(-this.lastAxis.x, 0, -this.lastAxis.y).applyQuaternion(this.camera.quaternion);
+      this.handleMove(tweenForward, timeDelta);
     } else {
       //handle web
-      var collided = this.collider.collide(this.forward);
+      const collided = this.collider.collide(this.forward);
       this.wasd.enabled = !collided;
+    }
+  },
+
+  handleMove: function (move, timeDelta){
+    move.y = 0;
+    const collided = this.collider.collide(true);
+    if (!collided) {
+      this.rig.position.sub(move.multiplyScalar(this.vrMovingSpeed / timeDelta))
+    }
+    const dist = this.rig.position.distanceTo(PENDULUM_POS);
+    if (dist < 20) {
+      debugger;
+      // enable laser
+      this.raycasterSystem.laserPlane.visible = true;
+    } else {
+      // disable laser
+      this.raycasterSystem.laserPlane.visible = false;
     }
   }
 });

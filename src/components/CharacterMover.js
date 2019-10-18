@@ -27,7 +27,7 @@ AFRAME.registerComponent('character-mover', {
     this.targetQuat = new THREE.Quaternion();
     this.lookAtDir = new THREE.Vector3();
 
-    this.walkingSpeed = 0.7;
+    this.walkingSpeed = 0.00208;
     this.reachedCharacter = true;
 
     this.stateMachine = new CharacterStateMachine();
@@ -57,7 +57,7 @@ AFRAME.registerComponent('character-mover', {
     });
     this.el.sceneEl.addEventListener('speech4-ended', (event) => {
       //START THE PACING CYCLE
-      this.walkingSpeed = 0.032;
+      this.walkingSpeed = 0.000125;
       this.targetPos.copy(PENDULUM_POS);
       this.targetPos.x += 4*(Math.random()-0.5);
       this.reachedCharacter = false;
@@ -84,7 +84,7 @@ AFRAME.registerComponent('character-mover', {
     });
 
     this.el.sceneEl.addEventListener('speech6-ended', (event) => {
-      this.walkingSpeed = 0.9;
+      this.walkingSpeed = 0.003515;
       window.setTimeout(() => {
         this.stateMachine.state = 5;
         this.targetPos.copy(PYRAMID_ENTRANCE_POS);
@@ -128,9 +128,9 @@ AFRAME.registerComponent('character-mover', {
         this.stateMachine.updateState(this);
         return;
       }
-      this.lookAtDir.multiplyScalar(this.walkingSpeed/timeDelta/dist);
+      this.lookAtDir.multiplyScalar(this.walkingSpeed*timeDelta/dist);
       this.characterPos.add(this.lookAtDir)
-      this.el.object3D.quaternion.slerp(this.targetQuat, 1.6/timeDelta);
+      this.el.object3D.quaternion.slerp(this.targetQuat, 0.00625*timeDelta);
     } else {
       //rotate to face user, when not facing a target
       var camWorldPos = new THREE.Vector3();
@@ -139,7 +139,7 @@ AFRAME.registerComponent('character-mover', {
       this.lookAtDir.subVectors(camWorldPos, this.characterPos);
 
       setQuaternionFromDirection(this.lookAtDir.normalize(), UP, this.targetQuat);
-      this.el.object3D.quaternion.slerp(this.targetQuat, 1.6/timeDelta);
+      this.el.object3D.quaternion.slerp(this.targetQuat, 0.00625*timeDelta);
     }
 
   },

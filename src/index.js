@@ -23,6 +23,7 @@ import './systems/PendulumSystem';
 
 import './components/Mover';
 import './components/Collider';
+import './components/CustomControl';
 
 import Fire from './Fire';
 
@@ -93,12 +94,20 @@ const App = () => (
     {/* Character hight is 1.6 + cameraRig.z position */}
     <a-entity id="cameraRig" position="0 0.4 4">
       <a-camera id="camera" active="false" />
-      <a-entity id="controller"
-        oculus-go-controls
-        mover="speed: 120;"
+      <a-entity id="secondaryController"
+        custom-control="hand: left"
+        mover="speed: 30;"
         collider="camera: true;"
-      >
+        visible="false">
         {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
+      </a-entity>
+      <a-entity id="controller"
+        custom-control="hand: right"
+        mover="speed: 30;"
+        collider="camera: true;"
+        visible="false"
+      >
+      {Fire("fire1", "0 0 0.05", "0 0 0", "0.05 0.05 0.05", 0, 45)}
       </a-entity>
     </a-entity>
 

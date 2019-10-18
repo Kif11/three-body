@@ -31,7 +31,7 @@ AFRAME.registerComponent('ambient-controller', {
     for(var key in this.easingIn) {
       var value = this.easingIn[key];
       var curVolume = value.getVolume();
-      curVolume += 0.016/timeDelta;
+      curVolume += 0.0000625*timeDelta;
       if (curVolume > this.targetVolume){
         delete this.easingIn[key];
       } else {
@@ -41,7 +41,7 @@ AFRAME.registerComponent('ambient-controller', {
     for(var key in this.easingOut) {
       var value = this.easingOut[key];
       var curVolume = value.getVolume();
-      curVolume -= 0.016/timeDelta;
+      curVolume -= 0.0000625*timeDelta;
       if(curVolume <= 0){
         delete this.easingOut[key];
       } else {
