@@ -7,57 +7,57 @@
 		{
 			"bufferView":0,
 			"componentType":5123,
-			"count":4638,
+			"count":6756,
 			"type":"SCALAR",
 			"min":[0
 			],
-			"max":[4637
+			"max":[6755
 			]
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":4638,
+			"count":6756,
 			"type":"VEC3",
-			"min":[-2.00823379,-0.0342786312,-0.542703927
+			"min":[-2.32521033,-0.0851265416,-2.11756158
 			],
-			"max":[2.94855857,1.5055728,4.11076307
+			"max":[4.73573494,1.32957149,4.43106556
 			]
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":4638,
+			"count":6756,
 			"type":"VEC2",
-			"min":[0,4.39882278e-05
+			"min":[0.00460512983,0.000924170017
 			],
-			"max":[0.980256319,1
+			"max":[0.997475863,1.00460517
 			]
 		}
 	],
 	"buffers":[
 		{
 			"uri":"ruins_data.bin",
-			"byteLength":102036,
+			"byteLength":148632,
 			"name":"main_buffer"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":9276,
+			"byteLength":13512,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteOffset":9276,
-			"byteLength":55656,
+			"byteOffset":13512,
+			"byteLength":81072,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteOffset":64932,
-			"byteLength":37104,
+			"byteOffset":94584,
+			"byteLength":54048,
 			"target":34962
 		}
 	],

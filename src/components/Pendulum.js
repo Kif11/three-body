@@ -86,6 +86,7 @@ AFRAME.registerComponent('pendulum', {
     }, false );
 
     this.el.sceneEl.addEventListener( 'raycast-active', (event) => {
+      debugger;
       var t = this.raycasterSystem.intersectObject(this.ball);
       var m = this.raycasterSystem.intersectObject(this.plane);
 
