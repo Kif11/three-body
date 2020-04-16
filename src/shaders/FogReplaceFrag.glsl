@@ -1,3 +1,6 @@
+
+#define whiteCompliment(a) ( 1.0 - saturate( a ) )
+
 #ifdef USE_FOG
 	#ifdef FOG_EXP2
 		float fogFactor = whiteCompliment( exp2( - fogDensity * fogDensity * fogDepth * fogDepth * LOG2 ) );

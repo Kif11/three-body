@@ -38,7 +38,7 @@ AFRAME.registerComponent('sky', {
         heat_c1: {value: new THREE.Color("#f95c35")},
         heat_c2: {value: new THREE.Color("#f78f64")},
         night_c1: {value: new THREE.Color("#0d1a2f")},
-        fogColor: {value: 0},
+        fogColor: {value: new THREE.Color("#000000")},
         fogDensity: {value: 0},
         perlinNoiseTex: {value: noiseTex},
       },

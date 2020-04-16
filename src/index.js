@@ -126,8 +126,8 @@ const App = () => (
       </div>
       <a-entity position="0 0 4">
         <a-camera id="introCamera" active="true" look-controls-enabled="false" wasd-controls-enabled="false" />
-      </a-entity>
-      <a-entity id="introPlane" intro />
+      </a-entity >
+      <a-entity position="0 1.5 0" id="introPlane" intro />
     </a-entity>
 
     <a-entity id="mainScene" visible="false">

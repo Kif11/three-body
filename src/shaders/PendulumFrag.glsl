@@ -63,6 +63,7 @@ void RE_Direct_BlinnPhong( const in IncidentLight directLight, const in Geometri
 	reflectedLight.directDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );
 	// reflectedLight.directSpecular += irradiance * BRDF_Specular_BlinnPhong( directLight, geometry, material.specularColor, material.specularShininess ) * material.specularStrength;
 }
+#define whiteCompliment(a) ( 1.0 - saturate( a ) )
 
 void RE_IndirectDiffuse_BlinnPhong( const in vec3 irradiance, const in GeometricContext geometry, const in BlinnPhongMaterial material, inout ReflectedLight reflectedLight ) {
 	float fogDepth = vViewPosition.z;

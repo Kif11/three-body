@@ -58,7 +58,7 @@ AFRAME.registerComponent('set-gltf-material', {
     if (mesh.geometry){
       this.applyMaterialToMesh(mesh);
     }
-    mesh.children.forEach(child => {      
+    mesh.children.forEach(child => {
       this.applyMaterial(child);
     });
   },
