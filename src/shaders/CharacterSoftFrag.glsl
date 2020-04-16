@@ -39,7 +39,7 @@ varying vec3 vNormal;
 	varying vec3 vNormal;
 
 #endif
-
+#define whiteCompliment(a) ( 1.0 - saturate( a ) )
 
 struct BlinnPhongMaterial {
 
@@ -81,13 +81,14 @@ void RE_IndirectDiffuse_BlinnPhong( const in vec3 irradiance, const in Geometric
 
 #define Material_LightProbeLOD( material )	(0)
 
-
 #include <shadowmap_pars_fragment>
 #include <bumpmap_pars_fragment>
 #include <normalmap_pars_fragment>
 #include <specularmap_pars_fragment>
 #include <logdepthbuf_pars_fragment>
 #include <clipping_planes_pars_fragment>
+
+#undef USE_SHADOWMAP
 
 void main() {
 
